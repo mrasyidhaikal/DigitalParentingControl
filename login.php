@@ -5,6 +5,19 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="font/css/all.css">
+<?php
+session_start();
+$level = $_SESSION['level'];
+if ($level == 'parent') {
+    header('location:parent');
+}
+elseif ($level == 'guru') {
+    header('location:guru');
+}
+
+
+
+?>
 </head>
 <body style="background-color:#2f3542;">
 <div class="row">
@@ -88,7 +101,7 @@ if ($us==$username && $pas==$password) {
 		$_SESSION['id_kasir']=$id;
 		$_SESSION['username']=$username;
 		echo "<script>window.alert('Login Success');
-			window.location='index.php'</script>";
+			window.location='parent/index.php'</script>";
 	}
 	elseif ($level=='guru') {
 	$_SESSION['level']=$level;

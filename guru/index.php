@@ -5,8 +5,8 @@
 <?php 
 session_start();
 $level = $_SESSION['level'];
-if ($level != 'parent') {
-    header('location:login.php');
+if ($level != 'guru') {
+    header('location:../login.php');
 }
  ?>
 
@@ -40,7 +40,7 @@ if ($level != 'parent') {
         <input class="c-search__input u-input" placeholder="Search..." type="text"/>
       </div>
       <div class="header-icons-group">
-        <div class="c-header-icon logout"><a href="logout.php"><i class="fa fa-power-off"></a></i></div>
+        <div class="c-header-icon logout"><a href="../logout.php"><i class="fa fa-power-off"></a></i></div>
       </div>
     </div>
   </header>
