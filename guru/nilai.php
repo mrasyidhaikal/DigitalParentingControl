@@ -53,9 +53,9 @@ if ($level != 'guru') {
       <nav class="c-menu js-menu">
         <ul class="u-list">
         <a href="../guru/index.php">
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="notif">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengumuman">
             <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
-              <div class="c-menu-item__title"><span>Notif</span></div>
+              <div class="c-menu-item__title"><span>Pengumuman</span></div>
             </div>
           </li>
         </a>
