@@ -160,6 +160,32 @@ if ($level != 'guru') {
                   
               
                 </form>
+
+                <?php
+                include '../koneksi.php';
+                if(isset($_POST['fsubmit'])){
+                
+                $id_siswa = $_POST['id_siswa'];
+                $bindo = $_POST['bindo'];
+                $binggris = $_POST['binggris'];
+                $matematika = $_POST['matematika'];
+                $sejarah = $_POST['sejarah'];
+                $pkn = $_POST['pkn'];
+                $fisika = $_POST['fisika'];
+                $pbo = $_POST['pbo'];
+                $basisdata = $_POST['basisdata'];
+                $date = date("Y-m-d h:i:s");
+                $q = "INSERT INTO `tbl_mapelrpl` 
+                (`id_siswa`, `tanggal`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`) 
+                VALUES 
+                ('$id_siswa', '$date', '$bindo', '$binggris', '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata')";
+
+                mysql_query($q);
+
+                }
+                
+                ?>
+
                 </div>
     </div>
   </div> 
@@ -258,28 +284,7 @@ Dashboard.init();
 //# sourceURL=pen.js
 </script>
 
- <?php
  
-    include '../koneksi.php';
-    if (isset($_POST['fsubmit'])){
-
-    $id_siswa = $_POST['id_siswa'];
-    $bindo = $_POST['bindo'];
-    $binggris = $_POST['binggris'];
-    $matematika = $_POST['matematika'];
-    $sejarah = $_POST['sejarah'];
-    $pkn = $_POST['pkn'];
-    $fisika = $_POST['fisika'];
-    $pbo = $_POST['pbo'];
-    $basisdata = $_POST['basisdata'];
-    $date = date("Y-m-d h:i:s");
-    $q = mysql_query("INSERT INTO `tbl_mapelrpl` (`id_siswa`, 'tanggal' , `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`) VALUES ('$id_siswa', '$date' , '$bindo', '$binggris' , '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata');");
-
-    echo " <script>
-    alert('Berhasil Menambah Data Nilai Siswa !');
-    </script>";
-  }
-?>
 
 </body>
 </html>
