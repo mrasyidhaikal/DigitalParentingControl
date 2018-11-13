@@ -21,7 +21,6 @@ if ($level != 'guru') {
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" type="text/css" href="../font/css/all.css">
-    <link rel="stylesheet" type="text/css" href="guru.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
     <style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&subset=latin-ext");
 </style></head>
@@ -97,26 +96,17 @@ if ($level != 'guru') {
         
       
     <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;">
-                 <tr>
+           
       
-          <input type="hidden" name="action" id="action" value="save" />
-          </tr>
+ 
+      
           <form method="post" action="">
                     
                       <div class="form-group">        
-                      <label>Id Pasok</label>
+                      <label class="form-label">ID Siswa</label>
                       <input type="text" name="id_pasok" class="form-control"   required="required"/>
-                      </div>
-                      
-                       <div class="form-group">        
-                      <label>Jumlah</label>
-                      <input type="number" name="jumlah" class="form-control"   required="required"/>
-                      </div>
-                       <div class="form-group">        
-                      <label>Tanggal</label>
-                      <input type="date" name="tanggal" class="form-control"   required="required"/>
-                      </div>
-                      <input type="submit" name="sim"  required="required" class="btn btn-primary" />
+                      </div>     
+                   
                     
                   </table>
                   </div>
@@ -126,17 +116,9 @@ if ($level != 'guru') {
                 </div>
     </div>
 
-  
-
-    <div class="form-group">
-      <button type="submit" name="pengumuman" class="btn btn-primary btn-block btn-lg">Submit</button>
-    </div>
     </form>
   </div> 
-</div>
-            </div>
-        </a>
-    </div>
+
                   
   <div class="container"> 
     <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
@@ -168,7 +150,7 @@ if ($level != 'guru') {
             <td>2011/07/25</td>
             <td>$170,750</td>
         </tr>
-     
+</div>
   </div>   
 </main>
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
