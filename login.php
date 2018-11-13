@@ -107,7 +107,7 @@ if ($us==$username && $pas==$password) {
 	$_SESSION['level']=$level;
 	$_SESSION['id']=$id;
 	echo "<script>window.alert('Login Success');
-			window.location='guru/index.php'</script>";
+			window.location='guru/'</script>";
 	}
 
 }
