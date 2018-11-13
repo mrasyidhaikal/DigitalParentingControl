@@ -52,11 +52,13 @@ if ($level != 'guru') {
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
         <ul class="u-list">
+        <a href="../guru/index.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="notif">
             <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
               <div class="c-menu-item__title"><span>Notif</span></div>
             </div>
           </li>
+        </a>
           <a href="nilai.php">
           <li class="c-menu__item is-active" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
@@ -104,8 +106,12 @@ if ($level != 'guru') {
                     
                       <div class="form-group">        
                       <label class="form-label">ID Siswa</label>
-                      <input type="text" name="id_pasok" class="form-control"   required="required"/>
+                      <input type="text" name="id_pasok" class="form-control" placeholder="ID Siswa" required="required"/>
                       </div>     
+
+                      <div class="form-group">
+                      <input type="submit" name="id_pasok" class="btn btn-primary btn-lg" required="required"/>
+                      </div> 
                    
                     
                   </table>
