@@ -51,9 +51,9 @@ if ($level != 'parent') {
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
         <ul class="u-list">
-          <li class="c-menu__item is-active" data-toggle="tooltip" title="Pengumuman">
+          <li class="c-menu__item is-active" data-toggle="tooltip" title="notif">
             <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
-              <div class="c-menu-item__title"><span>Pengumuman</span></div>
+              <div class="c-menu-item__title"><span>Notif</span></div>
             </div>
           </li>
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
@@ -80,7 +80,7 @@ if ($level != 'parent') {
     <div class="container">
     <div class="row">
     <form role="form" class="col-md-10 go-right">
-      <h2>Pengumuman Murid <i class="fa fa-bullhorn"></i></h2>
+      <h2>Notif Murid <i class="fa fa-bullhorn"></i></h2>
     <div class="form-group">
       <input id="name" name="name" type="text" placeholder="Judul Pengumuman" class="form-control" required>
       <label for="name">Judul Pengumuman</label>
