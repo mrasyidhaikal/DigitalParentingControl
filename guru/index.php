@@ -86,7 +86,8 @@ if ($level != 'guru') {
   <div class="content-wrapper content-wrapper--with-bg">
     <div class="container">
     <div class="row">
-    <form role="form" class="col-md-10 go-right">
+  
+       <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
       <h2><i class="fas fa-bullhorn"></i> Pengumuman Murid</h2>
 
 
@@ -102,15 +103,28 @@ if ($level != 'guru') {
       
  
       
-          <form method="post" action="">
+           
                     
                       <div class="form-group">        
-                      <label class="form-label">ID Siswa</label>
-                      <input type="text" name="id_pasok" class="form-control" placeholder="ID Siswa" required="required"/>
+                      <label class="form-label">Judul Pengumuman</label>
+                      <input type="text" name="judul" class="form-control" placeholder="Judul" required="required"/>
                       </div>     
 
+                      <div class="form-group">        
+                      <label class="form-label">Isi Pengumuman</label>
+                      <textarea name="isi" class="form-control" placeholder="Isi Pengumuman" required="required"/>
+                      </textarea>
+
+                      <div class="form-group">        
+                      <label class="form-label">File Pengumuman</label>
+                     ><input type="file" name="ddf" class="form-control"   required="required"/>
+                      </div>
+                      </div>
+
+                      
                       <div class="form-group">
-                      <input type="submit" name="id_pasok" class="btn btn-primary btn-lg" required="required"/>
+                      <input type="submit" name="kirim" class="btn btn-primary btn-lg"/>
+                      </form>
                       </div> 
                    
                     
@@ -118,44 +132,75 @@ if ($level != 'guru') {
                   </div>
                   
               
-                </form>
+                
                 </div>
     </div>
 
     </form>
-  </div> 
+  </div>
+  <?php 
+if (isset($_POST['kirim'])) {
+  include '../koneksi.php';
+    $judul = $_POST['judul'];
+    $isi  = $_POST['isi'];
+    $tanggal = date("Y-m-d h:i:s");
+                  
+    $fl_name=$_FILES['ddf']['name'];
+    $tmp=$_FILES['ddf']['tmp_name'];
 
+    // Validasi
+    $ekstensi=['doc','pdf','jpg','jpeg','png'];
+    $nama = explode('.', $fl_name);
+    $nama=strtolower(end($nama));
+    if (!in_array($nama, $ekstensi)) {
+    
+    }
+    else{
+       $baru = uniqid();
+                $baru .='.';
+                $baru .=$nama;
+
+                $path="../file/".$baru;
+                $nama="file/".$baru;
+                move_uploaded_file($tmp, $path);
+      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL, '$judul', '$nama', '$isi', '$tanggal');").mysql_error();
+    
+
+    }
+
+
+  }
+ ?>
                   
   <div class="container"> 
     <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
+
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
+            <th>Id Pengumuman</th>
+            <th>Judul</th>
+            <th>File</th>
+            <th>Isi</th>
+            <th>Tanggal</th>
+            <th>Action</th>
         </tr>
     </thead>
+    <?php 
+      include '../koneksi.php';
+      $q = mysql_query("SELECT * FROM pengumuman");
+      while ($row = mysql_fetch_array($q)) {
     
+     ?>
     <tbody>
         <tr>
-            <td>Tiger Nixon</td>
-            <td>System Architect</td>
-            <td>Edinburgh</td>
-            <td>61</td>
-            <td>2011/04/25</td>
-            <td>$320,800</td>
+            <td><?php echo $row['id_pengumuman']; ?></td>
+            <td><?php echo $row['judul']; ?></td>
+            <td><?php echo $row['file']; ?></td>
+            <td><?php echo $row['isi']; ?></td>
+            <td><?php echo $row['tanggal']; ?></td>
+           <td><a href="" class="btn btn-success">Edit</a></td>
         </tr>
-        <tr>
-            <td>Garrett Winters</td>
-            <td>Accountant</td>
-            <td>Tokyo</td>
-            <td>63</td>
-            <td>2011/07/25</td>
-            <td>$170,750</td>
-        </tr>
+        <?php } ?>
 </div>
   </div>   
 </main>
