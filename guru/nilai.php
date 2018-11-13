@@ -89,25 +89,31 @@ if ($level != 'guru') {
     <form role="form" class="col-md-10 go-right">
       <h2><i class="fas fa-file-invoice"></i> Nilai Murid</h2>
 
-
   <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
   
   <div class="sembunyi">
     <div class="row">
       <div class="col-sm-6" style="margin-left: 10px;">
         
-      
     <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;">
            
-      
- 
-      
+
           <form method="post" action="">
-                    
+
                       <div class="form-group">        
                       <label class="form-label">ID Siswa</label>
-                      <input type="text" name="id_pasok" class="form-control" placeholder="ID Siswa" required="required"/>
-                      </div>     
+                      <input type="text" name="id_siswa" class="form-control" placeholder="ID Siswa" required="required"/>
+                      </div> 
+                      
+                      <div class="form-group">        
+                      <label class="form-label">Nilai Bahasa Indonesia</label>
+                      <input type="number" min="0" max="100" name="bindo" class="form-control" placeholder="Masukkan Nilai Bahasa Indonesia" required="required"/>
+                      </div>
+                      
+                      <div class="form-group">        
+                      <label class="form-label">Nilai Bahasa Indonesia</label>
+                      <input type="number" min="0" max="100" name="bindo" class="form-control" placeholder="Masukkan Nilai Bahasa Indonesia" required="required"/>
+                      </div>
 
                       <div class="form-group">
                       <input type="submit" name="id_pasok" class="btn btn-primary btn-lg" required="required"/>
