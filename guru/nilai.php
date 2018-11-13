@@ -86,8 +86,8 @@ if ($level != 'guru') {
   <div class="content-wrapper content-wrapper--with-bg">
     <div class="container">
     <div class="row">
-    <form role="form" class="col-md-10 go-right">
       <h2><i class="fas fa-file-invoice"></i> Nilai Murid</h2>
+
 
   <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
   
@@ -98,7 +98,7 @@ if ($level != 'guru') {
     <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;">
            
 
-          <form method="post" action="">
+          <form method="post" action="#">
 
                       <div class="form-group">        
                       <label class="form-label">ID Siswa</label>
@@ -107,16 +107,51 @@ if ($level != 'guru') {
                       
                       <div class="form-group">        
                       <label class="form-label">Nilai Bahasa Indonesia</label>
-                      <input type="number" min="0" max="100" name="bindo" class="form-control" placeholder="Masukkan Nilai Bahasa Indonesia" required="required"/>
+                      <input type="number" min="0" max="100" name="bindo" class="form-control" placeholder="Masukkan Nilai Bahasa Indonesia (Numeric 0-100)" required="required"/>
                       </div>
                       
                       <div class="form-group">        
-                      <label class="form-label">Nilai Bahasa Indonesia</label>
-                      <input type="number" min="0" max="100" name="bindo" class="form-control" placeholder="Masukkan Nilai Bahasa Indonesia" required="required"/>
+                      <label class="form-label">Nilai Bahasa Inggris</label>
+                      <input type="number" min="0" max="100" name="binggris" class="form-control" placeholder="Masukkan Nilai Bahasa Inggris (Numeric 0-100)" required="required"/>
+                      </div>
+
+                      <div class="form-group">        
+                      <label class="form-label">Nilai Matematika</label>
+                      <input type="number" min="0" max="100" name="matematika" class="form-control" placeholder="Masukkan Nilai Matematika (Numeric 0-100)" required="required"/>
+                      </div>
+
+                      <div class="form-group">        
+                      <label class="form-label">Nilai Sejarah</label>
+                      <input type="number" min="0" max="100" name="sejarah" class="form-control" placeholder="Masukkan Nilai Sejarah (Numeric 0-100)" required="required"/>
+                      </div>
+
+                      <div class="form-group">        
+                      <label class="form-label">Nilai PKN</label>
+                      <input type="number" min="0" max="100" name="pkn" class="form-control" placeholder="Masukkan Nilai PKN (Numeric 0-100)" required="required"/>
+                      </div>
+
+                      <div class="form-group">        
+                      <label class="form-label">Nilai Fisika</label>
+                      <input type="number" min="0" max="100" name="fisika" class="form-control" placeholder="Masukkan Nilai Fisika (Numeric 0-100)" required="required"/>
+                      </div>
+
+                      <div class="form-group">        
+                      <label class="form-label">Nilai Pemrograman Berorientasi Objek</label>
+                      <input type="number" min="0" max="100" name="pbo" class="form-control" placeholder="Masukkan Nilai Pemrograman Berorientasi Objek (Numeric 0-100)" required="required"/>
+                      </div>
+
+                      <div class="form-group">        
+                      <label class="form-label">Nilai Basis Data</label>
+                      <input type="number" min="0" max="100" name="basisdata" class="form-control" placeholder="Masukkan Nilai Basis Data (Numeric 0-100)" required="required"/>
+                      </div>
+
+                      <div class="form-group">        
+                      <label class="form-label">Nilai Fisika</label>
+                      <input type="number" min="0" max="100" name="fisika" class="form-control" placeholder="Masukkan Nilai Fisika (Numeric 0-100)" required="required"/>
                       </div>
 
                       <div class="form-group">
-                      <input type="submit" name="id_pasok" class="btn btn-primary btn-lg" required="required"/>
+                      <input type="submit" name="fsubmit" class="btn btn-primary btn-lg"/>
                       </div> 
                    
                     
@@ -127,8 +162,6 @@ if ($level != 'guru') {
                 </form>
                 </div>
     </div>
-
-    </form>
   </div> 
 
                   
@@ -225,4 +258,28 @@ Dashboard.init();
 //# sourceURL=pen.js
 </script>
 
-</body></html>
+ <?php
+ 
+    include '../koneksi.php';
+    if (isset($_POST['fsubmit'])){
+
+    $id_siswa = $_POST['id_siswa'];
+    $bindo = $_POST['bindo'];
+    $binggris = $_POST['binggris'];
+    $matematika = $_POST['matematika'];
+    $sejarah = $_POST['sejarah'];
+    $pkn = $_POST['pkn'];
+    $fisika = $_POST['fisika'];
+    $pbo = $_POST['pbo'];
+    $basisdata = $_POST['basisdata'];
+    $date = date("Y-m-d h:i:s");
+    $q = mysql_query("INSERT INTO `tbl_mapelrpl` (`id_siswa`, 'tanggal' , `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`) VALUES ('$id_siswa', '$date' , '$bindo', '$binggris' , '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata');");
+
+    echo " <script>
+    alert('Berhasil Menambah Data Nilai Siswa !');
+    </script>";
+  }
+?>
+
+</body>
+</html>
