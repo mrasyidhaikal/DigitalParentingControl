@@ -220,7 +220,7 @@ if ($level != 'guru') {
             <th>Sejarah</th>
             <th>PKN</th>
             <th>Fisika</th>
-            <th>Pemrograman Berorientasi Objek</th>
+            <th>PBO</th>
             <th>Basis Data</th>
             <th>Average</th>
             <th>Action</th>
