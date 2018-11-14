@@ -85,8 +85,8 @@ if ($level != 'guru') {
   <div class="content-wrapper content-wrapper--with-bg">
 
       <!--   -----------------------------------------------------------------   -->
-      <form action="#" method="post">
-      <input type="date" name="tanggal" value="<?php echo(date("Y-m-d"))?>">
+      <form action="" method="post">
+      <input type="date" name="tanggal">
       <select name="kelas"><option value="12RPL1">12RPL1</option></select>
       <input type="submit" name="cari">
       </form>
@@ -98,6 +98,7 @@ if ($level != 'guru') {
   <th>Tanggal</th>
   <th>Nama</th>
   <th>Sakit</th>
+  <th>izin</th>
   <th>Alfa</th>
   <th>Hadir</th>
   <th>Keterangan</th>
@@ -112,9 +113,10 @@ if ($level != 'guru') {
 
       $no = 1;
       $data = mysql_query("select * from absensi where tanggal ='$tanggal' and kelas='$kelas'");
-
-      if (mysql_num_rows($data )) {
-                                   
+        
+      if (mysql_num_rows($data)) {
+       if (isset($tanggal)) {
+              
         while($d = mysql_fetch_array($data))
         {
           ?>
@@ -122,16 +124,63 @@ if ($level != 'guru') {
             <td><?php echo $no++; ?></td>
             <td><?php echo $d['tanggal']; ?></td>
             <td><?php echo $d['nama']; ?></td>
-            <td><?php echo $d['sakit']; ?></td>
-            <td><?php echo $d['alfa']; ?></td>
-            <td><?php echo $d['hadir']; ?></td>
-            <td><?php echo $d['keterangan']; ?></td>
+            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="sakit" 
+              <?php 
+              if ($d['sakit']==1) {
+              echo "checked";
+            }; ?>>
+            </td>
+            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="izin" 
+              <?php 
+              if ($d['izin']==1) {
+              echo "checked";
+            }; ?> >
+            </td>
+            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="alfa" <?php 
+              if ($d['alfa']==1) {
+              echo "checked";
+            }; ?> >
+            </td>
+            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="hadir" <?php 
+              if ($d['hadir']==1) {
+              echo "checked";
+            }; ?> >
+            </td>
+            <td><input type="text" name="keterangan" value="<?php echo $d['keterangan']; ?>"></td>
           </tr>
           <?php 
         }
       
       }
-    }
+
+      }
+      else
+      {
+
+      $no = 1;
+
+      $data = mysql_query("select * from siswa");
+
+       while($d = mysql_fetch_array($data))
+        {
+          ?>
+          <tr>
+            <td><?php echo $no++; ?></td>
+            <td><?php echo $tanggal ?></td>
+            <td><?php echo $d['nama']; ?></td>
+            <td><input type="radio" name="absen" value="sakit"></td>
+            <td><input type="radio" name="absen" value="izin"></td>
+            <td><input type="radio" name="absen" value="alfa"></td>
+            <td><input type="radio" name="absen" value="hadir"></td>
+            <td><input type="text" name="keterangan" value=""></td>
+          </tr>
+          <?php 
+        }
+      
+       
+      }
+    }     
+
     ?>
 </table>
 </div>
