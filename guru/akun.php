@@ -106,22 +106,41 @@ if ($level != 'guru') {
            
             
                       <div class="form-group">        
-                      <label class="form-label">Judul Pengumuman</label>
-                      <input type="text" name="judul" class="form-control" placeholder="Judul" required="required"/>
+                      <label class="form-label">Username</label>
+                      <input type="text" name="username" class="form-control" placeholder="Username" required="required"/>
                       </div>     
 
                       <div class="form-group">        
-                      <label class="form-label">Isi Pengumuman</label>
-                      <textarea name="isi" class="form-control" placeholder="Isi Pengumuman" required="required"/>
-                      </textarea>
+                      <label class="form-label">Password</label>
+                      <input type="password" name="pass" class="form-control"  required="required"/>
+                      </div>  
+                      <div class="form-group">        
+                      <label class="form-label">Confirm Password</label>
+                      <input type="password" name="pass2" class="form-control"  required="required"/>
+                      </div>
+                      <div class="form-group">        
+                      <label class="form-label">Level</label>
+                      <select name="level" class="form-control">
+                        <option value="guru">Guru</option>
+                        <option value="parent">Parent</option>
+                      </select>
+                      </div>
+                      </div>
 
                       <div class="form-group">        
-                      <label class="form-label">File Pengumuman</label>
-                      <input type="file" name="ddf" class="form-control"   required="required"/>
-                      </div>
+                      <label class="form-label">Email</label>
+                      <input type="email" name="email" class="form-control" placeholder="Email" required="required"/>
                       </div>
 
-                      
+                      <div class="form-group">        
+                      <label class="form-label">No Hp</label>
+                      <input type="tel" name="nohp" class="form-control" placeholder="No Hp" required="required"/>
+                      </div>
+                      <div class="form-group">        
+                      <label class="form-label">Foto</label>
+                      <input type="file" name="foto" class="form-control" placeholder="No Hp" required="required"/>
+                      </div>
+
                       <div class="form-group">
                       <input type="submit" name="kirim" class="btn btn-primary btn-lg"/>
                       </form>
