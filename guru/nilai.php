@@ -205,6 +205,7 @@ if ($level != 'guru') {
 
                   
   <div class="container"> 
+  <div class ="col-md-8">
     <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
     <thead>
         <tr>
@@ -224,6 +225,7 @@ if ($level != 'guru') {
     </thead>
     
     <tbody>
+
     <?php 
     include '../koneksi.php';
     
@@ -252,6 +254,7 @@ if ($level != 'guru') {
         </tr>
     <?php } ?>
 </div>
+  </div>
   </div>   
 </main>
 
