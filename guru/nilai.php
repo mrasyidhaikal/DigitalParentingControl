@@ -88,7 +88,7 @@ if ($level != 'guru') {
   <div class="content-wrapper content-wrapper--with-bg">
     <div class="container">
     <div class="row">
-      <h2><i class="fas fa-file-invoice"></i> Nilai Murid</h2>
+      <h2><i class="fas fa-file-invoice"></i> Nilai Murid (per Bulan)</h2>
 
 
   <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
@@ -104,7 +104,21 @@ if ($level != 'guru') {
 
                       <div class="form-group">        
                       <label class="form-label">ID Siswa</label>
-                      <input type="text" name="id_siswa" class="form-control" placeholder="ID Siswa" required="required"/>
+                      
+                      <select name="id_siswa" id="select" class="form-control" >
+                          <option value="" disabled selected>Pilih ID Siswa</option>
+                            <?php 
+                            include '../koneksi.php';
+                            $data = mysql_query("SELECT id_siswa , nama_siswa from tbl_siswa");
+                             if ($data) {
+                               while ($row = mysql_fetch_array($data)){
+                                  ?>
+
+                                  <option value="<?php echo $row['id_siswa'];?>"><?php echo $row['id_siswa']; echo "  ---  "; echo $row['nama_siswa']; ?></option>
+                                                
+                          <?php } } ?>
+                        </select>
+
                       </div> 
                       
                       <div class="form-group">        
@@ -147,11 +161,6 @@ if ($level != 'guru') {
                       <input type="number" min="0" max="100" name="basisdata" class="form-control" placeholder="Masukkan Nilai Basis Data (Numeric 0-100)" required="required"/>
                       </div>
 
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Fisika</label>
-                      <input type="number" min="0" max="100" name="fisika" class="form-control" placeholder="Masukkan Nilai Fisika (Numeric 0-100)" required="required"/>
-                      </div>
-
                       <div class="form-group">
                       <input type="submit" name="fsubmit" class="btn btn-primary btn-lg"/>
                       </div> 
@@ -176,13 +185,18 @@ if ($level != 'guru') {
                 $fisika = $_POST['fisika'];
                 $pbo = $_POST['pbo'];
                 $basisdata = $_POST['basisdata'];
-                $date = date("Y-m-d h:i:s");
+                $date = date("l, d/M/Y");
+                $avg = ($bindo + $binggris + $matematika + $sejarah+ $pkn + $fisika + $pbo + $basisdata) / 8;
+
                 $q = "INSERT INTO `tbl_mapelrpl` 
-                (`id_siswa`, `tanggal`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`) 
+                (`id_siswa`, `tanggal`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`,`avg`) 
                 VALUES 
-                ('$id_siswa', '$date', '$bindo', '$binggris', '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata')";
+                ('$id_siswa', '$date', '$bindo', '$binggris', '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata','$avg')";
 
                 mysql_query($q);
+                
+                echo "<script>window.alert('Input Data Success !');
+                window.location='nilai.php'</script>";
 
                 }
                 
@@ -197,35 +211,70 @@ if ($level != 'guru') {
     <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
+            <th>Tanggal</th>
+            <th>ID Siswa</th>
+            <th>Bahasa Indonesia</th>
+            <th>Bahasa Inggris</th>
+            <th>Matematika</th>
+            <th>Sejarah</th>
+            <th>PKN</th>
+            <th>Fisika</th>
+            <th>Pemrograman Berorientasi Objek</th>
+            <th>Basis Data</th>
+            <th>Average</th>
+            <th>Action</th>
         </tr>
     </thead>
     
     <tbody>
+    <?php 
+    include '../koneksi.php';
+    
+    $query = mysql_query("SELECT * FROM tbl_mapelrpl");
+    while($row = mysql_fetch_array($query)){
+      $panggilnama = $row['id_siswa'];
+      $querynama = mysql_query("SELECT nama_siswa from tbl_siswa where id_siswa = $panggilnama");
+      $row2 = mysql_fetch_array($querynama);
+
+    ?>
         <tr>
-            <td>Tiger Nixon</td>
-            <td>System Architect</td>
-            <td>Edinburgh</td>
-            <td>61</td>
-            <td>2011/04/25</td>
-            <td>$320,800</td>
+            <td><?php echo $row['tanggal']; ?></td>
+            <td><?php echo $row2['nama_siswa'] ?></td>
+            <td><?php echo $row['bindo']; ?></td>
+            <td><?php echo $row['binggris']; ?></td>
+            <td><?php echo $row['matematika']; ?></td>
+            <td><?php echo $row['sejarah']; ?></td>
+            <td><?php echo $row['pkn']; ?></td>
+            <td><?php echo $row['fisika']; ?></td>
+            <td><?php echo $row['pbo']; ?></td>
+            <td><?php echo $row['basisdata']; ?></td>
+            <td><?php echo $row['avg'] ?></td>
+            <td><a href="nilai.php?delete=<?php echo $row['id_mapelrpl']; ?>" class="btn btn-danger">Hapus</a>
+            </td>
+
         </tr>
-        <tr>
-            <td>Garrett Winters</td>
-            <td>Accountant</td>
-            <td>Tokyo</td>
-            <td>63</td>
-            <td>2011/07/25</td>
-            <td>$170,750</td>
-        </tr>
+    <?php } ?>
 </div>
   </div>   
 </main>
+
+<?php
+if (isset($_GET['delete'])){
+
+  $id = $_GET['delete'];
+  $query = mysql_query("DELETE FROM `tbl_mapelrpl` WHERE `tbl_mapelrpl`.`id_mapelrpl` = $id");
+
+  if ($query) {
+    ?>
+    <script type="text/javascript">
+      document.location.href='nilai.php';
+      alert("Delete Data Success !");
+      </script>
+     <?php
+         }
+         }
+    ?>
+
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
 <!-- Data tables -->
