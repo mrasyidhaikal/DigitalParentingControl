@@ -94,18 +94,19 @@ $data=mysql_fetch_array(mysql_query("SELECT * FROM `users` WHERE username='$us' 
 $username=$data['username'];
 $password=$data['password'];
 $level=$data['level'];
-$id=$data['id_kasir'];
+$id=$data['id_user'];
+
 if ($us==$username && $pas==$password) {
 	if ($level=='parent') {
 		$_SESSION['level']=$level;
-		$_SESSION['id_kasir']=$id;
+		$_SESSION['id_user']=$id;
 		$_SESSION['username']=$username;
 		echo "<script>window.alert('Login Success');
 			window.location='parent/index.php'</script>";
 	}
 	elseif ($level=='guru') {
 	$_SESSION['level']=$level;
-	$_SESSION['id']=$id;
+	$_SESSION['id_user']=$id;
 	echo "<script>window.alert('Login Success');
 			window.location='guru/'</script>";
 	}

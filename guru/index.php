@@ -161,7 +161,7 @@ if (isset($_POST['kirim'])) {
     $judul = $_POST['judul'];
     $isi  = $_POST['isi'];
     $tanggal = date("Y-m-d H:i:s");
-                  
+    $id_user =$_SESSION['id_user']; 
     $fl_name=$_FILES['ddf']['name'];
     $tmp=$_FILES['ddf']['tmp_name'];
 
@@ -181,7 +181,7 @@ if (isset($_POST['kirim'])) {
                 $path="../file/".$baru;
                 $nama="file/".$baru;
                 move_uploaded_file($tmp, $path);
-      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL, '$judul', '$nama', '$isi', '$tanggal');").mysql_error();
+      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,$id_user, '$judul', '$nama', '$isi', '$tanggal');").mysql_error();
       echo "<script>window.alert('Input Success');
   window.location='index.php'</script>";
 
@@ -204,13 +204,14 @@ if (isset($_POST['kirim'])) {
             <th>Action</th>
         </tr>
     </thead>
-    <?php 
+
+    <tbody>
+          <?php 
       include '../koneksi.php';
       $q = mysql_query("SELECT * FROM pengumuman");
       while ($row = mysql_fetch_array($q)) {
     
      ?>
-    <tbody>
         <tr>
             <td><?php echo $row['id_pengumuman']; ?></td>
             <td><?php echo $row['judul']; ?></td>

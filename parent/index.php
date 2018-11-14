@@ -82,163 +82,119 @@ if ($level != 'parent') {
   <div class="row">
 
     <section class="content">
-      <h1>Table Filter</h1>
+    
       <div class="col-md-8 col-md-offset-2">
+          <h1><i class="fa fa-bullhorn"></i> Pemberitahuan</h1>
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="pull-right">
-              <div class="btn-group">
-                <button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
-                <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
-                <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button>
-                <button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
+              
+              <div class="form-group">
+                <form method="post" action="">
+                <input type="text" name="cari" class="form-control" placeholder="Cari Judul Pemberitahuan" id="keyword">
+               
+              </form>
               </div>
+
+              
             </div>
+            <div id="content">
             <div class="table-container">
               <table class="table table-filter">
                 <tbody>
+                <?php 
+                include '../koneksi.php';
+                // Pagination
+                $jumlahdata_per_page = 4;
+
+                $result = mysql_query("SELECT * FROM pengumuman");
+                $jumlah_data = mysql_num_rows($result);
+                $jumlah_halaman= ceil($jumlah_data / $jumlahdata_per_page);
+
+
+               $aktif = (isset($_GET['halaman'] ) ) ? $_GET['halaman'] : 1;
+
+                // Awal Data
+               $awaldata=($jumlahdata_per_page * $aktif) -$jumlahdata_per_page;
+              
+               // End Pagination Logic
+
+                $query = mysql_query("SELECT * FROM pengumuman LIMIT $awaldata, $jumlahdata_per_page");
+                while ($row = mysql_fetch_array($query)){
+                
+                
+                 ?>
                   <tr data-status="pagado">
                     <td>
-                      <div class="ckbox">
-                        <input type="checkbox" id="checkbox1">
-                        <label for="checkbox1"></label>
-                      </div>
-                    </td>
-                    <td>
-                      <a href="javascript:;" class="star">
-                        <i class="glyphicon glyphicon-star"></i>
-                      </a>
-                    </td>
-                    <td>
                       <div class="media">
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
                         <div class="media-body">
-                          <span class="media-meta pull-right">Febrero 13, 2016</span>
+                          <span class="media-meta pull-right"><?php echo $row['tanggal']; ?></span>
+                        
+                      
+
                           <h4 class="title">
-                            Lorem Impsum
-                            <span class="pull-right pagado">(Pagado)</span>
+                            <b>
+                            <?php echo $row['judul']; ?>
+                            </b>
                           </h4>
-                          <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
+                          <p class="summary"><?php echo $row['isi']; ?></p>
+                          <br>
+                            <span class="media-meta pull-right"><a href="../<?php echo $row['file']; ?>">Download File <i class="fas fa-file-download"></i></a></span>
                         </div>
                       </div>
                     </td>
                   </tr>
-                  <tr data-status="pendiente">
-                    <td>
-                      <div class="ckbox">
-                        <input type="checkbox" id="checkbox3">
-                        <label for="checkbox3"></label>
-                      </div>
-                    </td>
-                    <td>
-                      <a href="javascript:;" class="star">
-                        <i class="glyphicon glyphicon-star"></i>
-                      </a>
-                    </td>
-                    <td>
-                      <div class="media">
-                        <a href="#" class="pull-left">
-                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-                        </a>
-                        <div class="media-body">
-                          <span class="media-meta pull-right">Febrero 13, 2016</span>
-                          <h4 class="title">
-                            Lorem Impsum
-                            <span class="pull-right pendiente">(Pendiente)</span>
-                          </h4>
-                          <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr data-status="cancelado">
-                    <td>
-                      <div class="ckbox">
-                        <input type="checkbox" id="checkbox2">
-                        <label for="checkbox2"></label>
-                      </div>
-                    </td>
-                    <td>
-                      <a href="javascript:;" class="star">
-                        <i class="glyphicon glyphicon-star"></i>
-                      </a>
-                    </td>
-                    <td>
-                      <div class="media">
-                        <a href="#" class="pull-left">
-                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-                        </a>
-                        <div class="media-body">
-                          <span class="media-meta pull-right">Febrero 13, 2016</span>
-                          <h4 class="title">
-                            Lorem Impsum
-                            <span class="pull-right cancelado">(Cancelado)</span>
-                          </h4>
-                          <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr data-status="pagado" class="selected">
-                    <td>
-                      <div class="ckbox">
-                        <input type="checkbox" id="checkbox4" checked>
-                        <label for="checkbox4"></label>
-                      </div>
-                    </td>
-                    <td>
-                      <a href="javascript:;" class="star star-checked">
-                        <i class="glyphicon glyphicon-star"></i>
-                      </a>
-                    </td>
-                    <td>
-                      <div class="media">
-                        <a href="#" class="pull-left">
-                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-                        </a>
-                        <div class="media-body">
-                          <span class="media-meta pull-right">Febrero 13, 2016</span>
-                          <h4 class="title">
-                            Lorem Impsum
-                            <span class="pull-right pagado">(Pagado)</span>
-                          </h4>
-                          <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr data-status="pendiente">
-                    <td>
-                      <div class="ckbox">
-                        <input type="checkbox" id="checkbox5">
-                        <label for="checkbox5"></label>
-                      </div>
-                    </td>
-                    <td>
-                      <a href="javascript:;" class="star">
-                        <i class="glyphicon glyphicon-star"></i>
-                      </a>
-                    </td>
-                    <td>
-                      <div class="media">
-                        <a href="#" class="pull-left">
-                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-                        </a>
-                        <div class="media-body">
-                          <span class="media-meta pull-right">Febrero 13, 2016</span>
-                          <h4 class="title">
-                            Lorem Impsum
-                            <span class="pull-right pendiente">(Pendiente)</span>
-                          </h4>
-                          <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+               <?php } ?>
+
                 </tbody>
+
               </table>
+              </div>
+
+
+<!-- Pagination -->
+<div class="col-md-12 col-md-offset-8">
+  <nav aria-label="...">
+  <ul class="pagination">
+    <?php if($aktif > 1): ?>
+    <li class="page-item">
+      <a class="page-link" href="?halaman=<?php echo $aktif-1; ?>">Previous</a>
+    </li>
+    <?php else: ?>
+       <li class="page-item disabled">
+      <a class="page-link" href="">Previous</a>
+    </li>
+  <?php endif; ?>
+   <?php for ($i=1; $i <= $jumlah_halaman; $i++):?>
+    <?php if($i == $aktif) : ?>
+    <li class="page-item active">
+      <a class="page-link" href="?halaman=<?php echo $i; ?>"><?php echo $i; ?></a>
+    </li>
+    <?php else: ?>
+        <li class="page-item">
+      <a class="page-link" href="?halaman=<?php echo $i; ?>"><?php echo $i; ?></a>
+    </li>
+    <?php endif; ?>
+   <?php endfor; ?>
+
+    <?php if($aktif < $jumlah_halaman): ?>
+    <li class="page-item">
+      <a class="page-link" href="?halaman=<?php echo $aktif+1; ?>">Next</a>
+    </li>
+    <?php else: ?>
+       <li class="page-item disabled">
+      <a class="page-link" href="">Next</a>
+    </li>
+  <?php endif; ?>
+
+  </ul>
+</nav>
+</div>
+<!-- end pagination -->
+
             </div>
           </div>
         </div>
@@ -248,6 +204,7 @@ if ($level != 'parent') {
 
 </main>
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src="script.js"></script>
 <script type="text/javascript">
   
   "use strict";
