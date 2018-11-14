@@ -600,17 +600,17 @@ a.list-group-item.active small {
 }
 
 .form-group input[type="password"]{
-  border: 2px solid var(--primaryohever);
+
   outline: none;
   color: var(primaryohever);
 }
 .form-group input[type="mail"]{
-  border: 2px solid var(--primaryohever);
+  
   outline: none;
   color: var(primaryohever);
 }
 .form-group input[type="file"]{
-  border: 2px solid var(--primaryohever);
+  
   outline: none;
   color: var(primaryohever);
 }
