@@ -24,7 +24,11 @@ if ($level != 'guru') {
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
     <style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&subset=latin-ext");
 </style></head>
-
+<script type="text">
+ $(document).ready( function () {
+    $('#tabel').DataTable();
+} ); 
+</script>
 <body class="sidebar-is-reduced">
   <header class="l-header">
     <div class="l-header__inner clearfix">
@@ -66,14 +70,22 @@ if ($level != 'guru') {
             </div>
           </li>
           </a>
+<<<<<<< HEAD
           <a href="nilai.php">
+=======
+          <a href="absensi.php">
+>>>>>>> 8f2e61129fbb6525c107b5cc6753e53a051fb39f
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
           </li>
+<<<<<<< HEAD
           </a>
           <a href="akun.php">
+=======
+        </a>
+>>>>>>> 8f2e61129fbb6525c107b5cc6753e53a051fb39f
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
               <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>

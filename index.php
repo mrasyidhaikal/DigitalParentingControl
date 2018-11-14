@@ -9,7 +9,11 @@ if ($level != 'parent') {
     header('location:login.php');
 }
  ?>
-
+<script type="text/javascript">
+   $(document).ready( function () {
+    $('#tabel').DataTable();
+} ); 
+</script>
 <!DOCTYPE html>
 <html lang="en" >
 

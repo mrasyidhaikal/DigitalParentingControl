@@ -51,21 +51,27 @@ if ($level != 'guru') {
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
         <ul class="u-list">
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="notif">
+        <a href="../guru/index.php">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengumuman">
             <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
-              <div class="c-menu-item__title"><span>Notif</span></div>
+              <div class="c-menu-item__title"><span>Pengumuman</span></div>
             </div>
           </li>
+        </a>
+          <a href="nilai.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>
             </div>
           </li>
+          </a>
+          <a href="absensi.php">
           <li class="c-menu__item is-active" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
           </li>
+        </a>
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
               <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
@@ -79,32 +85,57 @@ if ($level != 'guru') {
   <div class="content-wrapper content-wrapper--with-bg">
 
       <!--   -----------------------------------------------------------------   -->
+      <form action="#" method="post">
+      <input type="date" name="tanggal" value="<?php echo(date("Y-m-d"))?>">
+      <select name="kelas"><option value="12RPL1">12RPL1</option></select>
+      <input type="submit" name="cari">
+      </form>
 
-      <input type="date" name="">
-      <select><option></option></select>
-      <input type="submit" name="">
-
+<div class="container"> 
+    <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
+  <tr>
+  <th>NO</th>
+  <th>Tanggal</th>
+  <th>Nama</th>
+  <th>Sakit</th>
+  <th>Alfa</th>
+  <th>Hadir</th>
+  <th>Keterangan</th>
+  </tr>
 <?php 
-    include 'koneksi.php';
-    $no = 1;
-    $data = mysql_query("select * from absensi where tanggal =''");
-    while($d = mysql_fetch_array($data)){
-      ?>
-      <tr>
-        <td><?php echo $no++; ?></td>
-        <td><?php echo $d['tanggal']; ?></td>
-        <td><?php echo $d['nama']; ?></td>
-        <td><?php echo $d['sakit']; ?></td>
-        <td><?php echo $d['alfa']; ?></td>
-        <td><?php echo $d['hadir']; ?></td>
-        <td><?php echo $d['keterangan']; ?></td>
-      </tr>
-      <?php 
+
+    include '../koneksi.php';   
+    if (isset($_POST['cari'])) {
+
+      $tanggal = $_POST['tanggal'];
+      $kelas = $_POST['kelas'];
+
+      $no = 1;
+      $data = mysql_query("select * from absensi where tanggal ='$tanggal' and kelas='$kelas'");
+
+      if (mysql_num_rows($data )) {
+                                   
+        while($d = mysql_fetch_array($data))
+        {
+          ?>
+          <tr>
+            <td><?php echo $no++; ?></td>
+            <td><?php echo $d['tanggal']; ?></td>
+            <td><?php echo $d['nama']; ?></td>
+            <td><?php echo $d['sakit']; ?></td>
+            <td><?php echo $d['alfa']; ?></td>
+            <td><?php echo $d['hadir']; ?></td>
+            <td><?php echo $d['keterangan']; ?></td>
+          </tr>
+          <?php 
+        }
+      
+      }
     }
     ?>
-
-
-
+</table>
+</div>
+<!-- ------------------------------------------ -->
   </div> 
             </div>
         </a>
