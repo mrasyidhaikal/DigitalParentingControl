@@ -90,7 +90,7 @@ if ($level != 'guru') {
       <select name="kelas"><option value="12RPL1">12RPL1</option></select>
       <input type="submit" name="cari">
       </form>
-
+<form>
 <div class="container"> 
     <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
   <tr>
@@ -131,10 +131,32 @@ if ($level != 'guru') {
         }
       
       }
+    }else{
+      $data = mysql_query("select * from tbl_siswa");
+
+       while($d = mysql_fetch_array($data))
+        {
+          ?>
+          <tr>
+            <td><?php echo $no++; ?></td>
+            <td><?php echo $tanggal ?></td>
+            <td><?php echo $d['nama']; ?></td>
+            <td><input type="radio" name="" value="sakit"></td>
+            <td><input type="radio" name="" value="izin"></td>
+            <td><input type="radio" name="" value="alfa"></td>
+            <td><input type="radio" name="" value="hadir"></td>
+            <td><input type="radio" name="" value="sakit"></td>
+          </tr>
+          <?php 
+        }
+      
+       
     }
+
     ?>
 </table>
 </div>
+</form>
 <!-- ------------------------------------------ -->
   </div> 
             </div>

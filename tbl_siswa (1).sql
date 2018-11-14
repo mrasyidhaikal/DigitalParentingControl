@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2018 at 07:52 AM
+-- Generation Time: Nov 14, 2018 at 07:30 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -25,30 +25,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `absensi`
+-- Table structure for table `tbl_siswa`
 --
 
-CREATE TABLE `absensi` (
-  `id_absen` varchar(100) NOT NULL,
-  `tanggal` varchar(100) NOT NULL,
-  `kelas` varchar(100) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `sakit` int(1) NOT NULL,
-  `izin` int(1) NOT NULL,
-  `alfa` int(1) NOT NULL,
-  `hadir` int(1) NOT NULL,
-  `keterangan` varchar(100) NOT NULL
+CREATE TABLE `tbl_siswa` (
+  `id_siswa` int(11) NOT NULL,
+  `id_user` varchar(255) NOT NULL,
+  `nama_siswa` int(11) NOT NULL,
+  `kelas` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `absensi`
---
-ALTER TABLE `absensi`
-  ADD PRIMARY KEY (`id_absen`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
