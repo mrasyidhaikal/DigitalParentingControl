@@ -115,7 +115,7 @@ if ($level != 'guru') {
       $data = mysql_query("select * from absensi where tanggal ='$tanggal' and kelas='$kelas'");
         
       if (mysql_num_rows($data)) {
-       if (isset($tanggal)) {
+       if (isset($tanggal,$kelas)) {
               
         while($d = mysql_fetch_array($data))
         {
@@ -150,7 +150,21 @@ if ($level != 'guru') {
           </tr>
           <?php 
         }
+      ?><!--$tanggal=$d['tanggal'];
+      $nama=$d['nama'];
+      $sakit=$d['sakit'];
+      $izin=$d['izin'];
+      $alfa=$d['alfa'];
+      $hadir=$d['hadir'];
+      $keterangan=$d['keterangan'];
+      $query1="";
+      $query1+="INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '$tanggal', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')";
+
+      UPDATE `absensi` SET `id_absen` = '2', `tanggal` = '1018-11-15', `kelas` = '22RPL1', `nama` = '2teven', `sakit` = '1', `izin` = '1', `alfa` = '0', `hadir` = '1', `keterangan` = 'qaasdasd' WHERE `absensi`.`id_absen` = 1
+
       
+      -->
+      <?php
       }
 
       }
@@ -158,8 +172,8 @@ if ($level != 'guru') {
       {
 
       $no = 1;
-
-      $data = mysql_query("select * from siswa");
+      echo "<script type='text/javascript'>alert('$kelas');</script>";
+      $data = mysql_query("select * from siswa where kelas='$kelas'");
 
        while($d = mysql_fetch_array($data))
         {
@@ -184,7 +198,13 @@ if ($level != 'guru') {
     ?>
 </table>
 </div>
+
+
+
 <!-- ------------------------------------------ -->
+
+
+
   </div> 
             </div>
         </a>
