@@ -88,7 +88,7 @@ if ($level != 'guru') {
   <div class="content-wrapper content-wrapper--with-bg">
     <div class="container">
     <div class="row">
-      <h2><i class="fas fa-file-invoice"></i> Nilai Murid (per Semester)</h2>
+      <h2><i class="fas fa-file-invoice"></i> Nilai Murid (per Bulan)</h2>
 
 
   <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
@@ -185,7 +185,7 @@ if ($level != 'guru') {
                 $fisika = $_POST['fisika'];
                 $pbo = $_POST['pbo'];
                 $basisdata = $_POST['basisdata'];
-                $date = date("l-d-M-Y");
+                $date = date("l, d/M/Y");
                 $avg = ($bindo + $binggris + $matematika + $sejarah+ $pkn + $fisika + $pbo + $basisdata) / 8;
 
                 $q = "INSERT INTO `tbl_mapelrpl` 
@@ -194,6 +194,9 @@ if ($level != 'guru') {
                 ('$id_siswa', '$date', '$bindo', '$binggris', '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata','$avg')";
 
                 mysql_query($q);
+                
+                echo "<script>window.alert('Input Data Success !');
+                window.location='nilai.php'</script>";
 
                 }
                 
