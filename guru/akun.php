@@ -66,20 +66,16 @@ if ($level != 'guru') {
             </div>
           </li>
           </a>
-          <a href="nilai.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
           </li>
-          </a>
-          <a href="akun.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
               <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
             </div>
           </li>
-          </a>
         </ul>
       </nav>
     </div>
@@ -92,7 +88,7 @@ if ($level != 'guru') {
     <div class="row">
   
        <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
-      <h2><i class="fas fa-bullhorn"></i> Pengumuman Murid</h2>
+      <h2><i class="fas fa-users"></i>Registrasi Akun</h2>
 
 
   <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
@@ -148,7 +144,7 @@ if (isset($_POST['kirim'])) {
   include '../koneksi.php';
     $judul = $_POST['judul'];
     $isi  = $_POST['isi'];
-    $tanggal = date("Y-m-d H:i:s");
+    $tanggal = date("Y-m-d h:i:s");
                   
     $fl_name=$_FILES['ddf']['name'];
     $tmp=$_FILES['ddf']['tmp_name'];
@@ -184,28 +180,36 @@ if (isset($_POST['kirim'])) {
 
     <thead>
         <tr>
-            <th>Id Pengumuman</th>
-            <th>Judul</th>
-            <th>File</th>
-            <th>Isi</th>
-            <th>Tanggal</th>
+            <th>Foto</th>
+            <th>Id User</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Level</th>
+            
+            <th>Email</th>
+            <th>No Hp</th>
             <th>Action</th>
         </tr>
     </thead>
     <?php 
       include '../koneksi.php';
-      $q = mysql_query("SELECT * FROM pengumuman");
+      $q = mysql_query("SELECT * FROM users");
       while ($row = mysql_fetch_array($q)) {
     
      ?>
     <tbody>
         <tr>
-            <td><?php echo $row['id_pengumuman']; ?></td>
-            <td><?php echo $row['judul']; ?></td>
-            <td><a href="../<?php echo $row['file']; ?>">Download File</a></td>
-            <td><?php echo $row['isi']; ?></td>
-            <td><?php echo $row['tanggal']; ?></td>
-           <td><a href="index.php?id=<?php echo $row['id_pengumuman']; ?>" class="btn btn-danger">Hapus</a></td>
+           <td><img src="../<?php echo $row['foto']; ?>"> </td>
+            <td><?php echo $row['id_user']; ?></td>
+            <td><?php echo $row['username']; ?></td>
+           
+            <td><?php echo $row['password']; ?></td>
+            <td><?php echo $row['level']; ?></td>
+            <td><?php echo $row['email']; ?></td>
+            <td><?php echo $row['nohp']; ?></td>
+           <td><a href="index.php?id=<?php echo $row['id_pengumuman']; ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+           <a href="index.php?update=<?php echo $row['id_pengumuman']; ?>" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
+           </td>
         </tr>
         <?php } ?>
 </div>

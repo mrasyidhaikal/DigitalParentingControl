@@ -18,6 +18,7 @@ if ($level != 'parent') {
     <meta charset="UTF-8">
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../font/css/all.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
     <style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&subset=latin-ext");
 </style></head>
@@ -49,24 +50,27 @@ if ($level != 'parent') {
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
         <ul class="u-list">
-          <li class="c-menu__item is-active" data-toggle="tooltip" title="Proposals">
-            <div class="c-menu__item__inner"><i class="fa fa-file-text-o"></i>
-              <div class="c-menu-item__title"><span>Proposals</span></div>
+          <a href="index.php">
+          <li class="c-menu__item is-active" data-toggle="tooltip" title="Pengumuman">
+            <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
+              <div class="c-menu-item__title"><span>Pengumuman</span></div>
+            </div>
+          </li></a>
+         <a href="nilai.php">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
+            <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
+              <div class="c-menu-item__title"><span>Nilai</span></div>
             </div>
           </li>
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="History">
-            <div class="c-menu__item__inner"><i class="fa fa-history"></i>
-              <div class="c-menu-item__title"><span>History</span></div>
+          </a>
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
+            <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
+              <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
           </li>
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Accounts">
-            <div class="c-menu__item__inner"><i class="fa fa-address-book-o"></i>
-              <div class="c-menu-item__title"><span>Accounts</span></div>
-            </div>
-          </li>
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Settings">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
-              <div class="c-menu-item__title"><span>Settings</span></div>
+              <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
             </div>
           </li>
         </ul>
