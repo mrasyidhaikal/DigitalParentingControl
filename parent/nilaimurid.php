@@ -152,7 +152,6 @@ if ($level != 'parent') {
 </div>
 
 
-
 	</div>
     
     <div class="row">
@@ -429,18 +428,12 @@ if ($level != 'parent') {
     <!-- <?php 
     include '../koneksi.php';
     
-    if(isset($_POST['tampilbulan'])){
-      $bulan = $_POST['bulan'];
-      $query = mysql_query("SELECT * FROM tbl_mapelrpl where tanggal LIKE '%$bulan%' and id_siswa =  ");
-    }
     
-    $query = mysql_query("SELECT * FROM tbl_mapelrpl");
     while($row = mysql_fetch_array($query)){
       $panggilnama = $row['id_siswa'];
       $querynama = mysql_query("SELECT nama_siswa from tbl_siswa where id_siswa = $panggilnama");
+      $query = mysql_query("SELECT * FROM tbl_mapelrpl");
       $row2 = mysql_fetch_array($querynama);
-
-      
 
     ?>
         <tr>
