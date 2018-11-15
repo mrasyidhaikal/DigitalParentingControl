@@ -107,6 +107,12 @@ if ($level != 'parent') {
 <div class="container">
 	<div class="row">
 		<h2>Daftar Nilai Siswa SMK Multistudi High School Batam</h2>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
     
     <!-- query ambil nama siswa -->
 
@@ -126,7 +132,8 @@ if ($level != 'parent') {
 	</div>
     
     <div class="row">
-    <?php while ($row = mysql_fetch_array($query)) {
+    <?php
+     while ($row = mysql_fetch_array($query)) {
       $bindo = $row['bindo'];
       $binggris = $row['binggris'];
       $matematika = $row['matematika'];
@@ -477,5 +484,4 @@ var Dashboard = function () {
 Dashboard.init();
 //# sourceURL=pen.js
 </script>
-
 </body></html>
