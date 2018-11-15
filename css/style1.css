@@ -15,11 +15,11 @@
 	font-weight:bold;
 	font-size:20px;
 	padding:10px; 
-	border:1px solid #2ecc71;
+	border:1px solid #102c58;
 	margin-bottom:10px;
 }
 .tampil:hover {
-	background-color: #2ecc71;
+	background-color: #102c58;
 	color: #fff;
 }
 .tampil img {
