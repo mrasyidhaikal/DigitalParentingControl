@@ -212,7 +212,7 @@ if ($level != 'guru') {
                 $fisika = $_POST['fisika'];
                 $pbo = $_POST['pbo'];
                 $basisdata = $_POST['basisdata'];
-                $date = date("l, d/M/Y");
+                $date = date("F");
                 $avg = ($bindo + $binggris + $matematika + $sejarah+ $pkn + $fisika + $pbo + $basisdata) / 8;
 
                 $q = "INSERT INTO `tbl_mapelrpl` 
@@ -237,7 +237,7 @@ if ($level != 'guru') {
 
     <thead>
         <tr>
-            <th>Tanggal</th>
+            <th>Bulan</th>
             <th>ID Siswa</th>
             <th>Bahasa Indonesia</th>
             <th>Bahasa Inggris</th>

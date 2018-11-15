@@ -45,8 +45,9 @@ if ($level != 'parent') {
       <div class="c-search">
         <input class="c-search__input u-input" placeholder="Search..." type="text"/>
       </div>
+      
       <div class="header-icons-group">
-        <div class="c-header-icon logout"><a href="../logout.php"><i class="fa fa-power-off"></a></i></div>
+      <a href="../logout.php">  <div class="c-header-icon logout"><i class="fa fa-power-off"></a></i></div>
       </div>
     </div>
   </header>
@@ -107,12 +108,8 @@ if ($level != 'parent') {
 <div class="container">
 	<div class="row">
 		<h2>Daftar Nilai Siswa SMK Multistudi High School Batam</h2>
+    
 
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
     
     <!-- query ambil nama siswa -->
 
@@ -126,9 +123,36 @@ if ($level != 'parent') {
 
 
       ?>
-
     <h4>Nama Murid : <b><?php echo $carinama['nama_siswa']; ?></b></h4>
     <h5>Hasil</h5>
+
+    <div class="col-sm-4">
+    <form action="" method="POST">
+        <select name="bulan" id="bulan" class="form-control ">
+              <option selected disabled>Pilih Bulan</option>
+              <option value="January">Januari</option>
+              <option value="February">Februari</option>
+              <option value="March">Maret</option>
+              <option value="April">April</option>
+              <option value="May">Mei</option>
+              <option value="June">Juni</option>
+              <option value="July">Juli</option>
+              <option value="August">Agustus</option>
+              <option value="September">September</option>
+              <option value="October">Oktober</option>
+              <option value="November">November</option>
+              <option value="December">Desember</option>
+        </select>
+
+<div class="col-sm-2">
+<button type="submit" class="btn btn-primary" name="tampilbulan" >Tampilkan</button>
+        </form>
+       </div>
+    </div>
+</div>
+
+
+
 	</div>
     
     <div class="row">
@@ -405,11 +429,18 @@ if ($level != 'parent') {
     <!-- <?php 
     include '../koneksi.php';
     
+    if(isset($_POST['tampilbulan'])){
+      $bulan = $_POST['bulan'];
+      $query = mysql_query("SELECT * FROM tbl_mapelrpl where tanggal LIKE '%$bulan%' and id_siswa =  ");
+    }
+    
     $query = mysql_query("SELECT * FROM tbl_mapelrpl");
     while($row = mysql_fetch_array($query)){
       $panggilnama = $row['id_siswa'];
       $querynama = mysql_query("SELECT nama_siswa from tbl_siswa where id_siswa = $panggilnama");
       $row2 = mysql_fetch_array($querynama);
+
+      
 
     ?>
         <tr>
