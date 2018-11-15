@@ -96,11 +96,17 @@ $password=$data['password'];
 $level=$data['level'];
 $id=$data['id_user'];
 
+
+$data2=mysql_fetch_array(mysql_query("SELECT * FROM `tbl_siswa` WHERE id_user='$id'"));
+$id_siswa = $data2['id_siswa'];
+
 if ($us==$username && $pas==$password) {
 	if ($level=='parent') {
 		$_SESSION['level']=$level;
 		$_SESSION['id_user']=$id;
+		$_SESSION['id_siswa']=$id_siswa;
 		$_SESSION['username']=$username;
+
 		echo "<script>window.alert('Selamat Datang $username');
 			window.location='parent/'</script>";
 	}

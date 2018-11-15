@@ -131,16 +131,19 @@ $row = mysql_fetch_array($query);
               
                // End Pagination Logic
 
-                $query = mysql_query("SELECT * FROM pengumuman LIMIT $awaldata, $jumlahdata_per_page");
+                $query = mysql_query("SELECT * FROM pengumuman JOIN users ON pengumuman.id_user = users.id_user
+                  LIMIT $awaldata, $jumlahdata_per_page");
+                $row2 = mysql_fetch_array($query);
                 while ($row = mysql_fetch_array($query)){
-                
-                
+              
+
+
                  ?>
                   <tr data-status="pagado">
                     <td>
                       <div class="media">
                         <a href="#" class="pull-left">
-                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                          <img width="100px" src="<?php echo $row['foto']; ?>" class="media-photo">
                         </a>
                         <div class="media-body">
                           <span class="media-meta pull-right"><?php echo $row['tanggal']; ?></span>

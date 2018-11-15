@@ -41,7 +41,7 @@ if ($level != 'guru') {
         <input class="c-search__input u-input" placeholder="Search..." type="text"/>
       </div>
       <div class="header-icons-group">
-        <div class="c-header-icon logout"><a href="../logout.php"><i class="fa fa-power-off"></a></i></div>
+        <a href="../logout.php"><div class="c-header-icon logout"><i class="fa fa-power-off"></i></a></div>
       </div>
     </div>
   </header>

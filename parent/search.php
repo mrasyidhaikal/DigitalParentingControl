@@ -23,16 +23,16 @@ $keyword = $_GET['keyword'];
               
                // End Pagination Logic
 
-                $query = mysql_query("SELECT * FROM pengumuman WHERE judul LIKE '%$keyword%'");
+                $query = mysql_query("SELECT * FROM pengumuman JOIN users ON pengumuman.id_user = users.id_user WHERE judul LIKE '%$keyword%'");
                 while ($row = mysql_fetch_array($query)){
                 
                 
                  ?>
-                  <tr data-status="pagado">
+                   <tr data-status="pagado">
                     <td>
                       <div class="media">
                         <a href="#" class="pull-left">
-                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                          <img width="100px" src="<?php echo $row['foto']; ?>" class="media-photo">
                         </a>
                         <div class="media-body">
                           <span class="media-meta pull-right"><?php echo $row['tanggal']; ?></span>
@@ -54,6 +54,11 @@ $keyword = $_GET['keyword'];
                <?php } ?>
 
                 </tbody>
+
+              </table>
+              </div>
+
+ 
 
               </table>
               <div class="col-md-12 col-md-offset-8">
