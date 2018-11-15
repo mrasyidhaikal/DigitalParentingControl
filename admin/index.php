@@ -7,7 +7,7 @@
 <?php 
 session_start();
 $level = $_SESSION['level'];
-if ($level != 'guru') {
+if ($level != 'admin') {
     header('location:../login.php');
 }
  ?>
@@ -104,7 +104,7 @@ if ($level != 'guru') {
     <div class="row">
   
        <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
-     <h2><i class="fas fa-file-invoice"></i> Nilai Murid (per Bulan)</h2>
+      <h2><i class="fas fa-bullhorn"></i> Pengumuman Murid</h2>
 
 
   <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
@@ -121,71 +121,27 @@ if ($level != 'guru') {
       
            
             
-                    <div class="form-group">        
-                      <label class="form-label">ID Siswa</label>
+                      <div class="form-group">        
+                      <label class="form-label">Judul Pengumuman</label>
+                      <input type="text" name="judul" class="form-control" placeholder="Judul" required="required"/>
+                      </div>     
+
+                      <div class="form-group">        
+                      <label class="form-label">Isi Pengumuman</label>
+                      <textarea name="isi" class="form-control" placeholder="Isi Pengumuman" required="required"/>
+                      </textarea>
+
+                      <div class="form-group">        
+                      <label class="form-label">File Pengumuman</label>
+                      <input type="file" name="ddf" class="form-control"   required="required"/>
+                      </div>
+                      </div>
+
                       
-                      <select name="id_siswa" id="select" class="form-control" >
-                          <option value="" disabled selected>Pilih ID Siswa</option>
-                            <?php 
-                            include '../koneksi.php';
-                            $data = mysql_query("SELECT id_siswa , nama_siswa from tbl_siswa");
-                             if ($data) {
-                               while ($row = mysql_fetch_array($data)){
-                                  ?>
-
-                                  <option value="<?php echo $row['id_siswa'];?>"><?php echo $row['id_siswa']; echo "  ---  "; echo $row['nama_siswa']; ?></option>
-                                                
-                          <?php } } ?>
-                        </select>
-
-                      </div> 
-                      
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Bahasa Indonesia</label>
-                      <input type="number" min="0" max="100" name="bindo" class="form-control" placeholder="Masukkan Nilai Bahasa Indonesia (Numeric 0-100)" required="required"/>
-                      </div>
-                      
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Bahasa Inggris</label>
-                      <input type="number" min="0" max="100" name="binggris" class="form-control" placeholder="Masukkan Nilai Bahasa Inggris (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Matematika</label>
-                      <input type="number" min="0" max="100" name="matematika" class="form-control" placeholder="Masukkan Nilai Matematika (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Sejarah</label>
-                      <input type="number" min="0" max="100" name="sejarah" class="form-control" placeholder="Masukkan Nilai Sejarah (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">        
-                      <label class="form-label">Nilai PKN</label>
-                      <input type="number" min="0" max="100" name="pkn" class="form-control" placeholder="Masukkan Nilai PKN (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Fisika</label>
-                      <input type="number" min="0" max="100" name="fisika" class="form-control" placeholder="Masukkan Nilai Fisika (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Pemrograman Berorientasi Objek</label>
-                      <input type="number" min="0" max="100" name="pbo" class="form-control" placeholder="Masukkan Nilai Pemrograman Berorientasi Objek (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Basis Data</label>
-                      <input type="number" min="0" max="100" name="basisdata" class="form-control" placeholder="Masukkan Nilai Basis Data (Numeric 0-100)" required="required"/>
-                      </div>
-
                       <div class="form-group">
-                      <input type="submit" name="fsubmit" class="btn btn-primary btn-lg"/>
+                      <input type="submit" name="kirim" class="btn btn-primary btn-lg"/>
+                      </form>
                       </div> 
-                   
-                    
-        
                    
                     
                   </table>
@@ -199,105 +155,84 @@ if ($level != 'guru') {
     </form>
     </div>
   </div>
-  <?php
-                include '../koneksi.php';
-                if(isset($_POST['fsubmit'])){
-                
-                $id_siswa = $_POST['id_siswa'];
-                $bindo = $_POST['bindo'];
-                $binggris = $_POST['binggris'];
-                $matematika = $_POST['matematika'];
-                $sejarah = $_POST['sejarah'];
-                $pkn = $_POST['pkn'];
-                $fisika = $_POST['fisika'];
-                $pbo = $_POST['pbo'];
-                $basisdata = $_POST['basisdata'];
-                $date = date("l, d/M/Y");
-                $avg = ($bindo + $binggris + $matematika + $sejarah+ $pkn + $fisika + $pbo + $basisdata) / 8;
+  <?php 
+if (isset($_POST['kirim'])) {
+  include '../koneksi.php';
+    $judul = $_POST['judul'];
+    $isi  = $_POST['isi'];
+    $tanggal = date("Y-m-d H:i:s");
+    $id_user =$_SESSION['id_user']; 
+    $fl_name=$_FILES['ddf']['name'];
+    $tmp=$_FILES['ddf']['tmp_name'];
 
-                $q = "INSERT INTO `tbl_mapelrpl` 
-                (`id_siswa`, `tanggal`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`,`avg`) 
-                VALUES 
-                ('$id_siswa', '$date', '$bindo', '$binggris', '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata','$avg')";
+    // Validasi
+    $ekstensi=['doc','pdf','jpg','jpeg','png'];
+    $nama = explode('.', $fl_name);
+    $nama=strtolower(end($nama));
+    if (!in_array($nama, $ekstensi)) {
+      echo "<script>window.alert('File Tidak Cocok');
+  window.location='index.php'</script>";
+    }
+    else{
+       $baru = uniqid();
+                $baru .='.';
+                $baru .=$nama;
 
-                mysql_query($q);
-                
-                echo "<script>window.alert('Input Data Success !');
-                window.location='nilai.php'</script>";
+                $path="../file/".$baru;
+                $nama="file/".$baru;
+                move_uploaded_file($tmp, $path);
+      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,$id_user, '$judul', '$nama', '$isi', '$tanggal');").mysql_error();
+      echo "<script>window.alert('Input Success');
+  window.location='index.php'</script>";
 
-                }
-                
-                ?>
+    }
 
 
-
+  }
+ ?>
                   
   <div class="container"> 
     <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
 
     <thead>
         <tr>
+            <th>Id Pengumuman</th>
+            <th>Judul</th>
+            <th>File</th>
+            <th>Isi</th>
             <th>Tanggal</th>
-            <th>ID Siswa</th>
-            <th>Bahasa Indonesia</th>
-            <th>Bahasa Inggris</th>
-            <th>Matematika</th>
-            <th>Sejarah</th>
-            <th>PKN</th>
-            <th>Fisika</th>
-            <th>PBO</th>
-            <th>Basis Data</th>
-            <th>Average</th>
             <th>Action</th>
         </tr>
     </thead>
 
     <tbody>
-           <?php 
-    include '../koneksi.php';
+          <?php 
+      include '../koneksi.php';
+      $q = mysql_query("SELECT * FROM pengumuman");
+      while ($row = mysql_fetch_array($q)) {
     
-    $query = mysql_query("SELECT * FROM tbl_mapelrpl");
-    while($row = mysql_fetch_array($query)){
-      $panggilnama = $row['id_siswa'];
-      $querynama = mysql_query("SELECT nama_siswa from tbl_siswa where id_siswa = $panggilnama");
-      $row2 = mysql_fetch_array($querynama);
-
-    ?>
+     ?>
         <tr>
-             <td><?php echo $row['tanggal']; ?></td>
-            <td><?php echo $row2['nama_siswa'] ?></td>
-            <td><?php echo $row['bindo']; ?></td>
-            <td><?php echo $row['binggris']; ?></td>
-            <td><?php echo $row['matematika']; ?></td>
-            <td><?php echo $row['sejarah']; ?></td>
-            <td><?php echo $row['pkn']; ?></td>
-            <td><?php echo $row['fisika']; ?></td>
-            <td><?php echo $row['pbo']; ?></td>
-            <td><?php echo $row['basisdata']; ?></td>
-            <td><?php echo $row['avg'] ?></td>
-            <td><a href="nilai.php?delete=<?php echo $row['id_mapelrpl']; ?>" class="btn btn-danger">Hapus</a>
-            </td>
+            <td><?php echo $row['id_pengumuman']; ?></td>
+            <td><?php echo $row['judul']; ?></td>
+            <td><a href="../<?php echo $row['file']; ?>">Download File</a></td>
+            <td><?php echo $row['isi']; ?></td>
+            <td><?php echo $row['tanggal']; ?></td>
+           <td><a href="index.php?id=<?php echo $row['id_pengumuman']; ?>" class="btn btn-danger">Hapus</a></td>
         </tr>
         <?php } ?>
 </div>
   </div>   
 </main>
-<?php
-if (isset($_GET['delete'])){
+<?php 
+if (isset($_GET['id'])) {
+  $id =$_GET['id'];
+  $hapus = mysql_query("DELETE FROM `arkademy`.`pengumuman` WHERE `pengumuman`.`id_pengumuman` = $id");
+  echo "<script>window.alert('Delete Success');
+  window.location='index.php'</script>";
+} 
 
-  $id = $_GET['delete'];
-  $query = mysql_query("DELETE FROM `tbl_mapelrpl` WHERE `tbl_mapelrpl`.`id_mapelrpl` = $id");
-
-  if ($query) {
-    ?>
-    <script type="text/javascript">
-      document.location.href='nilai.php';
-      alert("Delete Data Success !");
-      </script>
-     <?php
-         }
-         }
-    ?>
+?>
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
 <!-- Data tables -->

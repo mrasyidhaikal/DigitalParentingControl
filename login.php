@@ -101,14 +101,22 @@ if ($us==$username && $pas==$password) {
 		$_SESSION['level']=$level;
 		$_SESSION['id_user']=$id;
 		$_SESSION['username']=$username;
-		echo "<script>window.alert('Login Success');
-			window.location='parent/index.php'</script>";
+		echo "<script>window.alert('Selamat Datang $username');
+			window.location='parent/'</script>";
 	}
 	elseif ($level=='guru') {
 	$_SESSION['level']=$level;
+	$_SESSION['username']=$username;
 	$_SESSION['id_user']=$id;
-	echo "<script>window.alert('Login Success');
+	echo "<script>window.alert('Selamat Datang $username');
 			window.location='guru/'</script>";
+	}
+	elseif ($level=='admin') {
+		$_SESSION['level']=$level;
+		$_SESSION['id_user']=$id;
+		$_SESSION['username']=$username;
+		echo "<script>window.alert('Selamat Datang $username');
+			window.location='admin/index.php'</script>";
 	}
 
 }

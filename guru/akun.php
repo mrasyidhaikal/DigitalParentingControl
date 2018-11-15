@@ -88,7 +88,7 @@ if ($level != 'guru') {
     <div class="row">
   
        <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
-      <h2><i class="fas fa-users"></i>Registrasi Akun</h2>
+      <h2><i class="fas fa-users"></i>Registrasi Akun Orangtua</h2>
 
 
   <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
@@ -118,14 +118,7 @@ if ($level != 'guru') {
                       <label class="form-label">Confirm Password</label>
                       <input type="password" name="pass2" class="form-control"  required="required"/>
                       </div>
-                      <div class="form-group">        
-                      <label class="form-label">Level</label>
-                      <select name="level" class="form-control">
-                        <option value="guru">Guru</option>
-                        <option value="parent">Parent</option>
-                      </select>
-                      </div>
-                      </div>
+                     
 
                       <div class="form-group">        
                       <label class="form-label">Email</label>
@@ -161,32 +154,39 @@ if ($level != 'guru') {
   <?php 
 if (isset($_POST['kirim'])) {
   include '../koneksi.php';
-    $judul = $_POST['judul'];
-    $isi  = $_POST['isi'];
+    $username = $_POST['username'];
+    $pass  = $_POST['pass'];
+    $pass2 = $_POST['pass2'];
+    $id = uniqid();
+    $email = $_POST['email'];
+    $nohp = $_POST['nohp'];
     $tanggal = date("Y-m-d h:i:s");
                   
-    $fl_name=$_FILES['ddf']['name'];
-    $tmp=$_FILES['ddf']['tmp_name'];
+    $fl_name=$_FILES['foto']['name'];
+    $tmp=$_FILES['foto']['tmp_name'];
 
     // Validasi
-    $ekstensi=['doc','pdf','jpg','jpeg','png'];
+    $ekstensi=['jpeg','png','jpg','gif'];
     $nama = explode('.', $fl_name);
     $nama=strtolower(end($nama));
     if (!in_array($nama, $ekstensi)) {
       echo "<script>window.alert('File Tidak Cocok');
-  window.location='index.php'</script>";
+  window.location='akun.php'</script>";
     }
+    elseif ($pass != $pass2) {
+    echo "<script>window.alert('Password Tidak Sama');
+  window.location='akun.php'</script>";    }
     else{
        $baru = uniqid();
                 $baru .='.';
                 $baru .=$nama;
 
-                $path="../file/".$baru;
-                $nama="file/".$baru;
+                $path="../parent/foto/".$baru;
+               
                 move_uploaded_file($tmp, $path);
-      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL, '$judul', '$nama', '$isi', '$tanggal');").mysql_error();
+      $query =mysql_query("INSERT INTO `arkademy`.`users` (`id_user`, `username`, `password`, `level`, `foto`, `email`, `nohp`) VALUES ('$id', '$username', '$pass', 'parent', '$path', '$email', '$nohp')").mysql_error();
       echo "<script>window.alert('Input Success');
-  window.location='index.php'</script>";
+  window.location='akun.php'</script>";
 
     }
 
@@ -218,7 +218,7 @@ if (isset($_POST['kirim'])) {
      ?>
     <tbody>
         <tr>
-           <td><img src="../<?php echo $row['foto']; ?>"> </td>
+           <td><img width="100px" src="<?php echo $row['foto']; ?>"> </td>
             <td><?php echo $row['id_user']; ?></td>
             <td><?php echo $row['username']; ?></td>
            
@@ -226,8 +226,8 @@ if (isset($_POST['kirim'])) {
             <td><?php echo $row['level']; ?></td>
             <td><?php echo $row['email']; ?></td>
             <td><?php echo $row['nohp']; ?></td>
-           <td><a href="index.php?id=<?php echo $row['id_pengumuman']; ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
-           <a href="index.php?update=<?php echo $row['id_pengumuman']; ?>" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
+           <td><a href="akun.php?delete=<?php echo $row['id_user']; ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+           <a href="akun.php?update=<?php echo $row['id_user']; ?>" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
            </td>
         </tr>
         <?php } ?>
@@ -235,11 +235,12 @@ if (isset($_POST['kirim'])) {
   </div>   
 </main>
 <?php 
-if (isset($_GET['id'])) {
-  $id =$_GET['id'];
-  $hapus = mysql_query("DELETE FROM `arkademy`.`pengumuman` WHERE `pengumuman`.`id_pengumuman` = $id");
+include '../koneksi.php';
+if (isset($_GET['delete'])) {
+  $id =$_GET['delete'];
+ $hapus = mysql_query("DELETE FROM `arkademy`.`users` WHERE `users`.`id_user` = '$id'");
   echo "<script>window.alert('Delete Success');
-  window.location='index.php'</script>";
+  window.location='akun.php'</script>";
 } 
 
 ?>

@@ -5,6 +5,7 @@
 <?php 
 session_start();
 $level = $_SESSION['level'];
+
 if ($level != 'parent') {
     header('location:login.php');
 }
@@ -24,6 +25,7 @@ if ($level != 'parent') {
 </style></head>
 
 <body class="sidebar-is-reduced">
+
   <header class="l-header">
     <div class="l-header__inner clearfix">
       <div class="c-header-icon js-hamburger">
@@ -38,11 +40,21 @@ if ($level != 'parent') {
       <div class="c-search">
         <input class="c-search__input u-input" placeholder="Search..." type="text"/>
       </div>
+      <?php 
+include '../koneksi.php';
+$idd = $_SESSION['id_user'];
+$query = mysql_query("SELECT * FROM `users` WHERE id_user = '$idd' ");
+$row = mysql_fetch_array($query);
+ ?>
+       <div class="header-icons-group">
+        <div class=""><a href="../logout.php"><img width="125px" src="<?php echo $row['foto'] ?>"> </a></i></div>
+
       <div class="header-icons-group">
         <div class="c-header-icon logout"><a href="../logout.php"><i class="fa fa-power-off"></a></i></div>
       </div>
     </div>
   </header>
+
   <div class="l-sidebar">
     <div class="logo">
       <div class="logo__txt"><img src="../img/mhs.png" class="img-responsive" width="43px"></div>
@@ -84,7 +96,7 @@ if ($level != 'parent') {
     <section class="content">
     
       <div class="col-md-8 col-md-offset-2">
-          <h1><i class="fa fa-bullhorn"></i> Pemberitahuan</h1>
+          <h1><i class="fa fa-bullhorn"></i> Pengumuman</h1>
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="pull-right">
