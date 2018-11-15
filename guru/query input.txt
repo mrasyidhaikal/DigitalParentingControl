@@ -1,0 +1,4 @@
+
+INSERT INTO `absensi` (`id_absen`, `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES (NULL, '2018-11-13', '12RPL1', 'bhisma', '1', '0', '0', '0', 'blablablablabla');
+INSERT INTO `absensi` (`id_absen`, `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES (NULL, '2018-11-13', '12RPL1', 'steven', '1', '0', '0', '0', 'blablablablabla');
+INSERT INTO `absensi` (`id_absen`, `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES (NULL, '2018-11-13', '12RPL1', 'Rasyid', '1', '0', '0', '0', 'blablablablabla');
