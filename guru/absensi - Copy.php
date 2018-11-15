@@ -5,7 +5,6 @@
 <?php 
 session_start();
 $level = $_SESSION['level'];
-//echo "<script type='text/javascript'>alert('$level');</script>";
 if ($level != 'guru') {
     header('location:../login.php');
 }
@@ -88,12 +87,19 @@ if ($level != 'guru') {
       <!--   -----------------------------------------------------------------   -->
 
 <form action=""  method="post" name="table">
-      <form action="" method="post" name="cari">
-      <input type="date" name="tanggal">
+      <form action="" method="get" name="cari">
+        <?php 
+
+          $tgl="";
+          $tgl = $_SESSION['date'];
+          echo "<script type='text/javascript'>alert('$tgl');</script>";
+          
+          ?>
+          <input type="date" name="tanggal" value="<?php echo $tgl ?>">;
+                
       <select name="kelas"><option value="12RPL1">12RPL1</option></select>
       <input type="submit" name="cari">
       </form>
-
 <div class="container"> 
   <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
   <tr>
@@ -104,16 +110,15 @@ if ($level != 'guru') {
   <th>izin</th>
   <th>Alfa</th>
   <th>Hadir</th>
-  <th>Keterangan</th>
+  <th>Kdaten</th>
   </tr>
 <?php 
-
-    include '../koneksi.php';   
-    if (isset($_POST['cari'])) {
-
+      include '../koneksi.php';   
+      
+  
       $tanggal = $_POST['tanggal'];
       $kelas = $_POST['kelas'];
-
+    
       $no = 1;
       $data = mysql_query("select * from absensi where tanggal ='$tanggal' and kelas='$kelas'");
         
@@ -157,6 +162,9 @@ if ($level != 'guru') {
           </tr>
           <?php 
         }
+
+    echo "<script>
+      window.location='absensi.php'</script>";
       //"INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')";
 
       }
@@ -183,23 +191,31 @@ if ($level != 'guru') {
           <?php 
         }       
       }
-    }     
+      if (isset($_GET['cari'])) {
+
+      $tanggal = $_POST['tanggal'];
+      $kelas = $_POST['kelas'];
+
+      $_SESSION['date']=$tanggal;
+      $_SESSION['kelas']=$kelas;
+
+    }
     ?>
 </table>
 <br>
 
-<!--<a href="" onclick="save()">save</a>-->
+<a href="" onclick="save()">save</a>
 <script type="text/javascript">
   function save(){
   <?php     
-      //echo "<script type='text/javascript'>alert('1');</script>";
+//      echo "<script type='text/javascript'>alert('1');</script>";
       $tanggal = $_POST['tanggal'];
       $kel="kelas";
       $kelas = $_POST[$kel];
-      //echo "<script type='text/javascript'>alert('2');</script>";
+  //    echo "<script type='text/javascript'>alert('2');</script>";
       $no = 1;
       $query="select * from absensi where tanggal ='$tanggal' and kelas='$kelas'";
-      //echo "<script type='text/javascript'>alert('$query');</script>";
+    //  echo "<script type='text/javascript'>alert('$query');</script>";
       $data = mysql_query("$query");
       //echo "<script type='text/javascript'>alert('3');</script>";
       if (isset($tanggal,$kelas)) {
@@ -211,7 +227,7 @@ if ($level != 'guru') {
           $tanggal=$d['tanggal'];
       //echo "<script type='text/javascript'>alert('$tanggal');</script>";    
           $nama=$d['nama'];
-      //echo "<script type='text/javascript'>alert('$nama');</script>";
+      //    echo "<script type='text/javascript'>alert('$nama');</script>";
           $anu=$_SESSION[$nama];          
       //echo "<script type='text/javascript'>alert('$anu');</script>";
           $keterangan=$d['keterangan'];
@@ -237,7 +253,7 @@ if ($level != 'guru') {
       //echo "<script type='text/javascript'>alert('$hadir');</script>";
           //$keterangan=$_POST['keterangan'];
           $query="UPDATE `absensi` SET  `tanggal` = '$tanggal', `kelas` = '$kelas', `nama` = '$nama', `sakit` = '$sakit', `izin` = '$izin', `alfa` = '$alfa', `hadir` = '$hadir' WHERE `absensi`.`id_absen` ='$id_absen'";
-          //mysql_query($query);
+          mysql_query($query);
         }
       //"INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')";
       }else{
