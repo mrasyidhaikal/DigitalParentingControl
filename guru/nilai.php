@@ -57,14 +57,14 @@ if ($level != 'guru') {
       <nav class="c-menu js-menu">
         <ul class="u-list">
         <a href="../guru/index.php">
-          <li class="c-menu__item is-active" data-toggle="tooltip" title="Pengumuman">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengumuman">
             <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
               <div class="c-menu-item__title"><span>Pengumuman</span></div>
             </div>
           </li>
         </a>
           <a href="nilai.php">
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
+          <li class="c-menu__item is-active" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>
             </div>

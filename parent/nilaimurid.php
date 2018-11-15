@@ -3,11 +3,12 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="../js/jsmanual.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/style1.css">
+<link rel="stylesheet" type="text/css" href="parent.css">
 
 <?php 
 session_start();
 $level = $_SESSION['level'];
-if ($level != 'guru') {
+if ($level != 'parent') {
     header('location:../login.php');
 }
  ?>
@@ -24,7 +25,11 @@ if ($level != 'guru') {
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
     <style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&subset=latin-ext");
 </style></head>
-
+<script type="text/javascript">
+   $(document).ready( function () {
+    $('#tabel').DataTable();
+} ); 
+</script>
 <body class="sidebar-is-reduced">
   <header class="l-header">
     <div class="l-header__inner clearfix">
@@ -66,18 +71,28 @@ if ($level != 'guru') {
             </div>
           </li>
           </a>
+
+          <a href="nilai.php">
+
           <a href="absensi.php">
+
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
           </li>
-        </a>
+
+          </a>
+          <a href="akun.php">
+
+      
+
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
               <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
             </div>
           </li>
+          </a>
         </ul>
       </nav>
     </div>
@@ -88,91 +103,269 @@ if ($level != 'guru') {
   <div class="content-wrapper content-wrapper--with-bg">
     <div class="container">
     <div class="row">
-      <h2><i class="fas fa-file-invoice"></i> Nilai Murid (per Bulan)</h2>
+
+<div class="container">
+	<div class="row">
+		<h2>Daftar Nilai Siswa SMK Multistudi High School Batam</h2>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+    
+    <!-- query ambil nama siswa -->
+
+  <?php
+  include '../koneksi.php';
+      $panggilnama = $_SESSION['id_user'];
+      $query1 = mysql_query("SELECT * from tbl_siswa where id_user = $panggilnama"); 
+      $carinama = mysql_fetch_array($query1);
+      $id_siswa = $carinama['id_siswa'];
+      $query = mysql_query("SELECT * from tbl_mapelrpl where id_siswa = $id_siswa");
 
 
-  <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
-  
-  <div class="sembunyi">
+      ?>
+
+    <h4>Nama Murid : <b><?php echo $carinama['nama_siswa']; ?></b></h4>
+    <h5>Hasil</h5>
+	</div>
+    
     <div class="row">
-      <div class="col-sm-6" style="margin-left: 10px;">
-        
-    <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;">
-           
+    <?php
+     while ($row = mysql_fetch_array($query)) {
+      $bindo = $row['bindo'];
+      $binggris = $row['binggris'];
+      $matematika = $row['matematika'];
+      $sejarah = $row['sejarah'];
+      $pkn = $row['pkn'];
+      $fisika = $row['binggris'];
+      $pbo = $row['pbo'];
+      $basisdata = $row['basisdata'];
+      $avg = $row['avg'];
 
-          <form method="post" action="#">
+      ?>
+      
+    	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+			<div class="offer offer-danger">
+          
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-book"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+					Bahasa Indonesia : <label class="label label-danger"><?php echo $bindo; ?></label>
+					</h3>
+					<p>
+						 Nilai: 
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<?php echo $bindo; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $bindo; ?>%" >
+             <?php echo $bindo; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+			<div class="offer offer-success">
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-user-circle"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+						 Bahasa Inggris : <label class="label label-success"> <?php echo $binggris; ?></label>
+					</h3>
+					<p>
+						Nilai :
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $binggris; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $binggris; ?>%" >
+             <?php echo $binggris; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+			<div class="offer offer-radius offer-primary">
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-superscript"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+						 Matematika : <label class="label label-primary"> <?php echo $matematika; ?></label>
+					</h3>
+					<p>
+						Nilai :
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="<?php echo $matematika; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $matematika; ?>%" >
+             <?php echo $matematika; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+			<div class="offer offer-info">
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-search"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+						Sejarah : <label class="label label-info"> <?php echo $sejarah; ?></label>
+					</h3>
+					<p>
+						Nilai:
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $sejarah; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $sejarah; ?>%" >
+             <?php echo $sejarah; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
 
-                      <div class="form-group">        
-                      <label class="form-label">ID Siswa</label>
-                      
-                      <select name="id_siswa" id="select" class="form-control" >
-                          <option value="" disabled selected>Pilih ID Siswa</option>
-                            <?php 
-                            include '../koneksi.php';
-                            $data = mysql_query("SELECT id_siswa , nama_siswa from tbl_siswa");
-                             if ($data) {
-                               while ($row = mysql_fetch_array($data)){
-                                  ?>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+			<div class="offer offer-danger">
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-balance-scale"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+					PKN : <label class="label label-danger"><?php echo $pkn; ?></label>
+					</h3>
+					<p>
+						 Nilai :
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<?php echo $pkn; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pkn; ?>%" >
+             <?php echo $pkn; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+			<div class="offer offer-success">
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-flask"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+						 Fisika : <label class="label label-success"> <?php echo $fisika; ?></label>
+					</h3>
+					<p>
+						Nilai :
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $fisika; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $fisika; ?>%" >
+             <?php echo $fisika; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
+			<div class="offer offer-radius offer-primary">
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-desktop"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+						 Pemrograman Berorientasi Objek : <label class="label label-primary"> <?php echo $pbo; ?></label>
+					</h3>
+					<p>
+						Nilai :
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="<?php echo $pbo; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pbo; ?>%" >
+             <?php echo $pbo; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
+			<div class="offer offer-info">
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-database"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+						Basis Data : <label class="label label-info"> <?php echo $basisdata; ?></label>
+					</h3>
+					<p>
+						Nilai :
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $basisdata; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $basisdata; ?>%" >
+             <?php echo $basisdata; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
 
-                                  <option value="<?php echo $row['id_siswa'];?>"><?php echo $row['id_siswa']; echo "  ---  "; echo $row['nama_siswa']; ?></option>
-                                                
-                          <?php } } ?>
-                        </select>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-12">
+			<div class="offer offer-radius offer-warning">
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-file-text-o"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+						 Nilai Rata - Rata : <label class="label label-warning"> <?php echo $avg; ?></label>
+					</h3>
+					<p>
+						Nilai :
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<?php echo $avg; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avg; ?>%" >
+             <?php echo $avg; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
 
-                      </div> 
-                      
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Bahasa Indonesia</label>
-                      <input type="number" min="0" max="100" name="bindo" class="form-control" placeholder="Masukkan Nilai Bahasa Indonesia (Numeric 0-100)" required="required"/>
-                      </div>
-                      
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Bahasa Inggris</label>
-                      <input type="number" min="0" max="100" name="binggris" class="form-control" placeholder="Masukkan Nilai Bahasa Inggris (Numeric 0-100)" required="required"/>
-                      </div>
+    <?php  } ?>
 
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Matematika</label>
-                      <input type="number" min="0" max="100" name="matematika" class="form-control" placeholder="Masukkan Nilai Matematika (Numeric 0-100)" required="required"/>
-                      </div>
+  </div>
+</div>
 
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Sejarah</label>
-                      <input type="number" min="0" max="100" name="sejarah" class="form-control" placeholder="Masukkan Nilai Sejarah (Numeric 0-100)" required="required"/>
-                      </div>
 
-                      <div class="form-group">        
-                      <label class="form-label">Nilai PKN</label>
-                      <input type="number" min="0" max="100" name="pkn" class="form-control" placeholder="Masukkan Nilai PKN (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Fisika</label>
-                      <input type="number" min="0" max="100" name="fisika" class="form-control" placeholder="Masukkan Nilai Fisika (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Pemrograman Berorientasi Objek</label>
-                      <input type="number" min="0" max="100" name="pbo" class="form-control" placeholder="Masukkan Nilai Pemrograman Berorientasi Objek (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">        
-                      <label class="form-label">Nilai Basis Data</label>
-                      <input type="number" min="0" max="100" name="basisdata" class="form-control" placeholder="Masukkan Nilai Basis Data (Numeric 0-100)" required="required"/>
-                      </div>
-
-                      <div class="form-group">
-                      <input type="submit" name="fsubmit" class="btn btn-primary btn-lg"/>
-                      </div> 
-                   
-                    
-                  </table>
-                  </div>
-                  
-              
-                </form>
-
-                <?php
+    </div>
+  </div>
+  <?php
                 include '../koneksi.php';
                 if(isset($_POST['fsubmit'])){
                 
@@ -202,34 +395,14 @@ if ($level != 'guru') {
                 
                 ?>
 
-                </div>
-    </div>
-  </div> 
+
 
                   
   <div class="container"> 
-  <div class ="col-md-8">
-    <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Tanggal</th>
-            <th>ID Siswa</th>
-            <th>Bahasa Indonesia</th>
-            <th>Bahasa Inggris</th>
-            <th>Matematika</th>
-            <th>Sejarah</th>
-            <th>PKN</th>
-            <th>Fisika</th>
-            <th>PBO</th>
-            <th>Basis Data</th>
-            <th>Average</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    
-    <tbody>
 
-    <?php 
+    <!-- Source Code Table -->
+
+    <!-- <?php 
     include '../koneksi.php';
     
     $query = mysql_query("SELECT * FROM tbl_mapelrpl");
@@ -240,7 +413,7 @@ if ($level != 'guru') {
 
     ?>
         <tr>
-            <td><?php echo $row['tanggal']; ?></td>
+             <td><?php echo $row['tanggal']; ?></td>
             <td><?php echo $row2['nama_siswa'] ?></td>
             <td><?php echo $row['bindo']; ?></td>
             <td><?php echo $row['binggris']; ?></td>
@@ -253,31 +426,9 @@ if ($level != 'guru') {
             <td><?php echo $row['avg'] ?></td>
             <td><a href="nilai.php?delete=<?php echo $row['id_mapelrpl']; ?>" class="btn btn-danger">Hapus</a>
             </td>
-
         </tr>
-    <?php } ?>
-</div>
-  </div>
-  </div>   
+        <?php } ?>  -->
 </main>
-
-<?php
-if (isset($_GET['delete'])){
-
-  $id = $_GET['delete'];
-  $query = mysql_query("DELETE FROM `tbl_mapelrpl` WHERE `tbl_mapelrpl`.`id_mapelrpl` = $id");
-
-  if ($query) {
-    ?>
-    <script type="text/javascript">
-      document.location.href='nilai.php';
-      alert("Delete Data Success !");
-      </script>
-     <?php
-         }
-         }
-    ?>
-
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
 <!-- Data tables -->
@@ -285,10 +436,6 @@ if (isset($_GET['delete'])){
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <!-- end -->
 <script type="text/javascript">
- $(document).ready( function () {
-    $('#tabel').DataTable();
-} ); 
-  "use strict";
 
 var Dashboard = function () {
   var global = {
@@ -337,8 +484,4 @@ var Dashboard = function () {
 Dashboard.init();
 //# sourceURL=pen.js
 </script>
-
- 
-
-</body>
-</html>
+</body></html>
