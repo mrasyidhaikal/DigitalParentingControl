@@ -79,30 +79,55 @@ if ($level != 'guru') {
   <div class="content-wrapper content-wrapper--with-bg">
 
       <!--   -----------------------------------------------------------------   -->
+      <form action="#" method="post">
+      <input type="date" name="tanggal" value="<?php echo(date("Y-m-d"))?>">
+      <select name="kelas"><option value="12RPL1">12RPL1</option></select>
+      <input type="submit" name="cari">
+      </form>
 
-      <input type="date" name="">
-      <select><option></option></select>
-      <input type="submit" name="">
 
+<table border="1">
+  <tr>
+  <th>NO</th>
+  <th>Tanggal</th>
+  <th>Nama</th>
+  <th>Sakit</th>
+  <th>Alfa</th>
+  <th>Hadir</th>
+  <th>Keterangan</th>
+  </tr>
 <?php 
-    include 'koneksi.php';
-    $no = 1;
-    $data = mysql_query("select * from absensi where tanggal =''");
-    while($d = mysql_fetch_array($data)){
-      ?>
-      <tr>
-        <td><?php echo $no++; ?></td>
-        <td><?php echo $d['tanggal']; ?></td>
-        <td><?php echo $d['nama']; ?></td>
-        <td><?php echo $d['sakit']; ?></td>
-        <td><?php echo $d['alfa']; ?></td>
-        <td><?php echo $d['hadir']; ?></td>
-        <td><?php echo $d['keterangan']; ?></td>
-      </tr>
-      <?php 
+
+    include '../koneksi.php';   
+    if (isset($_POST['cari'])) {
+
+      $tanggal = $_POST['tanggal'];
+      $kelas = $_POST['kelas'];
+
+      $no = 1;
+      $data = mysql_query("select * from absensi where tanggal ='$tanggal' and kelas='$kelas'");
+
+      if (mysql_num_rows($data )) {
+                                   
+        while($d = mysql_fetch_array($data))
+        {
+          ?>
+          <tr>
+            <td><?php echo $no++; ?></td>
+            <td><?php echo $d['tanggal']; ?></td>
+            <td><?php echo $d['nama']; ?></td>
+            <td><?php echo $d['sakit']; ?></td>
+            <td><?php echo $d['alfa']; ?></td>
+            <td><?php echo $d['hadir']; ?></td>
+            <td><?php echo $d['keterangan']; ?></td>
+          </tr>
+          <?php 
+        }
+      
+      }
     }
     ?>
-
+</table>
 
 
   </div> 
