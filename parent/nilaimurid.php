@@ -107,19 +107,38 @@ if ($level != 'parent') {
 <div class="container">
 	<div class="row">
 		<h2>Daftar Nilai Siswa SMK Multistudi High School Batam</h2>
+    
+    <!-- query ambil nama siswa -->
 
   <?php
-  $query = mysql_query("SELECT * FROM tbl_mapelrpl");
-  $row = mysql_fetch_array($query); 
-  $panggilnama = $row['id_siswa'];
-      $querynama = mysql_query("SELECT nama_siswa from tbl_siswa where id_siswa = $panggilnama"); ?>
+  include '../koneksi.php';
+      $panggilnama = $_SESSION['id_user'];
+      $query1 = mysql_query("SELECT * from tbl_siswa where id_user = $panggilnama"); 
+      $carinama = mysql_fetch_array($query1);
+      $id_siswa = $carinama['id_siswa'];
+      $query = mysql_query("SELECT * from tbl_mapelrpl where id_siswa = $id_siswa");
 
-    <h4>Nama Murid :</h4>
+
+      ?>
+
+    <h4>Nama Murid : <b><?php echo $carinama['nama_siswa']; ?></b></h4>
     <h5>Hasil</h5>
 	</div>
     
     <div class="row">
-  
+    <?php while ($row = mysql_fetch_array($query)) {
+      $bindo = $row['bindo'];
+      $binggris = $row['binggris'];
+      $matematika = $row['matematika'];
+      $sejarah = $row['sejarah'];
+      $pkn = $row['pkn'];
+      $fisika = $row['binggris'];
+      $pbo = $row['pbo'];
+      $basisdata = $row['basisdata'];
+      $avg = $row['avg'];
+
+      ?>
+      
     	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<div class="offer offer-danger">
           
@@ -130,14 +149,14 @@ if ($level != 'parent') {
 				</div>
 				<div class="offer-content">
 					<h3 class="lead">
-					Bahasa Indonesia : <label class="label label-danger">323</label>
+					Bahasa Indonesia : <label class="label label-danger"><?php echo $bindo; ?></label>
 					</h3>
 					<p>
 						 Nilai: 
 						<br> 
                         <div class="progress">
-             <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
-                     60%
+             <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<?php echo $bindo; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $bindo; ?>%" >
+             <?php echo $bindo; ?> / 100
                         </div>
                    </div>
 					</p>
@@ -153,14 +172,14 @@ if ($level != 'parent') {
 				</div>
 				<div class="offer-content">
 					<h3 class="lead">
-						 Bahasa Inggris : <label class="label label-success"> 323</label>
+						 Bahasa Inggris : <label class="label label-success"> <?php echo $binggris; ?></label>
 					</h3>
 					<p>
 						Nilai :
 						<br> 
                         <div class="progress">
-             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
-                     60%
+             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $binggris; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $binggris; ?>%" >
+             <?php echo $binggris; ?> / 100
                         </div>
                    </div>
 					</p>
@@ -176,14 +195,14 @@ if ($level != 'parent') {
 				</div>
 				<div class="offer-content">
 					<h3 class="lead">
-						 Matematika : <label class="label label-primary"> 323</label>
+						 Matematika : <label class="label label-primary"> <?php echo $matematika; ?></label>
 					</h3>
 					<p>
 						Nilai :
 						<br> 
                         <div class="progress">
-             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
-                     60%
+             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="<?php echo $matematika; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $matematika; ?>%" >
+             <?php echo $matematika; ?> / 100
                         </div>
                    </div>
 					</p>
@@ -199,14 +218,14 @@ if ($level != 'parent') {
 				</div>
 				<div class="offer-content">
 					<h3 class="lead">
-						Sejarah : <label class="label label-info"> 323</label>
+						Sejarah : <label class="label label-info"> <?php echo $sejarah; ?></label>
 					</h3>
 					<p>
 						Nilai:
 						<br> 
                         <div class="progress">
-             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
-                     60%
+             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $sejarah; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $sejarah; ?>%" >
+             <?php echo $sejarah; ?> / 100
                         </div>
                    </div>
 					</p>
@@ -223,14 +242,14 @@ if ($level != 'parent') {
 				</div>
 				<div class="offer-content">
 					<h3 class="lead">
-					PKN : <label class="label label-danger">323</label>
+					PKN : <label class="label label-danger"><?php echo $pkn; ?></label>
 					</h3>
 					<p>
 						 Nilai :
 						<br> 
                         <div class="progress">
-             <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
-                     60%
+             <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<?php echo $pkn; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pkn; ?>%" >
+             <?php echo $pkn; ?> / 100
                         </div>
                    </div>
 					</p>
@@ -246,44 +265,44 @@ if ($level != 'parent') {
 				</div>
 				<div class="offer-content">
 					<h3 class="lead">
-						 Fisika : <label class="label label-success"> 323</label>
+						 Fisika : <label class="label label-success"> <?php echo $fisika; ?></label>
 					</h3>
 					<p>
 						Nilai :
 						<br> 
                         <div class="progress">
-             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
-                     60%
+             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $fisika; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $fisika; ?>%" >
+             <?php echo $fisika; ?> / 100
                         </div>
                    </div>
 					</p>
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
 			<div class="offer offer-radius offer-primary">
 				<div class="shape">
 					<div class="shape-text">
-						<span class="fa fa-terminal"></span>							
+						<span class="fa fa-desktop"></span>							
 					</div>
 				</div>
 				<div class="offer-content">
 					<h3 class="lead">
-						 Pemrograman Berorientasi Objek : <label class="label label-primary"> 323</label>
+						 Pemrograman Berorientasi Objek : <label class="label label-primary"> <?php echo $pbo; ?></label>
 					</h3>
 					<p>
 						Nilai :
 						<br> 
                         <div class="progress">
-             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
-                     60%
+             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="<?php echo $pbo; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pbo; ?>%" >
+             <?php echo $pbo; ?> / 100
                         </div>
                    </div>
 					</p>
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
 			<div class="offer offer-info">
 				<div class="shape">
 					<div class="shape-text">
@@ -292,14 +311,14 @@ if ($level != 'parent') {
 				</div>
 				<div class="offer-content">
 					<h3 class="lead">
-						Basis Data : <label class="label label-info"> 323</label>
+						Basis Data : <label class="label label-info"> <?php echo $basisdata; ?></label>
 					</h3>
 					<p>
 						Nilai :
 						<br> 
                         <div class="progress">
-             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
-                     60%
+             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $basisdata; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $basisdata; ?>%" >
+             <?php echo $basisdata; ?> / 100
                         </div>
                    </div>
 					</p>
@@ -307,7 +326,33 @@ if ($level != 'parent') {
 			</div>
 		</div>
 
-        </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-12">
+			<div class="offer offer-radius offer-warning">
+				<div class="shape">
+					<div class="shape-text">
+						<span class="fa fa-file-text-o"></span>							
+					</div>
+				</div>
+				<div class="offer-content">
+					<h3 class="lead">
+						 Nilai Rata - Rata : <label class="label label-warning"> <?php echo $avg; ?></label>
+					</h3>
+					<p>
+						Nilai :
+						<br> 
+                        <div class="progress">
+             <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<?php echo $avg; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avg; ?>%" >
+             <?php echo $avg; ?> / 100
+                        </div>
+                   </div>
+					</p>
+				</div>
+			</div>
+		</div>
+
+    <?php  } ?>
+
+  </div>
 </div>
 
 
