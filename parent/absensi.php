@@ -98,35 +98,53 @@ $row = mysql_fetch_array($query);
       $b=$_GET['year'];
       $c=$_GET['submit'];
    ?>
-<form action="" method="GET">
-  <select name="bulan">  
-    <option value='1'>January</option>
-    <option value='2'>February</option>
-    <option value='3'>Maret</option>
-    <option value='4'>April</option>
-    <option value='5'>Mei</option>
-    <option value='6'>Juni</option>
-    <option value='7'>Juli</option>
-    <option value='8'>Agustus</option>
-    <option value='9'>September</option>
-    <option value='10'>Oktober</option>
-    <option value='11'>November</option>
-    <option value='12'>Desember</option>
-  </select>
 
-    <?php 
-    $already_selected_value = 1984;
-    $earliest_year = 2007;
+<br>
+  <div class="col-md-3 ">
+    <form action="" method="GET">        
+            <select name="bulan" class="form-control">  
+              <option value='1'>January</option>
+              <option value='2'>February</option>
+              <option value='3'>Maret</option>
+              <option value='4'>April</option>
+              <option value='5'>Mei</option>
+              <option value='6'>Juni</option>
+              <option value='7'>Juli</option>
+              <option value='8'>Agustus</option>
+              <option value='9'>September</option>
+              <option value='10'>Oktober</option>
+              <option value='11'>November</option>
+              <option value='12'>Desember</option>
+            </select>
+      
+       
+            
+ 
+  </div>
+  <div class="col-md-3">
+         <?php 
+            $already_selected_value = 1984;
+            $earliest_year = 2007;
 
-    echo "<select name='year'>";
-    foreach (range(date('Y'), $earliest_year) as $x) {
-    echo '<option value="'.$x.'"'.($x === $already_selected_value ? ' selected="selected"' : '').'>'.$x.'</option>';
-    }
-    echo '</select>';
-    ?>
-    <input type="submit" name="submit" value="cari">
-</form>
-  
+            echo "<select name='year' class='form-control'>";
+            foreach (range(date('Y'), $earliest_year) as $x) {
+            echo '<option value="'.$x.'"'.($x === $already_selected_value ? ' selected="selected"' : '').'>'.$x.'</option>';
+            }
+            echo '</select>';
+            ?>
+          
+
+  </div>
+  <br>
+    <div class="col-md-3">
+      
+      <input class="btn btn-primary" type="submit" name="submit" value="cari"> 
+      
+    </div> 
+
+  </form>
+<br>
+ 
     <div class="container"> 
   <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
         <th>no</th>
@@ -167,7 +185,7 @@ $row = mysql_fetch_array($query);
         }
         ?>
     </table>
-</div>
+</div>  
 
 
     <!-- <table border="1">
