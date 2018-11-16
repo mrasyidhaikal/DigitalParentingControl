@@ -125,15 +125,16 @@ $row = mysql_fetch_array($query);
 
 
                $aktif = (isset($_GET['halaman'] ) ) ? $_GET['halaman'] : 1;
-
+              
                 // Awal Data
-               $awaldata=($jumlahdata_per_page * $aktif) -$jumlahdata_per_page;
+               $awaldata=($jumlahdata_per_page * $aktif) -$jumlahdata_per_page ;
+          
               
                // End Pagination Logic
 
-                $query = mysql_query("SELECT * FROM pengumuman JOIN users ON pengumuman.id_user = users.id_user
-                  LIMIT $awaldata, $jumlahdata_per_page");
-                $row2 = mysql_fetch_array($query);
+                $query = mysql_query("SELECT * FROM pengumuman JOIN users ON pengumuman.id_user = users.id_user LIMIT $awaldata, $jumlahdata_per_page
+                  ");
+               
                 while ($row = mysql_fetch_array($query)){
               
 

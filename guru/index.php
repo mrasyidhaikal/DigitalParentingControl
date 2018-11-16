@@ -181,10 +181,9 @@ if (isset($_POST['kirim'])) {
                 $path="../file/".$baru;
                 $nama="file/".$baru;
                 move_uploaded_file($tmp, $path);
-      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,$id_user, '$judul', '$nama', '$isi', '$tanggal');").mysql_error();
-      echo "<script>window.alert('Input Success');
-  window.location='index.php'</script>";
-
+      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,'$id_user', '$judul', '$nama', '$isi', '$tanggal');");
+      
+      
     }
 
 

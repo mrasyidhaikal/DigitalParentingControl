@@ -23,7 +23,7 @@ $keyword = $_GET['keyword'];
               
                // End Pagination Logic
 
-                $query = mysql_query("SELECT * FROM pengumuman JOIN users ON pengumuman.id_user = users.id_user WHERE judul LIKE '%$keyword%'");
+                $query = mysql_query("SELECT * FROM pengumuman JOIN users ON pengumuman.id_user = users.id_user WHERE judul LIKE '%$keyword%' LIMIT $awaldata, $jumlahdata_per_page");
                 while ($row = mysql_fetch_array($query)){
                 
                 
