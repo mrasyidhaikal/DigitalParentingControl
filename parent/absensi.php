@@ -91,8 +91,15 @@ $row = mysql_fetch_array($query);
   </div>
 <main class="l-main">
   <!--  ---------------------------------------------------------   -->
-<form action="" method="post">
-  <select name="bulan">
+  <?php
+
+    error_reporting(0);
+      $a=$_GET['bulan'];
+      $b=$_GET['year'];
+      $c=$_GET['submit'];
+   ?>
+<form action="" method="GET">
+  <select name="bulan">  
     <option value='1'>January</option>
     <option value='2'>February</option>
     <option value='3'>Maret</option>
@@ -106,6 +113,7 @@ $row = mysql_fetch_array($query);
     <option value='11'>November</option>
     <option value='12'>Desember</option>
   </select>
+
     <?php 
     $already_selected_value = 1984;
     $earliest_year = 2007;
@@ -116,8 +124,53 @@ $row = mysql_fetch_array($query);
     }
     echo '</select>';
     ?>
-    <input type="submit" name="">
-  <table border="1">
+    <input type="submit" name="submit" value="cari">
+</form>
+  
+    <div class="container"> 
+  <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
+        <th>no</th>
+        <th>Tanggal</th>
+        <th>Absen</th>
+        <th>Keterangan</th>
+      </tr>
+      <?php  
+      $no = 1;
+      $no1=0;
+      //echo "<script type='text/javascript'>alert('$kelas');</script>";
+      $data = mysql_query("SELECT * FROM `absensi` WHERE nama='steven' and tanggal LIKE '".$b."-".$a."%' ORDER BY `tanggal` ASC");
+
+       while($d = mysql_fetch_array($data))
+        {
+          ?>
+            <tr >
+            <td><?php echo $no++; ?></td>
+            <td><?php echo $d['tanggal'] ?></td>
+             <?php 
+             if ($d['sakit']==1){ 
+                echo"<td>Sakit</td>";  
+             }elseif ($d['alfa']==1) {
+                echo"<td>Alfa</td>";
+             } elseif ($d['izin']==1) {
+                echo"<td>izin</td>";
+             } elseif ($d['hadir']==1) {
+                echo"<td>hadir</td>";
+             } else{
+
+             }
+             ?>
+            <td><?php echo $d['keterangan']; ?></td>
+            
+          <?php $no1++; ?>
+          </tr> 
+          <?php 
+        }
+        ?>
+    </table>
+</div>
+
+
+    <!-- <table border="1">
     <tr>
       <th>senin</th>
       <th>selasa</th>
@@ -204,8 +257,7 @@ $row = mysql_fetch_array($query);
       echo "</tr>";
       ?>
 
-  </table>
-</form>
+  </table> -->
 
 
   <!--  ---------------------------------------------------------   -->
