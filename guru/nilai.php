@@ -66,11 +66,13 @@ if ($level != 'guru') {
             </div>
           </li>
           </a>
+          <a href="absensi.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
           </li>
+        </a>
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
               <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>

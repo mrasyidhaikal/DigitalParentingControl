@@ -51,21 +51,27 @@ if ($level != 'guru') {
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
         <ul class="u-list">
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="notif">
+        <a href="../guru/index.php">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengumuman">
             <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
-              <div class="c-menu-item__title"><span>Notif</span></div>
+              <div class="c-menu-item__title"><span>Pengumuman</span></div>
             </div>
           </li>
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
+        </a>
+          <a href="nilai.php">
+          <li class="c-menu__item is-active" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>
             </div>
           </li>
-          <li class="c-menu__item is-active" data-toggle="tooltip" title="Absensi">
+          </a>
+          <a href="absensi.php">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
           </li>
+        </a>
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
               <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
@@ -129,7 +135,7 @@ if ($level != 'guru') {
     ?>
 </table>
 
-
+<!-- ------------------------------------------ -->
   </div> 
             </div>
         </a>
