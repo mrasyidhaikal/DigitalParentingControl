@@ -135,7 +135,7 @@ $row = mysql_fetch_array($query);
           
 
   </div>
-  <br>
+
     <div class="col-md-3">
       
       <input class="btn btn-primary" type="submit" name="submit" value="cari"> 
