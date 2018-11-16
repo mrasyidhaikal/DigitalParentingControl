@@ -59,14 +59,14 @@ if ($level != 'guru') {
           </li>
         </a>
           <a href="nilai.php">
-          <li class="c-menu__item is-active" data-toggle="tooltip" title="Nilai">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>
             </div>
           </li>
           </a>
           <a href="absensi.php">
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
+          <li class="c-menu__item is-active" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
@@ -91,8 +91,8 @@ if ($level != 'guru') {
       <input type="submit" name="cari">
       </form>
 
-
-<table border="1">
+<div class="container"> 
+    <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
   <tr>
   <th>NO</th>
   <th>Tanggal</th>
@@ -134,7 +134,7 @@ if ($level != 'guru') {
     }
     ?>
 </table>
-
+</div>
 <!-- ------------------------------------------ -->
   </div> 
             </div>
