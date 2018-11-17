@@ -65,7 +65,7 @@ if ($level != 'parent') {
             </div>
           </li>
         </a>
-          <a href="nilai.php">
+          <a href="nilaimurid.php">
           <li class="c-menu__item is-active" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>
@@ -109,8 +109,8 @@ if ($level != 'parent') {
 	<div class="row">
 		<h2>Daftar Nilai Siswa SMK Multistudi High School Batam</h2>
     
+  
 
-    
     <!-- query ambil nama siswa -->
 
   <?php
@@ -121,16 +121,17 @@ if ($level != 'parent') {
       $id_siswa = $carinama['id_siswa'];
       $query = mysql_query("SELECT * from tbl_mapelrpl where id_siswa = $id_siswa");
 
-
+      
       ?>
-    <h4>Nama Murid : <b><?php echo $carinama['nama_siswa']; ?></b></h4>
-    <h5>Hasil</h5>
+    <h4>Nama Murid : <b><?php echo $carinama['nama_siswa']; ?></b></h4> 
 
+    <div class="continer">
+    <div class="row">
     <div class="col-sm-4">
     <form action="" method="POST">
+    <label>Pilih Bulan</label>
         <select name="bulan" id="bulan" class="form-control ">
-              <option selected disabled>Pilih Bulan</option>
-              <option value="January">Januari</option>
+              <option value="January" selected>Januari</option>
               <option value="February">Februari</option>
               <option value="March">Maret</option>
               <option value="April">April</option>
@@ -142,12 +143,14 @@ if ($level != 'parent') {
               <option value="October">Oktober</option>
               <option value="November">November</option>
               <option value="December">Desember</option>
-        </select>
-
-<div class="col-sm-2">
-<button type="submit" class="btn btn-primary" name="tampilbulan" >Tampilkan</button>
+        </select> 
+    </div>
+    
+<div class="col-sm-2" style="margin-top:25px; margin-left:-15px;">
+<button type="submit" class="btn btn-primary" name="tampilbulan" ><i class="fa fa-search"></i> Tampilkan</button>
         </form>
        </div>
+    </div>
     </div>
 </div>
 
@@ -156,7 +159,11 @@ if ($level != 'parent') {
     
     <div class="row">
     <?php
-     while ($row = mysql_fetch_array($query)) {
+    if (isset($_POST['tampilbulan'])){
+     $bulan = $_POST['bulan'];
+     $query2 = mysql_query("SELECT * From tbl_mapelrpl where tanggal LIKE '%$bulan%' and id_siswa = $id_siswa ");
+
+     while ($row = mysql_fetch_array($query2)) {
       $bindo = $row['bindo'];
       $binggris = $row['binggris'];
       $matematika = $row['matematika'];
@@ -165,7 +172,9 @@ if ($level != 'parent') {
       $fisika = $row['binggris'];
       $pbo = $row['pbo'];
       $basisdata = $row['basisdata'];
-      $avg = $row['avg'];
+      $avg = $row['avg']; 
+    }
+  
 
       ?>
       
@@ -424,34 +433,6 @@ if ($level != 'parent') {
   <div class="container"> 
 
     <!-- Source Code Table -->
-
-    <!-- <?php 
-    include '../koneksi.php';
-    
-    
-    while($row = mysql_fetch_array($query)){
-      $panggilnama = $row['id_siswa'];
-      $querynama = mysql_query("SELECT nama_siswa from tbl_siswa where id_siswa = $panggilnama");
-      $query = mysql_query("SELECT * FROM tbl_mapelrpl");
-      $row2 = mysql_fetch_array($querynama);
-
-    ?>
-        <tr>
-             <td><?php echo $row['tanggal']; ?></td>
-            <td><?php echo $row2['nama_siswa'] ?></td>
-            <td><?php echo $row['bindo']; ?></td>
-            <td><?php echo $row['binggris']; ?></td>
-            <td><?php echo $row['matematika']; ?></td>
-            <td><?php echo $row['sejarah']; ?></td>
-            <td><?php echo $row['pkn']; ?></td>
-            <td><?php echo $row['fisika']; ?></td>
-            <td><?php echo $row['pbo']; ?></td>
-            <td><?php echo $row['basisdata']; ?></td>
-            <td><?php echo $row['avg'] ?></td>
-            <td><a href="nilai.php?delete=<?php echo $row['id_mapelrpl']; ?>" class="btn btn-danger">Hapus</a>
-            </td>
-        </tr>
-        <?php } ?>  -->
 </main>
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
