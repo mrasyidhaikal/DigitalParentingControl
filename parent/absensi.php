@@ -75,7 +75,7 @@ $row = mysql_fetch_array($query);
             </div>
           </li>
           </a>
-          <li class="c-menu__item is-active" data-toggle="tooltip" title="Absensi">
+            <li class="c-menu__item is-active" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
