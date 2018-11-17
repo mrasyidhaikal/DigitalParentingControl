@@ -162,7 +162,7 @@ $row = mysql_fetch_array($query);
               <p>Izin :<?php echo $okizin; ?></p>
             </div>
                         
-            <a href="#">Learn More</a>
+            <a href="absensi.php" class="btn btn-primary">Learn More</a>
                         
            </div>
         </div>   
@@ -183,7 +183,7 @@ $row = mysql_fetch_array($query);
               <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
             </div>
                         
-            <a href="#">Learn More</a>
+            <a href="nilaimurid.php" class="btn btn-primary">Learn More</a>
                         
            </div>
         </div>   
@@ -205,7 +205,7 @@ $row = mysql_fetch_array($query);
               <span>Total Pengumuman:<?php echo $nilai; ?></span>
             </div> 
                         
-            <a href="#">Learn More</a>
+            <a href="index.php" class="btn btn-primary">Learn More</a>
                         
            </div>
         </div>   

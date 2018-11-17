@@ -14,7 +14,41 @@ if ($level != 'admin') {
 
 <!DOCTYPE html>
 <html lang="en" >
+<style type="text/css">
+  
+  body{
+background: #f2f2f2;
+}
+  span{
+    font-size:15px;
 
+}
+.box{
+    padding:60px 0px;
+
+}
+
+.box-part{
+
+    background:#FFF;
+    border-radius:0;
+    padding:60px 10px;
+    margin:30px 0px;
+ box-shadow:0 20px 50px rgba(0,0,0,.1);
+ height: 320px;
+}
+.text{
+    margin:20px 0px;
+}
+
+.fa{
+     color:#4183D7;
+}
+.far{
+     color:#4183D7;
+}
+
+</style>
 <head>
 
     <meta charset="UTF-8">
@@ -103,126 +137,77 @@ if ($level != 'admin') {
     <div class="container">
     <div class="row">
   
-       <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
-      <h2><i class="fas fa-bullhorn"></i> Pengumuman Murid</h2>
-
-
-  <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
-  
-  <div class="sembunyi">
-    <div class="row">
-      <div class="col-sm-10" style="margin-left: 10px;">
-        
-      
-    <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;">
-           
-      
- 
-      
-           
-            
-                      <div class="form-group">        
-                      <label class="form-label">Judul Pengumuman</label>
-                      <input type="text" name="judul" class="form-control" placeholder="Judul" required="required"/>
-                      </div>     
-
-                      <div class="form-group">        
-                      <label class="form-label">Isi Pengumuman</label>
-                      <textarea name="isi" class="form-control" placeholder="Isi Pengumuman" required="required"/>
-                      </textarea>
-
-                      <div class="form-group">        
-                      <label class="form-label">File Pengumuman</label>
-                      <input type="file" name="ddf" class="form-control"   required="required"/>
-                      </div>
-                      </div>
-
-                      
-                      <div class="form-group">
-                      <input type="submit" name="kirim" class="btn btn-primary btn-lg"/>
-                      </form>
-                      </div> 
-                   
-                    
-                  </table>
-                  </div>
-                  
+    <div class="box" style="margin-top: -20px;">
+    <div class="container" >
+      <div class="row">
+       
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+               
+          <div class="box-part text-center">
+                        <i class="far fa-address-book fa-3x"></i>
+                        
+            <div class="title"> 
+              <h3>Siswa</h3>
+            </div>
+                        
+            <div class="text">
               
-                
-                </div>
+            </div>
+                        
+            <a href="absensi.php" class="btn btn-primary">Learn More</a>
+                        
+           </div>
+        </div>   
+        
+         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+               
+          <div class="box-part text-center">
+              
+            <i class="fa fa-chart-bar fa-3x"></i>
+                    
+            <div class="title">
+              <h3>Nilai</h3>
+            </div>
+              <?php 
+             
+               ?>
+            <div class="text">
+              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+            </div>
+                        
+            <a href="nilaimurid.php" class="btn btn-primary">Learn More</a>
+                        
+           </div>
+        </div>   
+        
+         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+               
+          <div class="box-part text-center">
+                        
+                       <i class="fa fa-bullhorn fa-3x"></i>
+                        
+            <div class="title">
+              <h3>Pengumuman</h3>
+            </div>
+              <?php 
+              include '../koneksi.php';
+              $query = mysql_query("SELECT * FROM pengumuman");
+              $nilai = mysql_num_rows($query);
+               ?>           
+            <div class="text">
+              <span>Total Pengumuman:<?php echo $nilai; ?></span>
+            </div> 
+                        
+            <a href="index.php" class="btn btn-primary">Learn More</a>
+                        
+           </div>
+        </div>   
+        </div>
+       
+    </div>    
     </div>
-
-    </form>
-    </div>
-  </div>
-  <?php 
-if (isset($_POST['kirim'])) {
-  include '../koneksi.php';
-    $judul = $_POST['judul'];
-    $isi  = $_POST['isi'];
-    $tanggal = date("Y-m-d H:i:s");
-    $id_user =$_SESSION['id_user']; 
-    $fl_name=$_FILES['ddf']['name'];
-    $tmp=$_FILES['ddf']['tmp_name'];
-
-    // Validasi
-    $ekstensi=['doc','pdf','jpg','jpeg','png'];
-    $nama = explode('.', $fl_name);
-    $nama=strtolower(end($nama));
-    if (!in_array($nama, $ekstensi)) {
-      echo "<script>window.alert('File Tidak Cocok');
-  window.location='index.php'</script>";
-    }
-    else{
-       $baru = uniqid();
-                $baru .='.';
-                $baru .=$nama;
-
-                $path="../file/".$baru;
-                $nama="file/".$baru;
-                move_uploaded_file($tmp, $path);
-      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,$id_user, '$judul', '$nama', '$isi', '$tanggal');").mysql_error();
-      echo "<script>window.alert('Input Success');
-  window.location='index.php'</script>";
-
-    }
-
-
-  }
- ?>
-                  
-  <div class="container"> 
-    <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
-
-    <thead>
-        <tr>
-            <th>Id Pengumuman</th>
-            <th>Judul</th>
-            <th>File</th>
-            <th>Isi</th>
-            <th>Tanggal</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-
-    <tbody>
-          <?php 
-      include '../koneksi.php';
-      $q = mysql_query("SELECT * FROM pengumuman");
-      while ($row = mysql_fetch_array($q)) {
-    
-     ?>
-        <tr>
-            <td><?php echo $row['id_pengumuman']; ?></td>
-            <td><?php echo $row['judul']; ?></td>
-            <td><a href="../<?php echo $row['file']; ?>">Download File</a></td>
-            <td><?php echo $row['isi']; ?></td>
-            <td><?php echo $row['tanggal']; ?></td>
-           <td><a href="index.php?id=<?php echo $row['id_pengumuman']; ?>" class="btn btn-danger">Hapus</a></td>
-        </tr>
-        <?php } ?>
 </div>
-  </div>   
+  </div></div>
 </main>
 <?php 
 if (isset($_GET['id'])) {
