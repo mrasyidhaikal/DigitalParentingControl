@@ -116,7 +116,7 @@ if ($us==$username && $pas==$password) {
 		$_SESSION['username']=$username;
 
 		echo "<script>window.alert('Selamat Datang $username');
-			window.location='parent/'</script>";
+			window.location='parent/info.php'</script>";
 	}
 	elseif ($level=='guru') {
 	$_SESSION['level']=$level;
