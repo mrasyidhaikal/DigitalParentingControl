@@ -11,6 +11,7 @@ keyword.addEventListener('keyup',function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			content.innerHTML = xhr.responseText;
 		}
+		
 	}
 	// Eksekusi AjAx
 	xhr.open('GET','search.php?keyword=' + keyword.value,true);

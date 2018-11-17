@@ -236,8 +236,14 @@ if (isset($_POST['kirim'])) {
             <td><?php echo $row['email']; ?></td>
             <td><?php echo $row['nohp']; ?></td>
            <td><a href="akun.php?delete=<?php echo $row['id_user']; ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
-           <a href="akun.php?update=<?php echo $row['id_user']; ?>" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
+           <a href="editakun.php?update=<?php echo $row['id_user']; ?>" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
+           <br>
+           <br>
+           <center>
+           <a href="editfoto.php?update=<?php echo $row['id_user']; ?>" class="btn btn-primary"><i class="fa fa-image"></i> Edit Foto</a>
+           </center>
            </td>
+           
         </tr>
         <?php } ?>
 </div>

@@ -583,6 +583,8 @@ a.list-group-item.active small {
   width: 55px;
   height: 300px;
 }
+
+
 @media (max-width: 768px){
   .log{
     width: 100%;

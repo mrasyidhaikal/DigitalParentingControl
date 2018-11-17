@@ -7,10 +7,11 @@
 <?php 
 session_start();
 $level = $_SESSION['level'];
-if ($level != 'guru') {
+if ($level != 'admin') {
     header('location:../login.php');
 }
  ?>
+
 
 <!DOCTYPE html>
 <html lang="en" >
@@ -24,11 +25,7 @@ if ($level != 'guru') {
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
     <style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&subset=latin-ext");
 </style></head>
-<script type="text/javascript">
-   $(document).ready( function () {
-    $('#tabel').DataTable();
-} ); 
-</script>
+
 <body class="sidebar-is-reduced">
   <header class="l-header">
     <div class="l-header__inner clearfix">
@@ -63,40 +60,34 @@ if ($level != 'guru') {
             </div>
           </li>
         </a>
-          <a href="nilai.php">
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
-            <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
-              <div class="c-menu-item__title"><span>Nilai</span></div>
+          <a href="siswa.php">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Siswa">
+            <div class="c-menu__item__inner"><i class="fa fa-users"></i>
+              <div class="c-menu-item__title"><span>Siswa</span></div>
             </div>
           </li>
           </a>
-
-          <a href="nilai.php">
-
-          <a href="absensi.php">
-
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
           </li>
-
-          </a>
-          <a href="akun.php">
-
-      
-
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
               <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
             </div>
           </li>
-          </a>
         </ul>
       </nav>
     </div>
   </div>
+<?php 
+include '../koneksi.php';
+$id_user = $_GET['update'];
+$query = mysql_query("SELECT * FROM users WHERE id_user = $id_user");
+$data = mysql_fetch_array($query);
 
+ ?>
   
 <main class="l-main">
   <div class="content-wrapper content-wrapper--with-bg">
@@ -104,13 +95,10 @@ if ($level != 'guru') {
     <div class="row">
   
        <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
-      <h2><i class="fas fa-bullhorn"></i> Pengumuman Murid</h2>
+      <h2><i class="fas fa-users"></i>Edit Akun</h2>
 
 
-  <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
   
-  <div class="sembunyi">
-    <div class="row">
       <div class="col-sm-10" style="margin-left: 10px;">
         
       
@@ -122,22 +110,39 @@ if ($level != 'guru') {
            
             
                       <div class="form-group">        
-                      <label class="form-label">Judul Pengumuman</label>
-                      <input type="text" name="judul" class="form-control" placeholder="Judul" required="required"/>
+                      <label class="form-label">Username</label>
+                      <input type="text" value="<?php echo $data['username'] ?>" name="username" class="form-control" placeholder="Username" required="required"/>
                       </div>     
 
                       <div class="form-group">        
-                      <label class="form-label">Isi Pengumuman</label>
-                      <textarea name="isi" class="form-control" placeholder="Isi Pengumuman" required="required"/>
-                      </textarea>
+                      <label class="form-label">Password</label>
+                      <input type="password" value="<?php echo $data['password'] ?>" name="pass" class="form-control"  required="required"/>
+                      </div>  
+                      <div class="form-group">        
+                      <label class="form-label">Confirm Password</label>
+                      <input type="password" name="pass2" class="form-control" value="<?php echo $data['password'] ?>"  required="required"/>
+                      </div>
+                     <div class="form-group">
+                       <label class="form-label">Level</label>
+                       <select name="level" class="form-control">
+                        <option value="<?php echo $data['level'] ?>"><?php echo $data['level'] ?></option>
+                         <option value="guru">Guru</option>
+                         <option value="parent">Parent</option>
+                         <option value="admin">Admin</option>
+                       </select>
+                     </div>
 
                       <div class="form-group">        
-                      <label class="form-label">File Pengumuman</label>
-                      <input type="file" name="ddf" class="form-control"   required="required"/>
-                      </div>
+                      <label class="form-label">Email</label>
+                      <input type="email" name="email" class="form-control" value="<?php echo $data['email'] ?>" placeholder="Email" required="required"/>
                       </div>
 
-                      
+                      <div class="form-group">        
+                      <label class="form-label">No Hp</label>
+                      <input type="tel" value="<?php echo $data['nohp'] ?>" name="nohp" class="form-control" placeholder="No Hp" required="required"/>
+                      </div>
+                    
+
                       <div class="form-group">
                       <input type="submit" name="kirim" class="btn btn-primary btn-lg"/>
                       </form>
@@ -158,80 +163,37 @@ if ($level != 'guru') {
   <?php 
 if (isset($_POST['kirim'])) {
   include '../koneksi.php';
-    $judul = $_POST['judul'];
-    $isi  = $_POST['isi'];
-    $tanggal = date("Y-m-d H:i:s");
-    $id_user =$_SESSION['id_user']; 
-    $fl_name=$_FILES['ddf']['name'];
-    $tmp=$_FILES['ddf']['tmp_name'];
+    $username = $_POST['username'];
+    $pass  = $_POST['pass'];
+    $pass2 = $_POST['pass2'];
+    $id = uniqid();
+    $level = $_POST['level'];
+    $email = $_POST['email'];
+    $nohp = $_POST['nohp'];
 
-    // Validasi
-    $ekstensi=['doc','pdf','jpg','jpeg','png'];
-    $nama = explode('.', $fl_name);
-    $nama=strtolower(end($nama));
-    if (!in_array($nama, $ekstensi)) {
-      echo "<script>window.alert('File Tidak Cocok');
-  window.location='index.php'</script>";
-    }
+    $tanggal = date("Y-m-d h:i:s");
+                  
+   
+    if ($pass != $pass2) {
+    echo "<script>window.alert('Password Tidak Sama');
+  window.location='akun.php'</script>";    }
     else{
-       $baru = uniqid();
-                $baru .='.';
-                $baru .=$nama;
+      
+               
+               
+      $query =mysql_query("UPDATE `arkademy`.`users` SET `id_user` = '$id', `username` = '$username', `password` = '$pass', `email` = '$email', `nohp` = '$nohp' WHERE `users`.`id_user` = '$id_user'").mysql_error();
+      echo "<script>window.alert('Input Success');
+  window.location='akun.php'</script>";
 
-                $path="../file/".$baru;
-                $nama="file/".$baru;
-                move_uploaded_file($tmp, $path);
-      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,'$id_user', '$judul', '$nama', '$isi', '$tanggal');");
-      
-      
     }
 
 
   }
  ?>
                   
-  <div class="container"> 
-    <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
 
-    <thead>
-        <tr>
-            <th>Id Pengumuman</th>
-            <th>Judul</th>
-            <th>File</th>
-            <th>Isi</th>
-            <th>Tanggal</th>
-            <th>Action</th>
-        </tr>
-    </thead>
 
-    <tbody>
-          <?php 
-      include '../koneksi.php';
-      $q = mysql_query("SELECT * FROM pengumuman");
-      while ($row = mysql_fetch_array($q)) {
-    
-     ?>
-        <tr>
-            <td><?php echo $row['id_pengumuman']; ?></td>
-            <td><?php echo $row['judul']; ?></td>
-            <td><a href="../<?php echo $row['file']; ?>">Download File</a></td>
-            <td><?php echo $row['isi']; ?></td>
-            <td><?php echo $row['tanggal']; ?></td>
-           <td><a href="index.php?id=<?php echo $row['id_pengumuman']; ?>" class="btn btn-danger">Hapus</a></td>
-        </tr>
-        <?php } ?>
-</div>
-  </div>   
-</main>
-<?php 
-if (isset($_GET['id'])) {
-  $id =$_GET['id'];
-  $hapus = mysql_query("DELETE FROM `arkademy`.`pengumuman` WHERE `pengumuman`.`id_pengumuman` = $id");
-  echo "<script>window.alert('Delete Success');
-  window.location='index.php'</script>";
-} 
-
-?>
+   
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
 <!-- Data tables -->

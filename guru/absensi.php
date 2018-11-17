@@ -85,15 +85,44 @@ if ($level != 'guru') {
 <main class="l-main">
   <div class="content-wrapper content-wrapper--with-bg">
 
+
       <!--   -----------------------------------------------------------------   -->
 
-<form action=""  method="post" name="table">
-      <form action="" method="post" name="cari">
-      <input type="date" name="tanggal">
-      <select name="kelas"><option value="12RPL1">12RPL1</option></select>
-      <input type="submit" name="cari">
+
+
+      <?php 
+        error_reporting(0);
+       $tanggal=$_GET['tanggal'];
+       $kelas=$_GET['kelas']
+      ?>
+      <form action="" method="GET" name="cari">
+      
+  <div class="col-md-3 ">
+    <input type="date" class="form-control" name="tanggal" value="<?php echo $tanggal; ?>">
+  </div>
+      
+  <div class="col-md-3 ">
+    <select name="kelas" class="form-control">
+        <option value="12RPL1">12RPL1</option>
+        <option value="12RPL2">12RPL2</option>
+        <option value="12RPL3">12RPL3</option>
+      </select>
+  </div>
+
+  <div class="col-md-3 ">
+      <input type="submit" class="btn btn-primary" name="cari">
+  </div>
+
       </form>
 
+<div class="container"> 
+  
+  <label style="color: white">a</label>
+  <br> 
+  <label style="color: white">a</label>
+
+</div>
+<form action="" method="POST">
 <div class="container"> 
   <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
   <tr>
@@ -108,11 +137,13 @@ if ($level != 'guru') {
   </tr>
 <?php 
 
-    include '../koneksi.php';   
-    if (isset($_POST['cari'])) {
-
-      $tanggal = $_POST['tanggal'];
-      $kelas = $_POST['kelas'];
+    include '../koneksi.php'; 
+    $anu=$_GET['cari']; 
+    // echo "<script type='text/javascript'>alert('$anu');</script>";
+      
+    if (isset($anu)) {
+      // echo "<script type='text/javascript'>alert('$tanggal');</script>";
+      
 
       $no = 1;
       $data = mysql_query("select * from absensi where tanggal ='$tanggal' and kelas='$kelas'");
@@ -130,29 +161,25 @@ if ($level != 'guru') {
               <?php 
               if ($d['sakit']==1) {
               echo "checked";
-              $_SESSION[$d['nama']]='sakit';
             }; ?>>
             </td>
             <td><input type="radio" name="<?php echo $d['nama']; ?>" value="izin" 
               <?php 
               if ($d['izin']==1) {
               echo "checked";
-              $_SESSION[$d['nama']]='izin';
             }; ?> >
             </td>
             <td><input type="radio" name="<?php echo $d['nama']; ?>" value="alfa" <?php 
               if ($d['alfa']==1) {
               echo "checked";
-              $_SESSION[$d['nama']]='alfa';
             }; ?> >
             </td>
             <td><input type="radio" name="<?php echo $d['nama']; ?>" value="hadir" <?php 
               if ($d['hadir']==1) {
               echo "checked";
-              $_SESSION[$d['nama']]='hadir';
             }; ?> >
             </td>
-            <td><input type="text" name="keterangan" value="<?php echo $d['keterangan']; ?>">
+            <td><input type="text" name="<?php echo $itu=$d['nama'].'keterangan'; ?>" value="<?php echo $d['keterangan']; ?>">
               <?php?></td>
           </tr>
           <?php 
@@ -174,11 +201,15 @@ if ($level != 'guru') {
             <td><?php echo $no++; ?></td>
             <td><?php echo $tanggal ?></td>
             <td><?php echo $d['nama']; ?></td>
-            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="sakit"></td>
-            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="izin"></td>
-            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="alfa"></td>
-            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="hadir"></td>
-            <td><input type="text" name="keterangan" value=""></td>
+            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="sakit" >
+            </td>
+            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="izin" >
+            </td>
+            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="alfa" >
+            </td>
+            <td><input type="radio" name="<?php echo $d['nama']; ?>" value="hadir" >
+            </td>
+            <td><input type="text" name="<?php echo $itu=$d['nama'].'keterangan'; ?>" value=""></td>
           </tr>
           <?php 
         }       
@@ -187,15 +218,16 @@ if ($level != 'guru') {
     ?>
 </table>
 <br>
+<input type="submit" class="btn btn-primary" name="save" value="save">
 
-<!--<a href="" onclick="save()">save</a>-->
-<script type="text/javascript">
-  function save(){
   <?php     
+    if (isset($_POST['save'])) {
+      # code...
       //echo "<script type='text/javascript'>alert('1');</script>";
-      $tanggal = $_POST['tanggal'];
+      $tanggal = $_GET['tanggal'];
+      
       $kel="kelas";
-      $kelas = $_POST[$kel];
+      $kelas = $_GET[$kel];
       //echo "<script type='text/javascript'>alert('2');</script>";
       $no = 1;
       $query="select * from absensi where tanggal ='$tanggal' and kelas='$kelas'";
@@ -203,52 +235,96 @@ if ($level != 'guru') {
       $data = mysql_query("$query");
       //echo "<script type='text/javascript'>alert('3');</script>";
       if (isset($tanggal,$kelas)) {
-      if (mysql_num_rows($data)) {
-      //echo "<script type='text/javascript'>alert('4');</script>";
+      
+      $ok=mysql_num_rows($data); 
+      // echo "<script type='text/javascript'>alert('$ok');</script>";
+      if ($ok<1) {
+
+          $data = mysql_query("select * from siswa where kelas='$kelas'");
+           while($d = mysql_fetch_array($data)){
+
+          // echo "<script type='text/javascript'>alert('$tanggal');</script>";
+              $nama=$d['nama'];
+          // echo "<script type='text/javascript'>alert('$nama');</script>";
+              $hmm=$d['nama'].'keterangan';
+              $anu=$_POST[$nama];          
+          // echo "<script type='text/javascript'>alert('$anu');</script>";
+              $keterangan=$_POST[$hmm];
+          // echo "<script type='text/javascript'>alert('$keterangan');</script>";
+              $sakit="0";
+              $izin="0";
+              $alfa="0";
+              $hadir="0";
+              if ($anu=="sakit") {
+                $sakit="1";
+              }elseif ($anu=="izin") {
+                $izin="1";
+              }elseif ($anu=="alfa") {
+                $alfa="1";
+              }elseif ($anu=="hadir") {
+                $hadir="1";
+              }else{
+
+              }
+          // echo "<script type='text/javascript'>alert('$sakit');</script>";
+          // echo "<script type='text/javascript'>alert('$alfa');</script>";
+          // echo "<script type='text/javascript'>alert('$izin');</script>";
+          // echo "<script type='text/javascript'>alert('$hadir');</script>";
+              //$keterangan=$_POST['keterangan'];
+              $query=mysql_query("INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`,`keterangan`) VALUES ( '$tanggal', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir','$keterangan')");
+
+            }
+            echo "<script type='text/javascript'>alert('sukses');</script>";
+            
+            //"INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')"; 
+      }else{
         while($d = mysql_fetch_array($data)){
+      
       //echo "<script type='text/javascript'>alert('5');</script>";
           $id_absen=$d['id_absen'];
           $tanggal=$d['tanggal'];
       //echo "<script type='text/javascript'>alert('$tanggal');</script>";    
           $nama=$d['nama'];
-      //echo "<script type='text/javascript'>alert('$nama');</script>";
-          $anu=$_SESSION[$nama];          
-      //echo "<script type='text/javascript'>alert('$anu');</script>";
-          $keterangan=$d['keterangan'];
-          $sakit="0";
+      // echo "<script type='text/javascript'>alert('$nama');</script>";
+          $hmm=$d['nama'].'keterangan';
+          $anu=$_POST[$nama];    
+      // echo "<script type='text/javascript'>alert('$anu');</script>";
+          $keterangan=$_POST[$hmm];
+          // echo "<script type='text/javascript'>alert('$keterangan');</script>";$sakit="0";
           $izin="0";
           $alfa="0";
           $hadir="0";
-          if ($anu="sakit") {
+          if ($anu=="sakit") {
             $sakit="1";
-          }elseif ($anu="izin") {
+          }elseif ($anu=="izin") {
             $izin="1";
-          }elseif ($anu="alfa") {
+          }elseif ($anu=="alfa") {
             $alfa="1";
-          }elseif ($anu="hadir") {
+          }elseif ($anu=="hadir") {
             $hadir="1";
           }else{
 
           }
-
-      //echo "<script type='text/javascript'>alert('$sakit');</script>";
-      //echo "<script type='text/javascript'>alert('$alfa');</script>";
-      //echo "<script type='text/javascript'>alert('$izin');</script>";
-      //echo "<script type='text/javascript'>alert('$hadir');</script>";
+      // echo "<script type='text/javascript'>alert('$sakit');</script>";
+      // echo "<script type='text/javascript'>alert('$alfa');</script>";
+      // echo "<script type='text/javascript'>alert('$izin');</script>";
+      // echo "<script type='text/javascript'>alert('$hadir');</script>";
           //$keterangan=$_POST['keterangan'];
-          $query="UPDATE `absensi` SET  `tanggal` = '$tanggal', `kelas` = '$kelas', `nama` = '$nama', `sakit` = '$sakit', `izin` = '$izin', `alfa` = '$alfa', `hadir` = '$hadir' WHERE `absensi`.`id_absen` ='$id_absen'";
-          //mysql_query($query);
+          $query=mysql_query("UPDATE `absensi` SET  `tanggal` = '$tanggal', `kelas` = '$kelas', `nama` = '$nama', `sakit` = '$sakit', `izin` = '$izin', `alfa` = '$alfa', `hadir` = '$hadir',`keterangan`='$keterangan' WHERE `absensi`.`id_absen` ='$id_absen'");
+          }
+          echo "<script type='text/javascript'>alert('sukses');window.location='absensi.php'</script>";
+            
         }
+
+            
       //"INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')";
-      }else{
-
-        }
       }
+    }
     
+      echo "<script type='text/javascript'>window.location ='http://localhost/DigitalParentingControl/guru/absensi.php');</script>"; 
 ?>
-}
 
-</script>
+
 </div>
 </form>
 
@@ -380,4 +456,5 @@ Dashboard.init();
 //# sourceURL=pen.js
 </script>
 
-</body></html>
+</body>
+</html>

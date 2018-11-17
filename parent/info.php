@@ -9,7 +9,40 @@ if ($level != 'parent') {
     header('location:../login.php');
 }
  ?>
+<style type="text/css">
+body{
+background: #f2f2f2;
+}
+  span{
+    font-size:15px;
 
+}
+.box{
+    padding:60px 0px;
+
+}
+
+.box-part{
+
+    background:#FFF;
+    border-radius:0;
+    padding:60px 10px;
+    margin:30px 0px;
+ box-shadow:0 20px 50px rgba(0,0,0,.1);
+ height: 320px;
+}
+.text{
+    margin:20px 0px;
+}
+
+.fa{
+     color:#4183D7;
+}
+.far{
+     color:#4183D7;
+}
+a
+</style>
 <!DOCTYPE html>
 <html lang="en" >
 
@@ -33,14 +66,9 @@ if ($level != 'parent') {
         <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
       </div>
       <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-bell"></i>
-        <div class="c-dropdown c-dropdown--notifications">
-          <div class="c-dropdown__header"></div>
-          <div class="c-dropdown__content"></div>
-        </div>
+        
       </div>
-      <div class="c-search">
-        <input class="c-search__input u-input" placeholder="Search..." type="text"/>
-      </div>
+     
       <?php 
 include '../koneksi.php';
 $idd = $_SESSION['id_user'];
@@ -94,133 +122,81 @@ $row = mysql_fetch_array($query);
       </nav>
     </div>
   </div>
-<main class="l-main">
+<main class="l-main" >
    <div class="container">
-  <div class="row">
 
-    <section class="content">
-    
-      <div class="col-md-8 col-md-offset-2">
-          <h1><i class="fa fa-bullhorn"></i> Pengumuman</h1>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="pull-right">
-              
-              <div class="form-group">
-                <form method="post" action="">
-                <input type="text" name="cari" class="form-control" placeholder="Cari Judul Pemberitahuan" id="keyword">
+<div class="box" style="margin-top: -20px;">
+    <div class="container" >
+      <div class="row">
+       
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                
-              </form>
-              </div>
-
-              
-            </div>
-            <div id="content">
-            <div class="table-container">
-              <table class="table table-filter">
-                <tbody>
-                <?php 
-                include '../koneksi.php';
-                // Pagination
-                $jumlahdata_per_page = 4;
-
-                $result = mysql_query("SELECT * FROM pengumuman");
-                $jumlah_data = mysql_num_rows($result);
-                $jumlah_halaman= ceil($jumlah_data / $jumlahdata_per_page);
-
-
-               $aktif = (isset($_GET['halaman'] ) ) ? $_GET['halaman'] : 1;
-              
-                // Awal Data
-               $awaldata=($jumlahdata_per_page * $aktif) -$jumlahdata_per_page ;
-          
-              
-               // End Pagination Logic
-
-                $query = mysql_query("SELECT * FROM pengumuman JOIN users ON pengumuman.id_user = users.id_user LIMIT $awaldata, $jumlahdata_per_page
-                  ");
-               
-                while ($row = mysql_fetch_array($query)){
-              
-
-
-                 ?>
-                  <tr data-status="pagado">
-                    <td>
-                      <div class="media">
-                        <a href="#" class="pull-left">
-                          <img width="100px" src="<?php echo $row['foto']; ?>" class="media-photo">
-                        </a>
-                        <div class="media-body">
-                          <span class="media-meta pull-right"><?php echo $row['tanggal']; ?></span>
+          <div class="box-part text-center">
+                        <i class="far fa-address-book fa-3x"></i>
                         
-                      
-
-                          <h4 class="title">
-                            <b>
-                            <?php echo $row['judul']; ?>
-                            </b>
-                          </h4>
-                          <p class="summary"><?php echo $row['isi']; ?></p>
-                          <br>
-                            <span class="media-meta pull-right"><a href="../<?php echo $row['file']; ?>">Download File <i class="fas fa-file-download"></i></a></span>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-               <?php } ?>
-
-                </tbody>
-
-              </table>
-              </div>
-
-
-<!-- Pagination -->
-<div class="col-md-12 col-md-offset-8">
-  <nav aria-label="...">
-  <ul class="pagination">
-    <?php if($aktif > 1): ?>
-    <li class="page-item">
-      <a class="page-link" href="?halaman=<?php echo $aktif-1; ?>">Previous</a>
-    </li>
-    <?php else: ?>
-       <li class="page-item disabled">
-      <a class="page-link" href="">Previous</a>
-    </li>
-  <?php endif; ?>
-   <?php for ($i=1; $i <= $jumlah_halaman; $i++):?>
-    <?php if($i == $aktif) : ?>
-    <li class="page-item active">
-      <a class="page-link" href="?halaman=<?php echo $i; ?>"><?php echo $i; ?></a>
-    </li>
-    <?php else: ?>
-        <li class="page-item">
-      <a class="page-link" href="?halaman=<?php echo $i; ?>"><?php echo $i; ?></a>
-    </li>
-    <?php endif; ?>
-   <?php endfor; ?>
-
-    <?php if($aktif < $jumlah_halaman): ?>
-    <li class="page-item">
-      <a class="page-link" href="?halaman=<?php echo $aktif+1; ?>">Next</a>
-    </li>
-    <?php else: ?>
-       <li class="page-item disabled">
-      <a class="page-link" href="">Next</a>
-    </li>
-  <?php endif; ?>
-
-  </ul>
-</nav>
-</div>
-<!-- end pagination -->
-
+            <div class="title"> 
+              <h3>Kehadiran</h3>
             </div>
-          </div>
+                        
+            <div class="text">
+              <p>Hadir:</p>
+              <P>Sakit:</P>
+              <p>Alfa :</p>
+            </div>
+                        
+            <a href="absensi.php" class="btn btn-primary">Learn More</a>
+                        
+           </div>
+        </div>   
+        
+         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+               
+          <div class="box-part text-center">
+              
+            <i class="fa fa-chart-bar fa-3x"></i>
+                    
+            <div class="title">
+              <h3>Nilai</h3>
+            </div>
+              <?php 
+              $query = mysql_query("SELECT * FROM ni")
+               ?>
+            <div class="text">
+              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+            </div>
+                        
+            <a href="nilaimurid.php" class="btn btn-primary">Learn More</a>
+                        
+           </div>
+        </div>   
+        
+         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+               
+          <div class="box-part text-center">
+                        
+                       <i class="fa fa-bullhorn fa-3x"></i>
+                        
+            <div class="title">
+              <h3>Pengumuman</h3>
+            </div>
+              <?php 
+              $query = mysql_query("SELECT * FROM pengumuman");
+              $nilai = mysql_num_rows($query);
+               ?>           
+            <div class="text">
+              <span>Total Pengumuman:<?php echo $nilai; ?></span>
+            </div> 
+                        
+            <a href="index.php" class="btn btn-primary">Learn More</a>
+                        
+           </div>
+        </div>   
         </div>
-
-
+       
+    </div>    
+    </div>
+</div>
+  </div></div>
 
 
 </main>

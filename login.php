@@ -3,7 +3,15 @@
 <head>
 	<title></title>
 <link rel="stylesheet" type="text/css" href="style.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../font/css/all.css">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
+    <style class="cp-pen-styles">@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&subset=latin-ext");
+</style></head>
 <link rel="stylesheet" type="text/css" href="font/css/all.css">
 <?php
 session_start();
@@ -108,7 +116,7 @@ if ($us==$username && $pas==$password) {
 		$_SESSION['username']=$username;
 
 		echo "<script>window.alert('Selamat Datang $username');
-			window.location='parent/'</script>";
+			window.location='parent/info.php'</script>";
 	}
 	elseif ($level=='guru') {
 	$_SESSION['level']=$level;
