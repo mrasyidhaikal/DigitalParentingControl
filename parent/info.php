@@ -3,6 +3,7 @@
 <!------ Include the above in your HEAD tag ---------->
 <?php 
 session_start();
+include '../koneksi.php';
 $level = $_SESSION['level'];
 
 if ($level != 'parent') {
@@ -69,15 +70,8 @@ a
         
       </div>
      
-      <?php 
-include '../koneksi.php';
-$idd = $_SESSION['id_user'];
-$query = mysql_query("SELECT * FROM `users` WHERE id_user = '$idd' ");
-$row = mysql_fetch_array($query);
- ?>
-       <div class="header-icons-group">
-        <div class=""><a href="../logout.php"><img class="img-circle" width="100px" src="<?php echo $row['foto'] ?>"> </a></i></div>
 
+       
       <div class="header-icons-group">
         <div class="c-header-icon logout"><a href="../logout.php"><i class="fa fa-power-off"></a></i></div>
       </div>
@@ -133,15 +127,30 @@ $row = mysql_fetch_array($query);
                
           <div class="box-part text-center">
                         <i class="far fa-address-book fa-3x"></i>
-                        
+            <?php 
+             $panggilnama = $_SESSION['id_user'];
+             $query1 = mysql_query("SELECT * from tbl_siswa where id_user = $panggilnama"); 
+             $carinama = mysql_fetch_array($query1);
+             $id_siswa = $carinama['id_siswa'];
+             $query = mysql_query("SELECT * from tbl_mapelrpl where id_siswa = $id_siswa");
+             $namanya=$carinama['nama_siswa'];
+            $query1 = mysql_query("SELECT * FROM absensi WHERE nama = '$namanya' AND sakit = '1' ");
+            $query2 = mysql_query("SELECT * FROM absensi WHERE nama = '$namanya' AND alfa = '1' ");
+            $query3 = mysql_query("SELECT * FROM absensi WHERE nama = '$namanya' AND izin = '1' ");
+            $hasil1 = mysql_num_rows($query1);
+            $hasil2 = mysql_num_rows($query2);
+            $hasil3 = mysql_num_rows($query3);
+
+            ?>      
+            
             <div class="title"> 
               <h3>Kehadiran</h3>
             </div>
                         
             <div class="text">
-              <p>Hadir:</p>
-              <P>Sakit:</P>
-              <p>Alfa :</p>
+              <p>Sakit:<?php echo $hasil1 ?></p>
+              <P>Alfa:<?php echo $hasil2 ?></P>
+              <p>Izin :<?php echo $hasil3 ?></p>
             </div>
                         
             <a href="absensi.php" class="btn btn-primary">Learn More</a>

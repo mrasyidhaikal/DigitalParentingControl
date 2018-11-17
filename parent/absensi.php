@@ -153,10 +153,18 @@ $row = mysql_fetch_array($query);
         <th>Keterangan</th>
       </tr>
       <?php  
+
+      $panggilnama = $_SESSION['id_user'];
+      $query1 = mysql_query("SELECT * from tbl_siswa where id_user = $panggilnama"); 
+      $carinama = mysql_fetch_array($query1);
+      $id_siswa = $carinama['id_siswa'];
+      $query = mysql_query("SELECT * from tbl_mapelrpl where id_siswa = $id_siswa");
+      $namanya=$carinama['nama_siswa'];
+
       $no = 1;
       $no1=0;
-      //echo "<script type='text/javascript'>alert('$kelas');</script>";
-      $data = mysql_query("SELECT * FROM `absensi` WHERE nama='steven' and tanggal LIKE '".$b."-".$a."%' ORDER BY `tanggal` ASC");
+      echo "<script type='text/javascript'>alert('$kelas');</script>";
+      $data = mysql_query("SELECT * FROM `absensi` WHERE nama='$namanya' and tanggal LIKE '".$b."-".$a."%' ORDER BY `tanggal` ASC");
 
        while($d = mysql_fetch_array($data))
         {

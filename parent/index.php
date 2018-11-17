@@ -2,6 +2,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <?php 
+include 'koneksi.php';
 session_start();
 $level = $_SESSION['level'];
 
@@ -41,15 +42,8 @@ if ($level != 'parent') {
       <div class="c-search">
         <input class="c-search__input u-input" placeholder="Search..." type="text"/>
       </div>
-      <?php 
-include '../koneksi.php';
-$idd = $_SESSION['id_user'];
-$query = mysql_query("SELECT * FROM `users` WHERE id_user = '$idd' ");
-$row = mysql_fetch_array($query);
- ?>
-       <div class="header-icons-group">
-        <div class=""><a href="../logout.php"><img class="img-circle" width="100px" src="<?php echo $row['foto'] ?>"> </a></i></div>
 
+       
       <div class="header-icons-group">
         <div class="c-header-icon logout"><a href="../logout.php"><i class="fa fa-power-off"></a></i></div>
       </div>

@@ -162,8 +162,8 @@ if ($level != 'parent') {
     if (isset($_POST['tampilbulan'])){
      $bulan = $_POST['bulan'];
      $query2 = mysql_query("SELECT * From tbl_mapelrpl where tanggal LIKE '%$bulan%' and id_siswa = $id_siswa ");
-
      while ($row = mysql_fetch_array($query2)) {
+      
       $bindo = $row['bindo'];
       $binggris = $row['binggris'];
       $matematika = $row['matematika'];

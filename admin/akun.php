@@ -164,7 +164,7 @@ if (isset($_POST['kirim'])) {
     $username = $_POST['username'];
     $pass  = $_POST['pass'];
     $pass2 = $_POST['pass2'];
-    $id = uniqid();
+   
     $level = $_POST['level'];
     $email = $_POST['email'];
     $nohp = $_POST['nohp'];
@@ -189,12 +189,10 @@ if (isset($_POST['kirim'])) {
                 $baru .='.';
                 $baru .=$nama;
 
-                $path="../parent/foto/".$baru;
+                $path="gbr/".$baru;
                
                 move_uploaded_file($tmp, $path);
-      $query =mysql_query("INSERT INTO `arkademy`.`users` (`id_user`, `username`, `password`, `level`, `foto`, `email`, `nohp`) VALUES ('$id', '$username', '$pass', '$level', '$path', '$email', '$nohp')").mysql_error();
-      echo "<script>window.alert('Input Success');
-  window.location='akun.php'</script>";
+
 
     }
 
