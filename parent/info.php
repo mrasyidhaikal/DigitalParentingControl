@@ -132,16 +132,34 @@ $row = mysql_fetch_array($query);
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                
           <div class="box-part text-center">
-                        <i class="far fa-address-book fa-3x"></i>
-                        
+            <i class="far fa-address-book fa-3x"></i>
+                                    
+
+            <?php 
+              
+              $nama='steven';
+
+              $query1="select * from absensi where nama ='$nama' and sakit='1'";
+              $query2="select * from absensi where nama ='$nama' and alfa='1'";
+              $query3="select * from absensi where nama ='snama' and izin='1'";
+
+              $data1 = mysql_query("$query1");
+              $data2 = mysql_query("$query2");
+              $data3 = mysql_query("$query3");
+
+              $oksakit=mysql_num_rows($data1); 
+              $okalfa=mysql_num_rows($data2);
+              $okizin=mysql_num_rows($data3);
+            
+            ?>
             <div class="title"> 
               <h3>Kehadiran</h3>
             </div>
                         
             <div class="text">
-              <p>Hadir:</p>
-              <P>Sakit:</P>
-              <p>Alfa :</p>
+              <p>Alfa:<?php echo $okalfa; ?></p>
+              <P>Sakit:<?php echo $oksakit; ?></P>
+              <p>Izin :<?php echo $okizin; ?></p>
             </div>
                         
             <a href="absensi.php" class="btn btn-primary">Learn More</a>
