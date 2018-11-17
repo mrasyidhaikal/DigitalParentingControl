@@ -274,7 +274,7 @@ if ($level != 'guru') {
               $query=mysql_query("INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`,`keterangan`) VALUES ( '$tanggal', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir','$keterangan')");
 
             }
-            echo "<script type='text/javascript'>alert('sukses');</script>";
+          echo "<script type='text/javascript'>alert('sukses');window.location='absensi.php'</script>";
             
             //"INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')"; 
       }else{
