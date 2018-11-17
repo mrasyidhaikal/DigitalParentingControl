@@ -75,7 +75,7 @@ $row = mysql_fetch_array($query);
             </div>
           </li>
           </a>
-            <li class="c-menu__item is-active" data-toggle="tooltip" title="Absensi">
+          <li class="c-menu__item is-active" data-toggle="tooltip" title="Absensi">
             <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
@@ -103,15 +103,15 @@ $row = mysql_fetch_array($query);
   <div class="col-md-3 ">
     <form action="" method="GET">        
             <select name="bulan" class="form-control">  
-              <option value='1'>January</option>
-              <option value='2'>February</option>
-              <option value='3'>Maret</option>
-              <option value='4'>April</option>
-              <option value='5'>Mei</option>
-              <option value='6'>Juni</option>
-              <option value='7'>Juli</option>
-              <option value='8'>Agustus</option>
-              <option value='9'>September</option>
+              <option value='01'>January</option>
+              <option value='02'>February</option>
+              <option value='03'>Maret</option>
+              <option value='04'>April</option>
+              <option value='05'>Mei</option>
+              <option value='06'>Juni</option>
+              <option value='07'>Juli</option>
+              <option value='08'>Agustus</option>
+              <option value='09'>September</option>
               <option value='10'>Oktober</option>
               <option value='11'>November</option>
               <option value='12'>Desember</option>
