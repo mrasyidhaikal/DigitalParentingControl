@@ -96,16 +96,32 @@ if ($level != 'guru') {
        $kelas=$_GET['kelas']
       ?>
       <form action="" method="GET" name="cari">
-      <input type="date" name="tanggal" value="<?php echo $tanggal; ?>">
-      <select name="kelas">
+      
+  <div class="col-md-3 ">
+    <input type="date" class="form-control" name="tanggal" value="<?php echo $tanggal; ?>">
+  </div>
+      
+  <div class="col-md-3 ">
+    <select name="kelas" class="form-control">
         <option value="12RPL1">12RPL1</option>
         <option value="12RPL2">12RPL2</option>
         <option value="12RPL3">12RPL3</option>
       </select>
-      <input type="submit" name="cari">
+  </div>
+
+  <div class="col-md-3 ">
+      <input type="submit" class="btn btn-primary" name="cari">
+  </div>
+
       </form>
 
+<div class="container"> 
+  
+  <label style="color: white">a</label>
+  <br> 
+  <label style="color: white">a</label>
 
+</div>
 <form action="" method="POST">
 <div class="container"> 
   <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
@@ -163,7 +179,7 @@ if ($level != 'guru') {
               echo "checked";
             }; ?> >
             </td>
-            <td><input type="text" name="keterangan" value="<?php echo $d['keterangan']; ?>">
+            <td><input type="text" name="<?php echo $itu=$d['nama'].'keterangan'; ?>" value="<?php echo $d['keterangan']; ?>">
               <?php?></td>
           </tr>
           <?php 
@@ -193,7 +209,7 @@ if ($level != 'guru') {
             </td>
             <td><input type="radio" name="<?php echo $d['nama']; ?>" value="hadir" >
             </td>
-            <td><input type="text" name="keterangan" value=""></td>
+            <td><input type="text" name="<?php echo $itu=$d['nama'].'keterangan'; ?>" value=""></td>
           </tr>
           <?php 
         }       
@@ -201,13 +217,15 @@ if ($level != 'guru') {
     }     
     ?>
 </table>
-<input type="submit" name="save" value="save">
+<br>
+<input type="submit" class="btn btn-primary" name="save" value="save">
 
   <?php     
     if (isset($_POST['save'])) {
       # code...
       //echo "<script type='text/javascript'>alert('1');</script>";
       $tanggal = $_GET['tanggal'];
+      
       $kel="kelas";
       $kelas = $_GET[$kel];
       //echo "<script type='text/javascript'>alert('2');</script>";
@@ -228,9 +246,11 @@ if ($level != 'guru') {
           // echo "<script type='text/javascript'>alert('$tanggal');</script>";
               $nama=$d['nama'];
           // echo "<script type='text/javascript'>alert('$nama');</script>";
+              $hmm=$d['nama'].'keterangan';
               $anu=$_POST[$nama];          
           // echo "<script type='text/javascript'>alert('$anu');</script>";
-              // $keterangan=$d['keterangan'];
+              $keterangan=$_POST[$hmm];
+          // echo "<script type='text/javascript'>alert('$keterangan');</script>";
               $sakit="0";
               $izin="0";
               $alfa="0";
@@ -251,10 +271,11 @@ if ($level != 'guru') {
           // echo "<script type='text/javascript'>alert('$izin');</script>";
           // echo "<script type='text/javascript'>alert('$hadir');</script>";
               //$keterangan=$_POST['keterangan'];
-              $query=mysql_query("INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`) VALUES ( '$tanggal', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir')");
+              $query=mysql_query("INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`,`keterangan`) VALUES ( '$tanggal', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir','$keterangan')");
 
             }
-
+            echo "<script type='text/javascript'>alert('sukses');</script>";
+            
             //"INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')"; 
       }else{
         while($d = mysql_fetch_array($data)){
@@ -265,10 +286,11 @@ if ($level != 'guru') {
       //echo "<script type='text/javascript'>alert('$tanggal');</script>";    
           $nama=$d['nama'];
       // echo "<script type='text/javascript'>alert('$nama');</script>";
-          $anu=$_POST[$nama];          
+          $hmm=$d['nama'].'keterangan';
+          $anu=$_POST[$nama];    
       // echo "<script type='text/javascript'>alert('$anu');</script>";
-          $keterangan=$d['keterangan'];
-          $sakit="0";
+          $keterangan=$_POST[$hmm];
+          // echo "<script type='text/javascript'>alert('$keterangan');</script>";$sakit="0";
           $izin="0";
           $alfa="0";
           $hadir="0";
@@ -288,11 +310,13 @@ if ($level != 'guru') {
       // echo "<script type='text/javascript'>alert('$izin');</script>";
       // echo "<script type='text/javascript'>alert('$hadir');</script>";
           //$keterangan=$_POST['keterangan'];
-          $query=mysql_query("UPDATE `absensi` SET  `tanggal` = '$tanggal', `kelas` = '$kelas', `nama` = '$nama', `sakit` = '$sakit', `izin` = '$izin', `alfa` = '$alfa', `hadir` = '$hadir' WHERE `absensi`.`id_absen` ='$id_absen'");
+          $query=mysql_query("UPDATE `absensi` SET  `tanggal` = '$tanggal', `kelas` = '$kelas', `nama` = '$nama', `sakit` = '$sakit', `izin` = '$izin', `alfa` = '$alfa', `hadir` = '$hadir',`keterangan`='$keterangan' WHERE `absensi`.`id_absen` ='$id_absen'");
           }
-
+          echo "<script type='text/javascript'>alert('sukses');window.location='absensi.php'</script>";
+            
         }
 
+            
       //"INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')";
       }
     }
