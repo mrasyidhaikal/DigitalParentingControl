@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2018 at 10:02 AM
+-- Generation Time: Nov 18, 2018 at 05:11 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -48,7 +48,9 @@ INSERT INTO `absensi` (`id_absen`, `tanggal`, `kelas`, `nama`, `sakit`, `izin`, 
 (51, '2018-11-17', 'XII RPL 1', 'Steven Salim', 1, 0, 0, 0, 'asd'),
 (52, '2018-11-17', 'XII RPL 1', 'Haikal', 0, 1, 0, 0, 'asd'),
 (53, '2018-11-27', 'XII RPL 1', 'Steven Salim', 1, 0, 0, 0, 'asdasd'),
-(54, '2018-11-27', 'XII RPL 1', 'Haikal', 0, 1, 0, 0, 'asdasd');
+(54, '2018-11-27', 'XII RPL 1', 'Haikal', 0, 1, 0, 0, 'asdasd'),
+(55, '2018-11-29', 'XII RPL 1', 'Steven Salim', 1, 0, 0, 0, 'asda'),
+(56, '2018-11-29', 'XII RPL 1', 'Haikal', 0, 1, 0, 0, 'asda');
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,27 @@ INSERT INTO `tbl_mapelrpl` (`id_mapelrpl`, `id_siswa`, `tanggal`, `bindo`, `bing
 (8, 2, 'November', 80, 70, 60, 50, 40, 30, 20, 10, 45),
 (9, 1, 'December', 90, 90, 90, 90, 90, 90, 90, 90, 90),
 (10, 1, 'January', 40, 40, 40, 40, 40, 40, 40, 40, 40),
-(13, 1, 'November', 90, 80, 90, 80, 90, 80, 90, 70, 83.75);
+(13, 1, 'November', 90, 80, 90, 80, 90, 80, 90, 70, 83.75),
+(14, 1, 'February', 80, 80, 80, 10, 20, 30, 40, 50, 60),
+(16, 1, 'March', 80, 80, 80, 80, 80, 80, 80, 80, 80),
+(17, 1, 'April', 70, 70, 70, 70, 70, 70, 70, 70, 70),
+(18, 1, 'March', 80, 80, 80, 80, 80, 80, 80, 80, 80),
+(19, 1, 'April', 70, 70, 70, 70, 70, 70, 70, 70, 70),
+(20, 1, 'June', 50, 50, 50, 50, 50, 50, 50, 50, 50),
+(21, 1, 'July', 100, 100, 100, 100, 100, 100, 100, 100, 100),
+(22, 1, 'August', 95, 95, 95, 95, 95, 95, 95, 95, 95),
+(23, 1, 'September', 80, 80, 80, 80, 80, 80, 80, 80, 80),
+(24, 1, 'October', 85, 85, 85, 85, 85, 85, 85, 85, 85),
+(25, 2, 'January', 90, 90, 90, 90, 90, 90, 90, 90, 90),
+(26, 2, 'February', 95, 95, 95, 95, 95, 95, 95, 95, 95),
+(27, 2, 'March', 91, 91, 91, 91, 91, 91, 91, 91, 91),
+(28, 2, 'April', 98, 98, 98, 98, 98, 98, 98, 98, 98),
+(29, 2, 'May', 97, 97, 97, 97, 97, 97, 97, 97, 97),
+(30, 2, 'June', 90, 90, 90, 90, 90, 90, 90, 90, 90),
+(31, 2, 'July', 97, 97, 97, 97, 97, 97, 97, 97, 97),
+(32, 2, 'August', 90, 90, 90, 90, 90, 90, 90, 90, 90),
+(33, 2, 'September', 89, 89, 89, 89, 89, 89, 89, 89, 89),
+(34, 2, 'December', 97, 97, 97, 97, 97, 97, 97, 97, 97);
 
 -- --------------------------------------------------------
 
@@ -152,7 +174,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id_user`, `nama_user`, `username`, `password`, `level`, `foto`, `email`, `nohp`) VALUES
 (1, '', 'arka', 'arka', 'guru', '../parent/foto/5befde8ba1bfd.jpg', 'arkademy@gmail.com', '08213123'),
 (2, '', 'demy', '123', 'parent', '../parent/foto/5befdfcb054e8.jpg', '2113@gmail', '324234'),
-(4, 'admin', 'admin', 'admin', 'admin', 'aadsas', 'stevenlim2306@gmail.com', '546456'),
+(3, 'parent', 'parent', '123', 'parent', '', 'HaikalBisma@gmail.com', '012312'),
+(4, 'admin', 'admin', 'admin', 'admin', '', 'stevenlim2306@gmail.com', '546456'),
 (10, '', 'haikal', '123', 'guru', '../parent/foto/5beff7f7372da.jpg', '1232dsf@asd', '123123');
 
 --
@@ -198,7 +221,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absensi`
 --
 ALTER TABLE `absensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `pengumuman`
@@ -210,13 +233,13 @@ ALTER TABLE `pengumuman`
 -- AUTO_INCREMENT for table `tbl_mapelrpl`
 --
 ALTER TABLE `tbl_mapelrpl`
-  MODIFY `id_mapelrpl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_mapelrpl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

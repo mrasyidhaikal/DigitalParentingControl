@@ -140,6 +140,8 @@ if ($level != 'parent') {
     
 <div class="col-sm-2" style="margin-top:25px; margin-left:-15px;">
 <button type="submit" class="btn btn-primary" name="tampilbulan" ><i class="fa fa-search"></i> Tampilkan</button>
+
+
         </form>
        </div>
     </div>
@@ -152,7 +154,7 @@ if ($level != 'parent') {
     <div class="row">
     <?php
     if (isset($_POST['tampilbulan'])){
-     $bulan = $_POST['bulan'];
+      $bulan = $_POST['bulan'];
      $query2 = mysql_query("SELECT * From tbl_mapelrpl where tanggal LIKE '%$bulan%' and id_siswa = $id_siswa ");
      while ($row = mysql_fetch_array($query2)) {
       
@@ -170,8 +172,11 @@ if ($level != 'parent') {
 
       ?>
       
+
+      
     	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<div class="offer offer-danger">
+      
           
 				<div class="shape">
 					<div class="shape-text">
