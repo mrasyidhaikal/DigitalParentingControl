@@ -74,7 +74,7 @@ if ($level != 'admin') {
     <div class="row">
   
        <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
-      <h2><i class="fas fa-user-plus"></i>Input Siswa</h2>
+      <h2><i class="fas fa-user-plus"></i> Input Siswa</h2>
 
 
   <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
