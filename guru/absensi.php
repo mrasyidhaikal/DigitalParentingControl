@@ -31,15 +31,7 @@ if ($level != 'guru') {
       <div class="c-header-icon js-hamburger">
         <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
       </div>
-      <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-bell"></i>
-        <div class="c-dropdown c-dropdown--notifications">
-          <div class="c-dropdown__header"></div>
-          <div class="c-dropdown__content"></div>
-        </div>
-      </div>
-      <div class="c-search">
-        <input class="c-search__input u-input" placeholder="Search..." type="text"/>
-      </div>
+      
       <div class="header-icons-group">
         <a href="../logout.php"><div class="c-header-icon logout"><i class="fa fa-power-off"></i></a></div>
       </div>
@@ -276,8 +268,8 @@ if ($level != 'guru') {
               $query=mysql_query("INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`,`keterangan`) VALUES ( '$tanggal', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir','$keterangan')");
 
             }
-            echo "<script type='text/javascript'>alert('sukses');window.location='absensi.php'</script>";
-              
+          echo "<script type='text/javascript'>alert('sukses');window.location='absensi.php'</script>";
+            
             //"INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')"; 
       }else{
         while($d = mysql_fetch_array($data)){
@@ -334,69 +326,6 @@ if ($level != 'guru') {
 
 
 
-  </div> 
-            </div>
-        </a>
-    </div>
-      <div class="row">
-
-        <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-         Messages
-        </div>        
-                
-              <div class="panel-body"> 
-                <div class="alert alert-success">
-                  <strong>Well done!</strong> You successfully read this important alert message.
-                </div>
-                <div class="alert alert-info">
-                  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-                </div>
-                <div class="alert alert-warning">
-                  <strong>Warning!</strong> Best check yo self, you're not looking too good.
-                </div>
-                <div class="alert alert-danger">
-                  <strong>Oh snap!</strong> Change a few things up and try submitting again.
-                </div>
-              </div>
-        </div>
-      </div>            
-        </div>                
-                  
-  </div>
-  <div class="container"> 
-    <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
-        </tr>
-    </thead>
-    
-    <tbody>
-        <tr>
-            <td>Tiger Nixon</td>
-            <td>System Architect</td>
-            <td>Edinburgh</td>
-            <td>61</td>
-            <td>2011/04/25</td>
-            <td>$320,800</td>
-        </tr>
-        <tr>
-            <td>Garrett Winters</td>
-            <td>Accountant</td>
-            <td>Tokyo</td>
-            <td>63</td>
-            <td>2011/07/25</td>
-            <td>$170,750</td>
-        </tr>
-     
-  </div>   
 </main>
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 

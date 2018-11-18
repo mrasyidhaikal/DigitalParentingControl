@@ -33,15 +33,7 @@ if ($level != 'parent') {
       <div class="c-header-icon js-hamburger">
         <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
       </div>
-      <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-bell"></i>
-        <div class="c-dropdown c-dropdown--notifications">
-          <div class="c-dropdown__header"></div>
-          <div class="c-dropdown__content"></div>
-        </div>
-      </div>
-      <div class="c-search">
-        <input class="c-search__input u-input" placeholder="Search..." type="text"/>
-      </div>
+     
 
        
       <div class="header-icons-group">
@@ -131,7 +123,7 @@ if ($level != 'parent') {
               
                // End Pagination Logic
 
-                $query = mysql_query("SELECT * FROM pengumuman JOIN users ON pengumuman.id_user = users.id_user LIMIT $awaldata, $jumlahdata_per_page
+                $query = mysql_query("SELECT * FROM pengumuman JOIN users  ON pengumuman.id_user = users.id_user ORDER BY `id_pengumuman` DESC LIMIT $awaldata, $jumlahdata_per_page
                   ");
                
                 while ($row = mysql_fetch_array($query)){
@@ -157,7 +149,7 @@ if ($level != 'parent') {
                           </h4>
                           <p class="summary"><?php echo $row['isi']; ?></p>
                           <br>
-                            <span class="media-meta pull-right"><a href="../<?php echo $row['file']; ?>">Download File <i class="fas fa-file-download"></i></a></span>
+                            <span class="media-meta pull-right"><a href="<?php echo $row['file']; ?>">Download File <i class="fas fa-file-download"></i></a></span>
                         </div>
                       </div>
                     </td>
@@ -220,6 +212,7 @@ if ($level != 'parent') {
 </main>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='https://use.fontawesome.com/2188c74ac9.js'></script>
 <script src="script.js"></script>
 <script type="text/javascript">
   

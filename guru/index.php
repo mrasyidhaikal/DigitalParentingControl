@@ -35,15 +35,8 @@ if ($level != 'guru') {
       <div class="c-header-icon js-hamburger">
         <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
       </div>
-      <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-bell"></i>
-        <div class="c-dropdown c-dropdown--notifications">
-          <div class="c-dropdown__header"></div>
-          <div class="c-dropdown__content"></div>
-        </div>
-      </div>
-      <div class="c-search">
-        <input class="c-search__input u-input" placeholder="Search..." type="text"/>
-      </div>
+      
+     
       <div class="header-icons-group">
         <div class="c-header-icon logout"><a href="../logout.php"><i class="fa fa-power-off"></a></i></div>
       </div>
@@ -133,7 +126,7 @@ if ($level != 'guru') {
 
                       <div class="form-group">        
                       <label class="form-label">File Pengumuman</label>
-                      <input type="file" name="ddf" class="form-control"   required="required"/>
+                      <input type="file" name="pdf" class="form-control"   required="required"/>
                       </div>
                       </div>
 
@@ -162,11 +155,13 @@ if (isset($_POST['kirim'])) {
     $isi  = $_POST['isi'];
     $tanggal = date("Y-m-d H:i:s");
     $id_user =$_SESSION['id_user']; 
-    $fl_name=$_FILES['ddf']['name'];
-    $tmp=$_FILES['ddf']['tmp_name'];
+
+
+    $fl_name=$_FILES['pdf']['name'];
+    $tmp=$_FILES['pdf']['tmp_name'];
 
     // Validasi
-    $ekstensi=['doc','pdf','jpg','jpeg','png'];
+    $ekstensi=['docx','pdf','doc'];
     $nama = explode('.', $fl_name);
     $nama=strtolower(end($nama));
     if (!in_array($nama, $ekstensi)) {
@@ -174,14 +169,14 @@ if (isset($_POST['kirim'])) {
   window.location='index.php'</script>";
     }
     else{
-       $baru = uniqid();
+      $baru = uniqid();
                 $baru .='.';
                 $baru .=$nama;
 
                 $path="../file/".$baru;
-                $nama="file/".$baru;
+               
                 move_uploaded_file($tmp, $path);
-      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,'$id_user', '$judul', '$nama', '$isi', '$tanggal');");
+      $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,'$id_user', '$judul', '$path', '$isi', '$tanggal');");
       
       
     }
@@ -214,7 +209,7 @@ if (isset($_POST['kirim'])) {
         <tr>
             <td><?php echo $row['id_pengumuman']; ?></td>
             <td><?php echo $row['judul']; ?></td>
-            <td><a href="../<?php echo $row['file']; ?>">Download File</a></td>
+            <td><a href="<?php echo $row['file']; ?>">Download File</a></td>
             <td><?php echo $row['isi']; ?></td>
             <td><?php echo $row['tanggal']; ?></td>
            <td><a href="index.php?id=<?php echo $row['id_pengumuman']; ?>" class="btn btn-danger">Hapus</a></td>

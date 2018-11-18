@@ -31,15 +31,6 @@ if ($level != 'parent') {
       <div class="c-header-icon js-hamburger">
         <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
       </div>
-      <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-bell"></i>
-        <div class="c-dropdown c-dropdown--notifications">
-          <div class="c-dropdown__header"></div>
-          <div class="c-dropdown__content"></div>
-        </div>
-      </div>
-      <div class="c-search">
-        <input class="c-search__input u-input" placeholder="Search..." type="text"/>
-      </div>
       <?php 
 include '../koneksi.php';
 $idd = $_SESSION['id_user'];
@@ -102,7 +93,7 @@ $row = mysql_fetch_array($query);
 <br>
   <div class="col-md-3 ">
     <form action="" method="GET">        
-            <select name="bulan" class="form-control">  
+            <select name="bulan" class="form-control" >  
               <option value='01'>January</option>
               <option value='02'>February</option>
               <option value='03'>Maret</option>
@@ -163,7 +154,7 @@ $row = mysql_fetch_array($query);
 
       $no = 1;
       $no1=0;
-      echo "<script type='text/javascript'>alert('$kelas');</script>";
+      // echo "<script type='text/javascript'>alert('$kelas');</script>";
       $data = mysql_query("SELECT * FROM `absensi` WHERE nama='$namanya' and tanggal LIKE '".$b."-".$a."%' ORDER BY `tanggal` ASC");
 
        while($d = mysql_fetch_array($data))
@@ -210,78 +201,84 @@ $row = mysql_fetch_array($query);
       
     <?php
     //SELECT * FROM `absensi` WHERE `tanggal` LIKE '2018-11%' and nama='steven' ORDER BY `absensi`.`tanggal` ASC
+    // $panggilnama = $_SESSION['id_user'];
+    // $query1 = mysql_query("SELECT * from tbl_siswa where id_user = $panggilnama"); 
+    // $carinama = mysql_fetch_array($query1);
+    // $id_siswa = $carinama['id_siswa'];
+    // $query = mysql_query("SELECT * from tbl_mapelrpl where id_siswa = $id_siswa");
+    // $namanya=$carinama['nama_siswa'];
 
-    $data = mysql_query("SELECT * FROM `absensi` WHERE `tanggal` LIKE '2018-11%' and nama='steven' ORDER BY `absensi`.`tanggal` ASC");
+    // $data = mysql_query("SELECT * FROM `absensi` WHERE `tanggal` LIKE '2018-11%' and nama='$namanya' ORDER BY `absensi`.`tanggal` ASC");
     //$date = '15-12-2016';
     //$nameOfDay = date('l', strtotime($date));
     //echo $nameOfDay;
-      $d = mysql_fetch_array($data);
-      $f = mysql_num_rows($data);
-      $a=0;
-      $b=1;
-      $c=1;
-      $e=0;
-      $date = $d['tanggal'];
+      // $d = mysql_fetch_array($data);
+      // $f = mysql_num_rows($data);
+      // $a=0;
+      // $b=1;
+      // $c=1;
+      // $e=0;
+      // $date = $d['tanggal'];
       
-      $nameOfDay = date('l', strtotime($date));
+      // $nameOfDay = date('l', strtotime($date));
       
-      echo "<script type='text/javascript'>alert('$nameOfDay');</script>";
+      // echo "<script type='text/javascript'>alert('$nameOfDay');</script>";
       
-      if ($nameOfDay=="Monday") {
-        $e=1;
-      }elseif ($nameOfDay=="Tuesday") {
-        $e=2;
-      }elseif ($nameOfDay=="Wednesday") {
-        $e=3;
-      }elseif ($nameOfDay=="Thursday") {
-        $e=4;
-      }elseif ($nameOfDay=="Friday") {
-        $e=5;
-      }elseif ($nameOfDay=="Saturday") {
-        $e=6;
-      }elseif ($nameOfDay=="Sunday") {
-        $e=7;
-      }
+      // if ($nameOfDay=="Monday") {
+      //   $e=1;
+      // }elseif ($nameOfDay=="Tuesday") {
+      //   $e=2;
+      // }elseif ($nameOfDay=="Wednesday") {
+      //   $e=3;
+      // }elseif ($nameOfDay=="Thursday") {
+      //   $e=4;
+      // }elseif ($nameOfDay=="Friday") {
+      //   $e=5;
+      // }elseif ($nameOfDay=="Saturday") {
+      //   $e=6;
+      // }elseif ($nameOfDay=="Sunday") {
+      //   $e=7;
+      // }
 
-      echo "<script type='text/javascript'>alert('$e');</script>";
+      // echo "<script type='text/javascript'>alert('$e');</script>";
       
-      while ($a < 42) 
-      {
-        $date = $d['tanggal'];
+      // while ($a < 42) 
+      // {
+      //   $date = $d['tanggal'];
       
-        $nameOfDay = date('l', strtotime($date));
+      //   $nameOfDay = date('l', strtotime($date));
       
-        echo "<script type='text/javascript'>alert('$nameOfDay');</script>";
+      //   echo "<script type='text/javascript'>alert('$nameOfDay');</script>";
       
-        if ($e==0) {
-            if ($d['izin']==1) {
-                echo "<td style='background-color: yellow'>$c</td>"; 
-            }elseif ($d['sakit']==1) {
-                echo "<td style='background-color: blue'>$c</td>";
-            }elseif ($d['alfa']==1) {
-                echo "<td style='background-color: red'>$c</td>";
-            }elseif ($d['hadir']==1) {
-                echo "<td style='background-color: green'>$c</td>";
-            }
-            if ($b==7) {
-              echo("</tr><tr>");
-              $b=0;
-            }
-            $b++;
-            $a++;
-            $c++;
-        }else{
-          echo "<td></td>";
-          if ($b==7) {
-              echo("</tr><tr>");
-              $b=0;
-          }
-          $e--;
-          $b++;
-        }
-      }
-      echo "</tr>";
-      ?>
+      //   if ($e==0) {
+      //       if ($d['izin']==1) {
+      //           echo "<td style='background-color: yellow'>$c</td>"; 
+      //       }elseif ($d['sakit']==1) {
+      //           echo "<td style='background-color: blue'>$c</td>";
+      //       }elseif ($d['alfa']==1) {
+      //           echo "<td style='background-color: red'>$c</td>";
+      //       }elseif ($d['hadir']==1) {
+      //           echo "<td style='background-color: green'>$c</td>";
+      //       }
+      //       if ($b==7) {
+      //         echo("</tr><tr>");
+      //         $b=0;
+      //       }
+      //       $b++;
+      //       $a++;
+      //       $c++;
+      //   }else{
+      //     echo "<td></td>";
+      //     if ($b==7) {
+      //         echo("</tr><tr>");
+      //         $b=0;
+      //     }
+      //     $e--;
+      //     $b++;
+      //   }
+      // }
+      // echo "</tr>";
+      // ?>
 
   </table> -->
 
@@ -289,7 +286,9 @@ $row = mysql_fetch_array($query);
   <!--  ---------------------------------------------------------   -->
 
 </main>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://use.fontawesome.com/2188c74ac9.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 <script src="script.js"></script>
 <script type="text/javascript">
   

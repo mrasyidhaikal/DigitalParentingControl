@@ -52,6 +52,7 @@ a
     <meta charset="UTF-8">
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" href="../style.css">
+    
     <link rel="stylesheet" type="text/css" href="../font/css/all.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
@@ -66,9 +67,7 @@ a
       <div class="c-header-icon js-hamburger">
         <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
       </div>
-      <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-bell"></i>
-        
-      </div>
+   
      
 
        
@@ -168,13 +167,17 @@ a
               <h3>Nilai</h3>
             </div>
               <?php 
-              $query = mysql_query("SELECT * FROM ni")
+               $panggilnama = $_SESSION['id_user'];
+              $bulan = date('F');
+              $query = mysql_query("SELECT * FROM tbl_mapelrpl WHERE id_siswa = '$panggilnama' AND tanggal = '$bulan'  ");
+              $data = mysql_fetch_array($query);
                ?>
             <div class="text">
-              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+              <P>Nilai Rata-Rata Bulan : <?php echo $bulan ?></P>
+              <P>Nilai Rata-Rata : <?php echo $data['avg'] ?></P>
             </div>
                         
-            <a href="nilaimurid.php" class="btn btn-primary">Learn More</a>
+            <a href="nilaimurid.php" class="btn btn-primary" style="margin-top:20px;">Learn More</a>
                         
            </div>
         </div>   
@@ -196,7 +199,7 @@ a
               <span>Total Pengumuman:<?php echo $nilai; ?></span>
             </div> 
                         
-            <a href="index.php" class="btn btn-primary">Learn More</a>
+            <a href="index.php" class="btn btn-primary" style="margin-top:60px;">Learn More</a>
                         
            </div>
         </div>   
@@ -211,6 +214,7 @@ a
 </main>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='https://use.fontawesome.com/2188c74ac9.js'></script>
 <script src="script.js"></script>
 <script type="text/javascript">
   
