@@ -267,7 +267,8 @@ if ($level != 'guru') {
             <td><?php echo $row['pbo']; ?></td>
             <td><?php echo $row['basisdata']; ?></td>
             <td><?php echo $row['avg'] ?></td>
-            <td><a href="nilai.php?delete=<?php echo $row['id_mapelrpl']; ?>" class="btn btn-danger">Hapus</a>
+            <td><a href="nilai.php?delete=<?php echo $row['id_mapelrpl']; ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+              <a href="editnilai.php?update=<?php echo $row['id_mapelrpl']; ?>" class="btn btn-primary">  <i class="fa fa-edit"></i></a>
             </td>
         </tr>
         <?php } ?>

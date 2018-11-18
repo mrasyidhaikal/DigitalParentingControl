@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="parent.css">
 
 <?php 
+error_reporting(0);
 session_start();
 $level = $_SESSION['level'];
 if ($level != 'parent') {
@@ -44,7 +45,7 @@ if ($level != 'parent') {
   </header>
   <div class="l-sidebar">
     <div class="logo">
-      <div class="logo__txt"><img src="../img/mhs.png" class="img-responsive" width="43px"></div>
+      <div class="logo__txt"><a href="info.php"><img src="../img/mhs.png" class="img-responsive" width="43px"></a></div>
     </div>
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">

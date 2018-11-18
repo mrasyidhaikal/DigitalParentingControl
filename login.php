@@ -14,6 +14,7 @@
 </style></head>
 <link rel="stylesheet" type="text/css" href="font/css/all.css">
 <?php
+error_reporting(0);
 session_start();
 $level = $_SESSION['level'];
 if ($level == 'parent') {

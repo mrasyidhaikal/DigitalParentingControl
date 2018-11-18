@@ -44,7 +44,7 @@ if ($level != 'parent') {
 
   <div class="l-sidebar">
     <div class="logo">
-      <div class="logo__txt"><img src="../img/mhs.png" class="img-responsive" width="43px"></div>
+      <div class="logo__txt"><a href="info.php"><img src="../img/mhs.png" class="img-responsive" width="43px"></a></div>
     </div>
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
@@ -70,12 +70,13 @@ if ($level != 'parent') {
             </div>
           </li>
         </a>
-
+        <a href="akun.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
               <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
             </div>
           </li>
+          </a>
         </ul>
       </nav>
     </div>

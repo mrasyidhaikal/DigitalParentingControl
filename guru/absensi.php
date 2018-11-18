@@ -38,6 +38,7 @@ if ($level != 'guru') {
     </div>
   </header>
   <div class="l-sidebar">
+   
     <div class="logo">
       <div class="logo__txt"><img src="../img/mhs.png" class="img-responsive" width="43px"></div>
     </div>
@@ -65,11 +66,13 @@ if ($level != 'guru') {
             </div>
           </li>
         </a>
+         <a href="akun.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
             <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
               <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
             </div>
           </li>
+        </a>
         </ul>
       </nav>
     </div>

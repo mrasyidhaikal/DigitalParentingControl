@@ -32,15 +32,6 @@ if ($level != 'admin') {
       <div class="c-header-icon js-hamburger">
         <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
       </div>
-      <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-bell"></i>
-        <div class="c-dropdown c-dropdown--notifications">
-          <div class="c-dropdown__header"></div>
-          <div class="c-dropdown__content"></div>
-        </div>
-      </div>
-      <div class="c-search">
-        <input class="c-search__input u-input" placeholder="Search..." type="text"/>
-      </div>
       <div class="header-icons-group">
         <div class="c-header-icon logout"><a href="../logout.php"><i class="fa fa-power-off"></a></i></div>
       </div>
@@ -53,30 +44,24 @@ if ($level != 'admin') {
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
         <ul class="u-list">
-        <a href="../guru/index.php">
-          <li class="c-menu__item is-active" data-toggle="tooltip" title="Pengumuman">
-            <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
-              <div class="c-menu-item__title"><span>Pengumuman</span></div>
+
+          <a href="akun.php">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="User">
+            <div class="c-menu__item__inner"><i class="fa fa-user"></i>
+              <div class="c-menu-item__title"><span>User</span></div>
             </div>
           </li>
-        </a>
+
           <a href="siswa.php">
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Siswa">
+          <li class="c-menu__item is-active" data-toggle="tooltip" title="Siswa">
             <div class="c-menu__item__inner"><i class="fa fa-users"></i>
               <div class="c-menu-item__title"><span>Siswa</span></div>
             </div>
           </li>
           </a>
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
-            <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
-              <div class="c-menu-item__title"><span>Absensi</span></div>
-            </div>
+
           </li>
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
-            <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
-              <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
-            </div>
-          </li>
+          </a>
         </ul>
       </nav>
     </div>
@@ -99,7 +84,7 @@ $data = mysql_fetch_array($query);
     <div class="row">
   
        <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
-      <h2><i class="fas fa-users"></i>Edit Akun</h2>
+      <h2><i class="fas fa-user-edit  "></i>Edit Siswa</h2>
 
       <div class="col-sm-10" style="margin-left: 10px;">        
       

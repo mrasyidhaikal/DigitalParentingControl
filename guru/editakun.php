@@ -12,6 +12,7 @@ if ($level != 'guru') {
 }
  ?>
 
+
 <!DOCTYPE html>
 <html lang="en" >
 
@@ -44,14 +45,14 @@ if ($level != 'guru') {
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
         <ul class="u-list">
-        <a href="../guru/index.php">
+        <a href="guru/index.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengumuman">
             <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
               <div class="c-menu-item__title"><span>Pengumuman</span></div>
             </div>
           </li>
         </a>
-          <a href="nilai.php">
+          <a href="nilaimurid.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>
@@ -74,7 +75,13 @@ if ($level != 'guru') {
       </nav>
     </div>
   </div>
+<?php 
+include '../koneksi.php';
+$id_user = $_GET['update'];
+$query = mysql_query("SELECT * FROM users WHERE id_user = $id_user");
+$data = mysql_fetch_array($query);
 
+ ?>
   
 <main class="l-main">
   <div class="content-wrapper content-wrapper--with-bg">
@@ -82,13 +89,10 @@ if ($level != 'guru') {
     <div class="row">
   
        <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
-      <h2><i class="fas fa-users"></i>Registrasi Akun Orangtua</h2>
+      <h2><i class="fas fa-users"></i>Edit Akun</h2>
 
 
-  <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
   
-  <div class="sembunyi">
-    <div class="row">
       <div class="col-sm-10" style="margin-left: 10px;">
         
       
@@ -101,32 +105,35 @@ if ($level != 'guru') {
             
                       <div class="form-group">        
                       <label class="form-label">Username</label>
-                      <input type="text" name="username" class="form-control" placeholder="Username" required="required"/>
+                      <input type="text" value="<?php echo $data['username'] ?>" name="username" class="form-control" placeholder="Username" required="required"/>
                       </div>     
 
                       <div class="form-group">        
                       <label class="form-label">Password</label>
-                      <input type="password" name="pass" class="form-control"  required="required"/>
+                      <input type="password" value="<?php echo $data['password'] ?>" name="pass" class="form-control"  required="required"/>
                       </div>  
                       <div class="form-group">        
                       <label class="form-label">Confirm Password</label>
-                      <input type="password" name="pass2" class="form-control"  required="required"/>
+                      <input type="password" name="pass2" class="form-control" value="<?php echo $data['password'] ?>"  required="required"/>
                       </div>
-                     
+                     <div class="form-group">
+                       <label class="form-label">Level</label>
+                       <select name="level" class="form-control">
+                        <option value="<?php echo $data['level'] ?>"><?php echo $data['level'] ?></option>
+                       
+                       </select>
+                     </div>
 
                       <div class="form-group">        
                       <label class="form-label">Email</label>
-                      <input type="email" name="email" class="form-control" placeholder="Email" required="required"/>
+                      <input type="email" name="email" class="form-control" value="<?php echo $data['email'] ?>" placeholder="Email" required="required"/>
                       </div>
 
                       <div class="form-group">        
                       <label class="form-label">No Hp</label>
-                      <input type="tel" name="nohp" class="form-control" placeholder="No Hp" required="required"/>
+                      <input type="tel" value="<?php echo $data['nohp'] ?>" name="nohp" class="form-control" placeholder="No Hp" required="required"/>
                       </div>
-                      <div class="form-group">        
-                      <label class="form-label">Foto</label>
-                      <input type="file" name="foto" class="form-control" placeholder="No Hp" required="required"/>
-                      </div>
+                    
 
                       <div class="form-group">
                       <input type="submit" name="kirim" class="btn btn-primary btn-lg"/>
@@ -152,33 +159,21 @@ if (isset($_POST['kirim'])) {
     $pass  = $_POST['pass'];
     $pass2 = $_POST['pass2'];
     $id = uniqid();
+    $level = $_POST['level'];
     $email = $_POST['email'];
     $nohp = $_POST['nohp'];
+
     $tanggal = date("Y-m-d h:i:s");
                   
-    $fl_name=$_FILES['foto']['name'];
-    $tmp=$_FILES['foto']['tmp_name'];
-
-    // Validasi
-    $ekstensi=['jpeg','png','jpg','gif'];
-    $nama = explode('.', $fl_name);
-    $nama=strtolower(end($nama));
-    if (!in_array($nama, $ekstensi)) {
-      echo "<script>window.alert('File Tidak Cocok');
-  window.location='akun.php'</script>";
-    }
-    elseif ($pass != $pass2) {
+   
+    if ($pass != $pass2) {
     echo "<script>window.alert('Password Tidak Sama');
   window.location='akun.php'</script>";    }
     else{
-       $baru = uniqid();
-                $baru .='.';
-                $baru .=$nama;
-
-                $path="../parent/foto/".$baru;
+      
                
-                move_uploaded_file($tmp, $path);
-      $query =mysql_query("INSERT INTO `arkademy`.`users` (`id_user`, `username`, `password`, `level`, `foto`, `email`, `nohp`) VALUES ('$id', '$username', '$pass', 'parent', '$path', '$email', '$nohp')").mysql_error();
+               
+      $query =mysql_query("UPDATE `arkademy`.`users` SET `id_user` = '$id', `username` = '$username', `password` = '$pass', `email` = '$email', `nohp` = '$nohp' WHERE `users`.`id_user` = '$id_user'").mysql_error();
       echo "<script>window.alert('Input Success');
   window.location='akun.php'</script>";
 
@@ -188,56 +183,9 @@ if (isset($_POST['kirim'])) {
   }
  ?>
                   
-  <div class="container"> 
-    <table id="tabel" class="table table-striped table-bordered" width="100%" cellspacing="0">
 
-    <thead>
-        <tr>
-            <th>Foto</th>
-            <th>Id User</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Level</th>
-            
-            <th>Email</th>
-            <th>No Hp</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <?php 
-      include '../koneksi.php';
-      $q = mysql_query("SELECT * FROM users WHERE level='parent' ");
-      while ($row = mysql_fetch_array($q)) {
-    
-     ?>
-    <tbody>
-        <tr>
-           <td><img width="100px" src="<?php echo $row['foto']; ?>"> </td>
-            <td><?php echo $row['id_user']; ?></td>
-            <td><?php echo $row['username']; ?></td>
-           
-            <td><?php echo $row['password']; ?></td>
-            <td><?php echo $row['level']; ?></td>
-            <td><?php echo $row['email']; ?></td>
-            <td><?php echo $row['nohp']; ?></td>
-           <td><a href="akun.php?delete=<?php echo $row['id_user']; ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
-           <a href="editakun.php?update=<?php echo $row['id_user']; ?>" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
-           </td>
-        </tr>
-        <?php } ?>
-</div>
-  </div>   
-</main>
-<?php 
-include '../koneksi.php';
-if (isset($_GET['delete'])) {
-  $id =$_GET['delete'];
- $hapus = mysql_query("DELETE FROM `arkademy`.`users` WHERE `users`.`id_user` = '$id'");
-  echo "<script>window.alert('Delete Success');
-  window.location='akun.php'</script>";
-} 
 
-?>
+   
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
 <!-- Data tables -->

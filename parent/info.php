@@ -85,7 +85,7 @@ a
       <nav class="c-menu js-menu">
         <ul class="u-list">
           <a href="index.php">
-          <li class="c-menu__item is-active" data-toggle="tooltip" title="Pengumuman">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengumuman">
             <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
               <div class="c-menu-item__title"><span>Pengumuman</span></div>
             </div>
@@ -100,7 +100,7 @@ a
 
          <a href="absensi.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
-            <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
+            <div class="c-menu__item__inner"><i class="fa fa-calendar-alt"></i>
               <div class="c-menu-item__title"><span>Absensi</span></div>
             </div>
           </li>
@@ -152,7 +152,7 @@ a
               <p>Izin :<?php echo $hasil3 ?></p>
             </div>
                         
-            <a href="absensi.php" class="btn btn-primary">Learn More</a>
+            <a href="absensi.php" class="btn btn-primary">Selengkapnya</a>
                         
            </div>
         </div>   
@@ -167,7 +167,7 @@ a
               <h3>Nilai</h3>
             </div>
               <?php 
-               $panggilnama = $_SESSION['id_user'];
+               $panggilnama = $_SESSION['id_siswa'];
               $bulan = date('F');
               $query = mysql_query("SELECT * FROM tbl_mapelrpl WHERE id_siswa = '$panggilnama' AND tanggal = '$bulan'  ");
               $data = mysql_fetch_array($query);
@@ -177,7 +177,7 @@ a
               <P>Nilai Rata-Rata : <?php echo $data['avg'] ?></P>
             </div>
                         
-            <a href="nilaimurid.php" class="btn btn-primary" style="margin-top:20px;">Learn More</a>
+            <a href="nilaimurid.php" class="btn btn-primary" style="margin-top:20px;">Selengkapnya</a>
                         
            </div>
         </div>   
@@ -199,7 +199,7 @@ a
               <span>Total Pengumuman:<?php echo $nilai; ?></span>
             </div> 
                         
-            <a href="index.php" class="btn btn-primary" style="margin-top:60px;">Learn More</a>
+            <a href="index.php" class="btn btn-primary" style="margin-top:60px;">Selengkapnya</a>
                         
            </div>
         </div>   
