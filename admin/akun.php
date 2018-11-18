@@ -158,14 +158,13 @@ if ($level != 'admin') {
     </form>
     </div>
   </div>
-  <?php 
+<?php 
 if (isset($_POST['kirim'])) {
   include '../koneksi.php';
     $username = $_POST['username'];
     $pass  = $_POST['pass'];
     $pass2 = $_POST['pass2'];
-   
-    $level = $_POST['level'];
+        $level = $_POST['level'];
     $email = $_POST['email'];
     $nohp = $_POST['nohp'];
     $tanggal = date("Y-m-d h:i:s");
@@ -189,10 +188,12 @@ if (isset($_POST['kirim'])) {
                 $baru .='.';
                 $baru .=$nama;
 
-                $path="gbr/".$baru;
+                $path="../parent/foto/".$baru;
                
                 move_uploaded_file($tmp, $path);
-
+      $query =mysql_query("INSERT INTO `arkademy`.`users` (`username`, `password`, `level`, `foto`, `email`, `nohp`) VALUES ( '$username', '$pass', '$level', '$path', '$email', '$nohp')").mysql_error();
+      echo "<script>window.alert('Input Success');
+  window.location='akun.php'</script>";
 
     }
 
@@ -235,11 +236,8 @@ if (isset($_POST['kirim'])) {
             <td><?php echo $row['nohp']; ?></td>
            <td><a href="akun.php?delete=<?php echo $row['id_user']; ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
            <a href="editakun.php?update=<?php echo $row['id_user']; ?>" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
-           <br>
-           <br>
-           <center>
-           <a href="editfoto.php?update=<?php echo $row['id_user']; ?>" class="btn btn-primary"><i class="fa fa-image"></i> Edit Foto</a>
-           </center>
+    
+         
            </td>
            
         </tr>
@@ -257,7 +255,9 @@ if (isset($_GET['delete'])) {
 } 
 
 ?>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://use.fontawesome.com/2188c74ac9.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://use.fontawesome.com/2188c74ac9.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
 <!-- Data tables -->
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
