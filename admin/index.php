@@ -14,6 +14,7 @@ if ($level != 'admin') {
 
 <!DOCTYPE html>
 <html lang="en" >
+<head>
 <style type="text/css">
   
   body{
@@ -47,9 +48,7 @@ background: #f2f2f2;
 .far{
      color:#4183D7;
 }
-
 </style>
-<head>
 
     <meta charset="UTF-8">
     <title>Welcome</title>
@@ -69,15 +68,6 @@ background: #f2f2f2;
       <div class="c-header-icon js-hamburger">
         <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
       </div>
-      <div class="c-header-icon has-dropdown"><span class="c-badge c-badge--header-icon animated shake">12</span><i class="fa fa-bell"></i>
-        <div class="c-dropdown c-dropdown--notifications">
-          <div class="c-dropdown__header"></div>
-          <div class="c-dropdown__content"></div>
-        </div>
-      </div>
-      <div class="c-search">
-        <input class="c-search__input u-input" placeholder="Search..." type="text"/>
-      </div>
       <div class="header-icons-group">
         <div class="c-header-icon logout"><a href="../logout.php"><i class="fa fa-power-off"></a></i></div>
       </div>
@@ -90,40 +80,22 @@ background: #f2f2f2;
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
         <ul class="u-list">
-        <a href="../guru/index.php">
-          <li class="c-menu__item is-active" data-toggle="tooltip" title="Pengumuman">
-            <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
-              <div class="c-menu-item__title"><span>Pengumuman</span></div>
-            </div>
-          </li>
-        </a>
-          <a href="nilai.php">
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
-            <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
-              <div class="c-menu-item__title"><span>Nilai</span></div>
-            </div>
-          </li>
-          </a>
 
-          <a href="nilai.php">
-
-          <a href="absensi.php">
-
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Absensi">
-            <div class="c-menu__item__inner"><i class="fas fa-calendar-alt"></i>
-              <div class="c-menu-item__title"><span>Absensi</span></div>
-            </div>
-          </li>
-
-          </a>
           <a href="akun.php">
-
-      
-
-          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengaturan Akun">
-            <div class="c-menu__item__inner"><i class="fa fa-cogs"></i>
-              <div class="c-menu-item__title"><span>Pengaturan Akun</span></div>
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="User">
+            <div class="c-menu__item__inner"><i class="fa fa-user"></i>
+              <div class="c-menu-item__title"><span>User</span></div>
             </div>
+          </li>
+
+          <a href="siswa.php">
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Siswa">
+            <div class="c-menu__item__inner"><i class="fa fa-users"></i>
+              <div class="c-menu-item__title"><span>Siswa</span></div>
+            </div>
+          </li>
+          </a>
+
           </li>
           </a>
         </ul>
@@ -145,16 +117,20 @@ background: #f2f2f2;
                
           <div class="box-part text-center">
                         <i class="far fa-address-book fa-3x"></i>
-                        
-            <div class="title"> 
-              <h3>Siswa</h3>
+            
+            <div class="title">
+              <h3>siswa</h3>
             </div>
-                        
+              <?php 
+              include '../koneksi.php';
+              $query = mysql_query("SELECT * FROM `tbl_siswa`");
+              $nilai = mysql_num_rows($query);
+               ?>           
             <div class="text">
-              
-            </div>
-                        
-            <a href="absensi.php" class="btn btn-primary">Learn More</a>
+              <span>Total Siswa Yang Terdaftar:<?php echo $nilai; ?></span>
+            </div> 
+
+            <a href="siswa.php" class="btn btn-primary">Learn More</a>
                         
            </div>
         </div>   
@@ -166,16 +142,18 @@ background: #f2f2f2;
             <i class="fa fa-chart-bar fa-3x"></i>
                     
             <div class="title">
-              <h3>Nilai</h3>
+              <h3>Guru</h3>
             </div>
               <?php 
-             
-               ?>
+              include '../koneksi.php';
+              $query = mysql_query("SELECT * FROM `users` where level='guru'");
+              $nilai = mysql_num_rows($query);
+               ?>           
             <div class="text">
-              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-            </div>
+              <span>Total guru Yang Terdaftar:<?php echo $nilai; ?></span>
+            </div> 
                         
-            <a href="nilaimurid.php" class="btn btn-primary">Learn More</a>
+            <a href="akun.php" class="btn btn-primary">Learn More</a>
                         
            </div>
         </div>   
@@ -187,18 +165,18 @@ background: #f2f2f2;
                        <i class="fa fa-bullhorn fa-3x"></i>
                         
             <div class="title">
-              <h3>Pengumuman</h3>
+              <h3>Orang Tua</h3>
             </div>
               <?php 
               include '../koneksi.php';
-              $query = mysql_query("SELECT * FROM pengumuman");
+              $query = mysql_query("SELECT * FROM `users` where level='parent'");
               $nilai = mysql_num_rows($query);
                ?>           
             <div class="text">
-              <span>Total Pengumuman:<?php echo $nilai; ?></span>
+              <span>Total Orang Tua Yang Terdaftar:<?php echo $nilai; ?></span>
             </div> 
                         
-            <a href="index.php" class="btn btn-primary">Learn More</a>
+            <a href="akun.php" class="btn btn-primary">Learn More</a>
                         
            </div>
         </div>   
