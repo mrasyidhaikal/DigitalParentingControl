@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2018 at 05:11 PM
+-- Generation Time: Nov 24, 2018 at 04:50 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -45,12 +45,8 @@ CREATE TABLE `absensi` (
 --
 
 INSERT INTO `absensi` (`id_absen`, `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES
-(51, '2018-11-17', 'XII RPL 1', 'Steven Salim', 1, 0, 0, 0, 'asd'),
-(52, '2018-11-17', 'XII RPL 1', 'Haikal', 0, 1, 0, 0, 'asd'),
-(53, '2018-11-27', 'XII RPL 1', 'Steven Salim', 1, 0, 0, 0, 'asdasd'),
-(54, '2018-11-27', 'XII RPL 1', 'Haikal', 0, 1, 0, 0, 'asdasd'),
-(55, '2018-11-29', 'XII RPL 1', 'Steven Salim', 1, 0, 0, 0, 'asda'),
-(56, '2018-11-29', 'XII RPL 1', 'Haikal', 0, 1, 0, 0, 'asda');
+(61, '2018-11-24', 'XII RPL 1', 'Steven Salim', 1, 0, 0, 0, ''),
+(62, '2018-11-24', 'XII RPL 1', 'Haikal', 0, 1, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -76,7 +72,10 @@ INSERT INTO `pengumuman` (`id_pengumuman`, `id_user`, `judul`, `file`, `isi`, `t
 (34, '10', 'Rapat Orang Tua Sosialisasi Tata Tertib', 'file/5bf0f90083a8d.pdf', 'Diharpkan Kepada Orang Tua Siswa Hadir di rapat pada tanggal 19 November\r\n', '2018-11-18 06:30:40'),
 (35, '10', 'Hari Guru', 'file/5bf0f97d60262.pdf', 'Dibertahukan Kepada Seluruh Siswa SMK MHS menggunakan Baju Batik Di Hari Senin', '2018-11-18 06:32:45'),
 (36, '10', 'Peringatan Berdiri nya SMK MHS', 'file/5bf0fae43bc5e.pdf', 'Diharapkan Untuk Siswa Siswi SMK MHS menggunakan Alamamater Lengkap', '2018-11-18 06:38:44'),
-(63, '10', 'Rapat Orang Tua Sosialisasi ', '../file/5bf105d5ea631.pdf', 'Diharpkan Orang tua hadir tangal   18 november', '2018-11-18 07:25:25');
+(63, '10', 'Rapat Orang Tua Sosialisasi ', '../file/5bf105d5ea631.pdf', 'Diharpkan Orang tua hadir tangal   18 november', '2018-11-18 07:25:25'),
+(65, '1', 'judul', '../file/5bf92c4ca2f47.pdf', 'isi                      ', '2018-11-24 11:47:40'),
+(66, '1', 'judul', '../file/5bf92f1cf0e42.pdf', 'isi                      ', '2018-11-24 11:59:40'),
+(67, '1', 'judul', '../file/5bf9338aa1cad.pdf', 'isi                      ', '2018-11-24 12:18:34');
 
 -- --------------------------------------------------------
 
@@ -104,30 +103,36 @@ CREATE TABLE `tbl_mapelrpl` (
 --
 
 INSERT INTO `tbl_mapelrpl` (`id_mapelrpl`, `id_siswa`, `tanggal`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`, `avg`) VALUES
-(8, 2, 'November', 80, 70, 60, 50, 40, 30, 20, 10, 45),
-(9, 1, 'December', 90, 90, 90, 90, 90, 90, 90, 90, 90),
-(10, 1, 'January', 40, 40, 40, 40, 40, 40, 40, 40, 40),
-(13, 1, 'November', 90, 80, 90, 80, 90, 80, 90, 70, 83.75),
-(14, 1, 'February', 80, 80, 80, 10, 20, 30, 40, 50, 60),
-(16, 1, 'March', 80, 80, 80, 80, 80, 80, 80, 80, 80),
-(17, 1, 'April', 70, 70, 70, 70, 70, 70, 70, 70, 70),
-(18, 1, 'March', 80, 80, 80, 80, 80, 80, 80, 80, 80),
-(19, 1, 'April', 70, 70, 70, 70, 70, 70, 70, 70, 70),
-(20, 1, 'June', 50, 50, 50, 50, 50, 50, 50, 50, 50),
-(21, 1, 'July', 100, 100, 100, 100, 100, 100, 100, 100, 100),
-(22, 1, 'August', 95, 95, 95, 95, 95, 95, 95, 95, 95),
-(23, 1, 'September', 80, 80, 80, 80, 80, 80, 80, 80, 80),
-(24, 1, 'October', 85, 85, 85, 85, 85, 85, 85, 85, 85),
-(25, 2, 'January', 90, 90, 90, 90, 90, 90, 90, 90, 90),
-(26, 2, 'February', 95, 95, 95, 95, 95, 95, 95, 95, 95),
-(27, 2, 'March', 91, 91, 91, 91, 91, 91, 91, 91, 91),
-(28, 2, 'April', 98, 98, 98, 98, 98, 98, 98, 98, 98),
-(29, 2, 'May', 97, 97, 97, 97, 97, 97, 97, 97, 97),
-(30, 2, 'June', 90, 90, 90, 90, 90, 90, 90, 90, 90),
-(31, 2, 'July', 97, 97, 97, 97, 97, 97, 97, 97, 97),
-(32, 2, 'August', 90, 90, 90, 90, 90, 90, 90, 90, 90),
-(33, 2, 'September', 89, 89, 89, 89, 89, 89, 89, 89, 89),
-(34, 2, 'December', 97, 97, 97, 97, 97, 97, 97, 97, 97);
+(38, 1, 'November-19', 90, 90, 90, 90, 90, 90, 90, 90, 90),
+(39, 1, 'November-18', 80, 80, 80, 80, 80, 80, 80, 80, 80);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_raport`
+--
+
+CREATE TABLE `tbl_raport` (
+  `id_raport` int(11) NOT NULL,
+  `id_siswa` int(11) NOT NULL,
+  `semester` varchar(15) NOT NULL,
+  `bindo` double NOT NULL,
+  `binggris` double NOT NULL,
+  `matematika` double NOT NULL,
+  `sejarah` double NOT NULL,
+  `pkn` double NOT NULL,
+  `fisika` double NOT NULL,
+  `pbo` double NOT NULL,
+  `basisdata` double NOT NULL,
+  `avg` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_raport`
+--
+
+INSERT INTO `tbl_raport` (`id_raport`, `id_siswa`, `semester`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`, `avg`) VALUES
+(2, 1, 'semester1', 20, 20, 20, 20, 20, 20, 20, 20, 20);
 
 -- --------------------------------------------------------
 
@@ -172,8 +177,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `nama_user`, `username`, `password`, `level`, `foto`, `email`, `nohp`) VALUES
-(1, '', 'arka', 'arka', 'guru', '../parent/foto/5befde8ba1bfd.jpg', 'arkademy@gmail.com', '08213123'),
-(2, '', 'demy', '123', 'parent', '../parent/foto/5befdfcb054e8.jpg', '2113@gmail', '324234'),
+(1, '', 'arka', '123', 'guru', '../parent/foto/5befde8ba1bfd.jpg', 'koko.irfan123@gmail.com', '08213123'),
+(2, '', 'demy', '123', 'parent', '../parent/foto/5befdfcb054e8.jpg', 'koko.irfan123@gmail.com', '324234'),
 (3, 'parent', 'parent', '123', 'parent', '', 'HaikalBisma@gmail.com', '012312'),
 (4, 'admin', 'admin', 'admin', 'admin', '', 'stevenlim2306@gmail.com', '546456'),
 (10, '', 'haikal', '123', 'guru', '../parent/foto/5beff7f7372da.jpg', '1232dsf@asd', '123123');
@@ -201,6 +206,13 @@ ALTER TABLE `tbl_mapelrpl`
   ADD PRIMARY KEY (`id_mapelrpl`);
 
 --
+-- Indexes for table `tbl_raport`
+--
+ALTER TABLE `tbl_raport`
+  ADD PRIMARY KEY (`id_raport`),
+  ADD KEY `id_siswa` (`id_siswa`);
+
+--
 -- Indexes for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
@@ -221,25 +233,41 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absensi`
 --
 ALTER TABLE `absensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `pengumuman`
 --
 ALTER TABLE `pengumuman`
-  MODIFY `id_pengumuman` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_pengumuman` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `tbl_mapelrpl`
 --
 ALTER TABLE `tbl_mapelrpl`
-  MODIFY `id_mapelrpl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_mapelrpl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `tbl_raport`
+--
+ALTER TABLE `tbl_raport`
+  MODIFY `id_raport` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tbl_raport`
+--
+ALTER TABLE `tbl_raport`
+  ADD CONSTRAINT `tbl_raport_ibfk_1` FOREIGN KEY (`id_siswa`) REFERENCES `tbl_siswa` (`id_siswa`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
