@@ -91,13 +91,20 @@ if ($level != 'guru') {
 
       <?php 
         error_reporting(0);
+       $tanggal='';
        $tanggal=$_GET['tanggal'];
-       $kelas=$_GET['kelas']
+
+       if ($tanggal=='') {
+          $tanggal=date('Y-m-d');
+       }
+       
+      // echo "<script type='text/javascript'>alert('$tanggal');</script>";
+       $kelas=$_GET['kelas'];
       ?>
       <form action="" method="GET" name="cari">
       
   <div class="col-md-3 ">
-    <input type="date" class="form-control" name="tanggal" value="<?php echo $tanggal; ?>">
+    <input type="date" value="<?php echo $tanggal; ?>" class="form-control" max="<?php echo date('Y-m-d');?>" name="tanggal" >
   </div>
       
   <div class="col-md-3 ">
