@@ -149,7 +149,10 @@ if ($level != 'guru') {
     </div>
   </div>
   <?php 
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
 if (isset($_POST['kirim'])) {
+  
   include '../koneksi.php';
     $judul = $_POST['judul'];
     $isi  = $_POST['isi'];
@@ -214,13 +217,17 @@ try {
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
     //Content
+    $judul2 ="Anda Mendapatkan Pengumuman Tentang ".$judul;
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Body    = '<b>Notifikasi Baru</b>';
+    $mail->Subject = $judul2;
+    $mail->Body    = $isi;
     $mail->AltBody = 'haiii';
 
     $mail->send();
-  
-    echo 'Message has been sent';
+   
+   
+    echo "<script>window.alert('Pesan Terkrim');
+    window.location='index.php'</script>";
 
 } catch (Exception $e) {
     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
