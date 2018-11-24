@@ -7,7 +7,7 @@
 <?php 
 session_start();
 $level = $_SESSION['level'];
-if ($level != 'guru') {
+if ($level != 'parent') {
     header('location:../login.php');
 }
  ?>
@@ -99,14 +99,14 @@ if ($level != 'guru') {
      <h2><i class="fas fa-file-invoice"></i> Pilih Urutan Daftar Nilai</h2>
 
     <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
     <div class="form-group">
-        <a href="nilaisemester.php" class="btn btn-primary btn-lg">Input Nilai Semester</a>
+        <a href="nilaisemester.php" class="btn btn-primary btn-lg">Tampilkan Nilai Per Semester</a>
     </div>
     </div>
-    <div clas="col-md-3">
+    <div clas="col-md-4">
     <div class="form-group">
-        <a href="nilaibulan.php" class="btn btn-primary btn-lg">Input Nilai Bulanan</a>
+        <a href="nilaimurid.php" class="btn btn-primary btn-lg">Tampilkan Nilai Bulanan</a>
     </div>
 
     </div>

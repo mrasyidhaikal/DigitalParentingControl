@@ -58,7 +58,7 @@ if ($level != 'guru') {
             </div>
           </li>
         </a>
-          <a href="nilai.php">
+          <a href="pilihnilai.php">
           <li class="c-menu__item is-active" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>
@@ -105,8 +105,9 @@ if ($level != 'guru') {
  <?php 
 include '../koneksi.php';
 $id = $_GET['update'];
-$query = mysql_query("SELECT * FROM tbl_raport WHERE id_mapelrpl = '$id' ");
+$query = mysql_query("SELECT * FROM tbl_raport WHERE id_raport = '$id' ");
 $data = mysql_fetch_array($query);
+
   ?>
     <div class="row">
       <div class="col-sm-10" style="margin-left: 10px;">
@@ -114,28 +115,24 @@ $data = mysql_fetch_array($query);
       
     <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;" class="text-center">
            
-      
- 
-      
-           
-                        <div class="form-group">        
+
+                      <div class="form-group">        
 
                         <label class="form-label">Semester</label>
 
                         <select name="semester" id="select" class="form-control" >
                             <option value="" disabled>Pilih Semester</option>
-
-                                    <option value="semester1" <?php if( $agamaDariDatabase=='semester1'){echo "selected"; }>Semester 1</option>
-                                    <option value="semester2" <?php if( $agamaDariDatabase=='semester2'){echo "selected"; }>Semester 2</option>
-                                    <option value="semester3" <?php if( $agamaDariDatabase=='semester3'){echo "selected"; }>Semester 3</option>
-                                    <option value="semester4" <?php if( $agamaDariDatabase=='semester4'){echo "selected"; }>Semester 4</option>
-                                    <option value="semester5" <?php if( $agamaDariDatabase=='semester5'){echo "selected"; }>Semester 5</option>
-                                    <option value="semester6" <?php if( $agamaDariDatabase=='semester6'){echo "selected"; }>Semester 6</option>
+                                    <?php $semester = $_GET['semester']; ?>
+                                    <option value="semester1" <?php if( $semester=='semester1'){echo "selected"; } ?>>Semester 1</option>
+                                    <option value="semester2" <?php if( $semester=='semester2'){echo "selected"; } ?>>Semester 2</option>
+                                    <option value="semester3" <?php if( $semester=='semester3'){echo "selected"; } ?>>Semester 3</option>
+                                    <option value="semester4" <?php if( $semester=='semester4'){echo "selected"; } ?>>Semester 4</option>
+                                    <option value="semester5" <?php if( $semester=='semester5'){echo "selected"; } ?>>Semester 5</option>
+                                    <option value="semester6" <?php if( $semester=='semester6'){echo "selected"; } ?>>Semester 6</option>
                                                 
                         </select>
 
-                        </div> 
-                 
+                        </div>   
                       
                       <div class="form-group">        
                       <label class="form-label">Nilai Bahasa Indonesia</label>
@@ -209,10 +206,10 @@ $data = mysql_fetch_array($query);
                 $fisika = $_POST['fisika'];
                 $pbo = $_POST['pbo'];
                 $basisdata = $_POST['basisdata'];
-                $semester = $_POST['semester']
+                $date = date("F");
                 $avg = ($bindo + $binggris + $matematika + $sejarah+ $pkn + $fisika + $pbo + $basisdata) / 8;
 
-                $q = "UPDATE `arkademy`.`tbl_raport` SET `semester` = '$semester', `bindo` = '$bindo', `binggris` = '$binggris', `matematika` = '$matematika', `sejarah` = '$sejarah', `pkn` = '$pkn', `fisika` = '$fisika', `pbo` = '$pbo', `basisdata` = '$basisdata', `avg` = '$avg' WHERE `tbl_raport`.`id_mapelrpl` = $id";
+                $q = "UPDATE `arkademy`.`tbl_raport` SET `bindo` = '$bindo', `binggris` = '$binggris', `matematika` = '$matematika', `sejarah` = '$sejarah', `pkn` = '$pkn', `fisika` = '$fisika', `pbo` = '$pbo', `basisdata` = '$basisdata', `avg` = '$avg' WHERE `tbl_raport`.`id_mapelrpl` = $id";
 
                 mysql_query($q);
                 
