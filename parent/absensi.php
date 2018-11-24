@@ -93,7 +93,14 @@ $row = mysql_fetch_array($query);
    ?>
 
 <br>
+<div class="row">
+<div class="col-md-3" style="margin-left: 40px">
+<h2><i class="fas fa-file-invoice"></i> Daftar Absensi</h2>
+</div>
+</div>
+
   <div class="col-md-3 ">
+  
     <form action="" method="GET">        
             <select name="bulan" class="form-control" >  
               <option value='01'>January</option>
