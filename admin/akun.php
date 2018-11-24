@@ -84,12 +84,6 @@ if ($level != 'admin') {
         
       
     <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;">
-           
-      
- 
-      
-           
-            
                       <div class="form-group">        
                       <label class="form-label">Username</label>
                       <input type="text" name="username" class="form-control" placeholder="Username" required="required"/>

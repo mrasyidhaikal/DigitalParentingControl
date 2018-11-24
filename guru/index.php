@@ -177,7 +177,57 @@ if (isset($_POST['kirim'])) {
                
                 move_uploaded_file($tmp, $path);
       $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,'$id_user', '$judul', '$path', '$isi', '$tanggal');");
-      
+
+      $query = mysql_query("SELECT * FROM users WHERE level = 'parent'");
+      while($data = mysql_fetch_array($query)){
+    $email = $data['email'];    
+
+  
+//Load Composer's autoloader
+
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
+    
+$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+try {
+    //Server settings
+    $mail->SMTPDebug = 1;                                 // Enable verbose debug output
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com;';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username = 'mrasyid.haikal@gmail.com';                 // SMTP username
+    $mail->Password = '511243wow';                           // SMTP password
+    // $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 587;                                    // TCP port to connect to
+
+    //Recipients
+    $mail->setFrom('mrasyid.haikal@gmail.com', '');
+    $mail->addAddress($email);     // Add a recipient
+    // $mail->addAddress('ellen@example.com');               // Name is optional
+    // $mail->addReplyTo('info@example.com', 'Information');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
+
+    // Attachments
+     $mail->addAttachment($path);         // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+    //Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Body    = '<b>Notifikasi Baru</b>';
+    $mail->AltBody = 'haiii';
+
+    $mail->send();
+  
+    echo 'Message has been sent';
+
+} catch (Exception $e) {
+    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+}
+
+
+      }
       
     }
 
