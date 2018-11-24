@@ -6,6 +6,7 @@
 
 <?php 
 session_start();
+
 $level = $_SESSION['level'];
 if ($level != 'guru') {
     header('location:../login.php');
@@ -217,10 +218,14 @@ try {
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
     //Content
-    $judul2 ="Anda Mendapatkan Pengumuman Tentang ".$judul;
+    $id_userr =$_SESSION['id_user'];
+    $guru =mysql_fetch_array(mysql_query("SELECT * FROM users WHERE id_user = '$id_userr' "));
+    $namaguru = $guru['username'];
+    $judul2 ="Notifikasi Pengumuman Tentang ".$judul;
+    $isi2 = "Haloo Saya ".$namaguru." Anda Mendapatkan Pengumuma Tentang ";
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = $judul2;
-    $mail->Body    = $isi;
+    $mail->Body    = $isi2;
     $mail->AltBody = 'haiii';
 
     $mail->send();
