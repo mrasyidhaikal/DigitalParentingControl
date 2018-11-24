@@ -6,6 +6,7 @@
 
 <?php 
 session_start();
+
 $level = $_SESSION['level'];
 if ($level != 'guru') {
     header('location:../login.php');
@@ -149,7 +150,10 @@ if ($level != 'guru') {
     </div>
   </div>
   <?php 
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
 if (isset($_POST['kirim'])) {
+  
   include '../koneksi.php';
     $judul = $_POST['judul'];
     $isi  = $_POST['isi'];
@@ -177,7 +181,65 @@ if (isset($_POST['kirim'])) {
                
                 move_uploaded_file($tmp, $path);
       $query =mysql_query("INSERT INTO `arkademy`.`pengumuman` (`id_pengumuman`,`id_user`, `judul`, `file`, `isi`, `tanggal`) VALUES (NULL,'$id_user', '$judul', '$path', '$isi', '$tanggal');");
-      
+
+      $query = mysql_query("SELECT * FROM users WHERE level = 'parent'");
+      while($data = mysql_fetch_array($query)){
+    $email = $data['email'];    
+
+  
+//Load Composer's autoloader
+
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
+    
+$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+try {
+    //Server settings
+    $mail->SMTPDebug = 1;                                 // Enable verbose debug output
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com;';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username = 'mrasyid.haikal@gmail.com';                 // SMTP username
+    $mail->Password = '511243wow';                           // SMTP password
+    // $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 587;                                    // TCP port to connect to
+
+    //Recipients
+    $mail->setFrom('mrasyid.haikal@gmail.com', '');
+    $mail->addAddress($email);     // Add a recipient
+    // $mail->addAddress('ellen@example.com');               // Name is optional
+    // $mail->addReplyTo('info@example.com', 'Information');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
+
+    // Attachments
+     $mail->addAttachment($path);         // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+    //Content
+    $id_userr =$_SESSION['id_user'];
+    $guru =mysql_fetch_array(mysql_query("SELECT * FROM users WHERE id_user = '$id_userr' "));
+    $namaguru = $guru['username'];
+    $judul2 ="Notifikasi Pengumuman Tentang ".$judul;
+    $isi2 = "Haloo Saya ".$namaguru." Anda Mendapatkan Pengumuma Tentang ".$isi;
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = $judul2;
+    $mail->Body    = $isi2;
+    $mail->AltBody = 'haiii';
+
+    $mail->send();
+   
+   
+    echo "<script>window.alert('Pesan Terkrim');
+    window.location='index.php'</script>";
+
+} catch (Exception $e) {
+    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+}
+
+
+      }
       
     }
 

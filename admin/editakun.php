@@ -88,12 +88,6 @@ $data = mysql_fetch_array($query);
         
       
     <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;">
-           
-      
- 
-      
-           
-            
                       <div class="form-group">        
                       <label class="form-label">Username</label>
                       <input type="text" value="<?php echo $data['username'] ?>" name="username" class="form-control" placeholder="Username" required="required"/>
