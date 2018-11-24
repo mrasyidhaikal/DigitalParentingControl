@@ -279,29 +279,37 @@ if ($level != 'guru') {
             
             //"INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`, `keterangan`) VALUES ( '', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir', '$keterangan')"; 
       }else{
+        $data=mysql_query("select * from absensi where tanggal ='$tanggal' and kelas='$kelas'");
+      echo "<script type='text/javascript'>alert('$query');</script>";
+        
+        
         while($d = mysql_fetch_array($data)){
       
-      //echo "<script type='text/javascript'>alert('5');</script>";
+      // echo "<script type='text/javascript'>alert('5');</script>";
           $id_absen=$d['id_absen'];
           $tanggal=$d['tanggal'];
       //echo "<script type='text/javascript'>alert('$tanggal');</script>";    
           $nama=$d['nama'];
       // echo "<script type='text/javascript'>alert('$nama');</script>";
           $hmm=$d['id_absen'].'keterangan';
-          $anu=$_POST[$nama];    
+          $anu=$_POST[$id_absen];   
       // echo "<script type='text/javascript'>alert('$anu');</script>";
           $keterangan=$_POST[$hmm];
           // echo "<script type='text/javascript'>alert('$keterangan');</script>";$sakit="0";
           $izin="0";
           $alfa="0";
           $hadir="0";
+          $sakit="0";
           if ($anu=="sakit") {
             $sakit="1";
-          }elseif ($anu=="izin") {
+          }
+          if ($anu=="izin") {
             $izin="1";
-          }elseif ($anu=="alfa") {
+          }
+          if ($anu=="alfa") {
             $alfa="1";
-          }elseif ($anu=="hadir") {
+          }
+          if ($anu=="hadir") {
             $hadir="1";
           }else{
 
