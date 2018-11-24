@@ -50,6 +50,7 @@ if ($level != 'parent') {
     <div class="l-sidebar__content">
       <nav class="c-menu js-menu">
         <ul class="u-list">
+        
         <a href="../guru/index.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pengumuman">
             <div class="c-menu__item__inner"><i class="fa fa-bullhorn"></i>
@@ -57,6 +58,7 @@ if ($level != 'parent') {
             </div>
           </li>
         </a>
+
           <a href="pilihnilai.php">
           <li class="c-menu__item is-active" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
@@ -64,8 +66,6 @@ if ($level != 'parent') {
             </div>
           </li>
           </a>
-
-          <a href="nilai.php">
 
           <a href="absensi.php">
 
@@ -111,7 +111,7 @@ if ($level != 'parent') {
       $query1 = mysql_query("SELECT * from tbl_siswa where id_user = $panggilnama"); 
       $carinama = mysql_fetch_array($query1);
       $id_siswa = $carinama['id_siswa'];
-      $query = mysql_query("SELECT * from tbl_mapelrpl where id_siswa = $id_siswa");
+      $query = mysql_query("SELECT * from tbl_raport where id_siswa = $id_siswa");
       
       ?>
     <h4>Nama Murid : <b><?php echo $carinama['nama_siswa']; ?></b></h4> 
@@ -120,38 +120,17 @@ if ($level != 'parent') {
     <div class="row">
     <div class="col-sm-4">
     <form action="" method="POST">
-    <label>Pilih Bulan</label>
-    <?php $bulan = $row['bulan']; ?>
-        <select name="bulan" id="bulan" class="form-control ">
-        <option disabled selected>Pilih Bulan Terlebih Dahulu</option>
-              <option value="January" <?php if( $bulan=='January'){echo "selected"; } ?> >Januari</option>
-              <option value="February" <?php if( $bulan=='February'){echo "selected"; } ?> >Februari</option>
-              <option value="March" <?php if( $bulan=='March'){echo "selected"; } ?> >Maret</option>
-              <option value="April" <?php if( $bulan=='April'){echo "selected"; } ?> >April</option>
-              <option value="May" <?php if( $bulan=='May'){echo "selected"; } ?> >Mei</option>
-              <option value="June" <?php if( $bulan=='June'){echo "selected"; } ?> >Juni</option>
-              <option value="July" <?php if( $bulan=='July'){echo "selected"; } ?> >Juli</option>
-              <option value="August" <?php if( $bulan=='August'){echo "selected"; } ?> >Agustus</option>
-              <option value="September" <?php if( $bulan=='September'){echo "selected"; } ?> >September</option>
-              <option value="October" <?php if( $bulan=='October'){echo "selected"; } ?> >Oktober</option>
-              <option value="November" <?php if( $bulan=='November'){echo "selected"; } ?> >November</option>
-              <option value="December" <?php if( $bulan=='December'){echo "selected"; } ?> >Desember</option>
+    <label>Pilih Semester</label>
+        <select name="semester" class="form-control ">
+        <option disabled selected>Pilih Semester Terlebih Dahulu</option>
+              <option value="semester1" <?php if( $bulan=='January'){echo "selected"; } ?> >Semester 1</option>
+              <option value="semester2" <?php if( $bulan=='February'){echo "selected"; } ?> >Semester 2</option>
+              <option value="semester3" <?php if( $bulan=='March'){echo "selected"; } ?> >Semester 3</option>
+              <option value="semester4" <?php if( $bulan=='April'){echo "selected"; } ?> >Semester 4</option>
+              <option value="semester5" <?php if( $bulan=='May'){echo "selected"; } ?> >Semester 5</option>
+              <option value="semester6" <?php if( $bulan=='June'){echo "selected"; } ?> >Semester 6</option>
         </select> 
     </div>
-    <div class="continer">
-    <div class="row">
-    <div class="col-sm-4">
-<label>Pilih Tahun</label>
-        <select name="tahun" id="bulan" class="form-control ">
-        <option disabled selected>Pilih Tahun Terlebih Dahulu</option>
-              <option value="18" <?php if( $bulan=='18'){echo "selected"; } ?> >2018</option>
-              <option value="19" <?php if( $bulan=='19'){echo "selected"; } ?> >2019</option>
-        </select> 
-        </div>
-        </div>
-        </div>
-    </div>
-    
     
 <div class="col-sm-2" style="margin-top:25px; margin-left:-15px;">
 <button type="submit" class="btn btn-primary" name="tampilbulan" ><i class="fa fa-search"></i> Tampilkan</button>
@@ -169,9 +148,8 @@ if ($level != 'parent') {
     <div class="row">
     <?php
     if (isset($_POST['tampilbulan'])){
-      $bulan = $_POST['bulan'];
-      $tahun = $_POST['tahun'];
-     $query2 = mysql_query("SELECT * From tbl_mapelrpl where tanggal LIKE '%$bulan%-%$tahun%' and id_siswa = $id_siswa ");
+      $semester = $_POST['semester'];
+     $query2 = mysql_query("SELECT * From tbl_raport where semester LIKE '%$bulan%' and id_siswa = $id_siswa ");
      while ($row = mysql_fetch_array($query2)) {
       
       $bindo = $row['bindo'];
@@ -188,7 +166,7 @@ if ($level != 'parent') {
       ?>
       <div class="row">
       <div class="col-md-12" style="margin-left: 20px;">
-      <h3>Menampilkan Data Nilai Pada Bulan = <b><?php echo $bulan; ?>-<?php echo $tahun; ?></b></h3>
+      <h3>Menampilkan Data Nilai Pada Semester = <b><?php echo$semester ?></b></h3>
       </div>
       </div>
 
@@ -426,13 +404,13 @@ if ($level != 'parent') {
                 $fisika = $_POST['fisika'];
                 $pbo = $_POST['pbo'];
                 $basisdata = $_POST['basisdata'];
-                $date = date("l, d/M/Y");
+                $semester = $_POST['semester'];
                 $avg = ($bindo + $binggris + $matematika + $sejarah+ $pkn + $fisika + $pbo + $basisdata) / 8;
 
-                $q = "INSERT INTO `tbl_mapelrpl` 
-                (`id_siswa`, `tanggal`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`,`avg`) 
+                $q = "INSERT INTO `tbl_raport` 
+                (`id_siswa`, `semester`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`,`avg`) 
                 VALUES 
-                ('$id_siswa', '$date', '$bindo', '$binggris', '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata','$avg')";
+                ('$id_siswa', '$semester', '$bindo', '$binggris', '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata','$avg')";
 
                 mysql_query($q);
                 

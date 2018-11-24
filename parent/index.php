@@ -55,7 +55,7 @@ if ($level != 'parent') {
               <div class="c-menu-item__title"><span>Pengumuman</span></div>
             </div>
           </li></a>
-         <a href="nilaimurid.php">
+         <a href="pilihnilai.php">
           <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>

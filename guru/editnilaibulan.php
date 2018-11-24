@@ -58,7 +58,7 @@ if ($level != 'guru') {
             </div>
           </li>
         </a>
-          <a href="nilai.php">
+          <a href="pilihnilai.php">
           <li class="c-menu__item is-active" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>
@@ -113,13 +113,7 @@ $data = mysql_fetch_array($query);
         
       
     <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;" class="text-center">
-           
-      
- 
-      
-           
-            
-                 
+
                       
                       <div class="form-group">        
                       <label class="form-label">Nilai Bahasa Indonesia</label>
@@ -193,7 +187,7 @@ $data = mysql_fetch_array($query);
                 $fisika = $_POST['fisika'];
                 $pbo = $_POST['pbo'];
                 $basisdata = $_POST['basisdata'];
-                $date = date("F");
+                $date = date("F,y");
                 $avg = ($bindo + $binggris + $matematika + $sejarah+ $pkn + $fisika + $pbo + $basisdata) / 8;
 
                 $q = "UPDATE `arkademy`.`tbl_mapelrpl` SET `bindo` = '$bindo', `binggris` = '$binggris', `matematika` = '$matematika', `sejarah` = '$sejarah', `pkn` = '$pkn', `fisika` = '$fisika', `pbo` = '$pbo', `basisdata` = '$basisdata', `avg` = '$avg' WHERE `tbl_mapelrpl`.`id_mapelrpl` = $id";
