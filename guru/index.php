@@ -222,7 +222,7 @@ try {
     $guru =mysql_fetch_array(mysql_query("SELECT * FROM users WHERE id_user = '$id_userr' "));
     $namaguru = $guru['username'];
     $judul2 ="Notifikasi Pengumuman Tentang ".$judul;
-    $isi2 = "Haloo Saya ".$namaguru." Anda Mendapatkan Pengumuma Tentang ".$isi;
+    $isi2 = "Haloo Saya ".$namaguru." Anda Mendapatkan Pengumuman Tentang ".$isi;
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = $judul2;
     $mail->Body    = $isi2;
