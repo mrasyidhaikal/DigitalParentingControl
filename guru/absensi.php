@@ -81,7 +81,7 @@ if ($level != 'guru') {
   <div class="content-wrapper content-wrapper--with-bg">
 <div class="container">
   <div class="row">
-       <h2><i class="fas fa-file-invoice"></i>Input Absensi</h2>
+       <h2><i class="fas fa-file-invoice"></i> Input Absensi</h2>
   </div>
 </div>
 

@@ -271,7 +271,7 @@ try {
         <tr>
             <td><?php echo $row['id_pengumuman']; ?></td>
             <td><?php echo $row['judul']; ?></td>
-            <td><a href="<?php echo $row['file']; ?>">Download File</a></td>
+            <td><a href="../<?php echo $row['file']; ?>">Download File</a></td>
             <td><?php echo $row['isi']; ?></td>
             <td><?php echo $row['tanggal']; ?></td>
            <td><a href="index.php?id=<?php echo $row['id_pengumuman']; ?>" class="btn btn-danger">Hapus</a></td>
