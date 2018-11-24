@@ -7,7 +7,21 @@
 .sembunyi {
 	display:none;
 }
+.sembunyi2 {
+	display:none;
+}
 .tampil {
+	display:block;
+	width: 200px;
+	cursor:pointer;
+	text-align:center;
+	font-weight:bold;
+	font-size:20px;
+	padding:10px; 
+	border:1px solid #102c58;
+	margin-bottom:10px;
+}
+.tampil2 {
 	display:block;
 	width: 200px;
 	cursor:pointer;
