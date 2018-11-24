@@ -55,7 +55,7 @@ if ($level != 'guru') {
             </div>
           </li>
         </a>
-          <a href="nilai.php">
+          <a href="pilihnilai.php">
           <li class="c-menu__item is-active" data-toggle="tooltip" title="Nilai">
             <div class="c-menu__item__inner"><i class="fa fa-chart-bar"></i>
               <div class="c-menu-item__title"><span>Nilai</span></div>
@@ -96,14 +96,14 @@ if ($level != 'guru') {
     <div class="row">
   
        <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
-     <h2><i class="fas fa-file-invoice"></i> Nilai Murid (per Bulan)</h2>
+     <h2><i class="fas fa-file-invoice"></i> Nilai Murid (per Semester)</h2>
 
 <div class="row">
 <div class="col-md-3">
 <div class="tampil2 " ><i class="fa fa-whatsapp" style="font-weight: bold;"></i> KIRIM PESAN</div>
   </div>
 <div class="col-md-4">
-  <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
+  <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA </div>
   </div></div>
   
   <div class="sembunyi">
@@ -112,10 +112,6 @@ if ($level != 'guru') {
         
       
     <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;">
-           
-      
- 
-      
            
             
                     <div class="form-group">        
@@ -138,25 +134,24 @@ if ($level != 'guru') {
 
                       </div> 
 
-                        <div class="form-group">        
-                    
-                    <label class="form-label">Pilih Semester</label>
-                    
-                    <select name="id_siswa" id="select" class="form-control" >
-                        <option value="" disabled selected>Pilih ID Siswa</option>
-                          <?php 
-                          include '../koneksi.php';
-                          $data = mysql_query("SELECT id_siswa , nama_siswa from tbl_siswa");
-                           if ($data) {
-                             while ($row = mysql_fetch_array($data)){
-                                ?>
+                      <div class="form-group">        
 
-                                <option value="<?php echo $row['id_siswa'];?>"><?php echo $row['id_siswa']; echo "  ---  "; echo $row['nama_siswa']; ?></option>
-                                              
-                        <?php } } ?>
-                      </select>
+                        <label class="form-label">Semester</label>
 
-                    </div> 
+                        <select name="semester" id="select" class="form-control" >
+                            <option value="" disabled selected>Pilih Semester</option>
+
+                                    <option value="semester1">Semester 1</option>
+                                    <option value="semester2">Semester 2</option>
+                                    <option value="semester3">Semester 3</option>
+                                    <option value="semester4">Semester 4</option>
+                                    <option value="semester5">Semester 5</option>
+                                    <option value="semester6">Semester 6</option>
+                                                
+                        </select>
+
+                        </div> 
+
                       
                       <div class="form-group">        
                       <label class="form-label">Nilai Bahasa Indonesia</label>
@@ -198,6 +193,7 @@ if ($level != 'guru') {
                       <input type="number" min="0" max="100" name="basisdata" class="form-control" placeholder="Masukkan Nilai Basis Data (Numeric 0-100)" required="required"/>
                       </div>
 
+
                       <div class="form-group">
                       <input type="submit" name="fsubmit" class="btn btn-primary btn-lg"/>
                       </div> 
@@ -207,6 +203,7 @@ if ($level != 'guru') {
                    
                     
                   </table>
+                  </form>
                   </div>
                   
               
@@ -293,18 +290,18 @@ if ($level != 'guru') {
                 $fisika = $_POST['fisika'];
                 $pbo = $_POST['pbo'];
                 $basisdata = $_POST['basisdata'];
-                $date = date("F");
+                $semester = $_POST['semester'];
                 $avg = ($bindo + $binggris + $matematika + $sejarah+ $pkn + $fisika + $pbo + $basisdata) / 8;
 
-                $q = "INSERT INTO `tbl_mapelrpl` 
-                (`id_siswa`, `tanggal`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`,`avg`) 
+                $q = "INSERT INTO `tbl_raport` 
+                (`id_siswa`, `semester`, `bindo`, `binggris`, `matematika`, `sejarah`, `pkn`, `fisika`, `pbo`, `basisdata`,`avg`) 
                 VALUES 
-                ('$id_siswa', '$date', '$bindo', '$binggris', '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata','$avg')";
+                ('$id_siswa', '$semester', '$bindo', '$binggris', '$matematika', '$sejarah', '$pkn', '$fisika', '$pbo', '$basisdata','$avg')";
 
-                mysql_query($q);
+                mysqli_query($q);
                 
                 echo "<script>window.alert('Input Data Success !');
-                window.location='nilai.php'</script>";
+                window.location='nilaisemester.php'</script>";
 
                 }
                 
@@ -318,7 +315,7 @@ if ($level != 'guru') {
 
     <thead>
         <tr>
-            <th>Bulan</th>
+            <th>Semester</th>
             <th>ID Siswa</th>
             <th>Bahasa Indonesia</th>
             <th>Bahasa Inggris</th>
@@ -337,7 +334,7 @@ if ($level != 'guru') {
            <?php 
     include '../koneksi.php';
     
-    $query = mysql_query("SELECT * FROM tbl_mapelrpl");
+    $query = mysql_query("SELECT * FROM tbl_raport");
     while($row = mysql_fetch_array($query)){
       $panggilnama = $row['id_siswa'];
       $querynama = mysql_query("SELECT nama_siswa from tbl_siswa where id_siswa = $panggilnama");
@@ -345,7 +342,7 @@ if ($level != 'guru') {
 
     ?>
         <tr>
-             <td><?php echo $row['tanggal']; ?></td>
+             <td><?php echo $row['semester']; ?></td>
             <td><?php echo $row2['nama_siswa'] ?></td>
             <td><?php echo $row['bindo']; ?></td>
             <td><?php echo $row['binggris']; ?></td>
@@ -368,7 +365,7 @@ if ($level != 'guru') {
 if (isset($_GET['delete'])){
 
   $id = $_GET['delete'];
-  $query = mysql_query("DELETE FROM `tbl_mapelrpl` WHERE `tbl_mapelrpl`.`id_mapelrpl` = $id");
+  $query = mysql_query("DELETE FROM `tbl_raport` WHERE `tbl_raport`.`id_mapelrpl` = $id");
 
   if ($query) {
     ?>
