@@ -91,13 +91,20 @@ if ($level != 'guru') {
 
       <?php 
         error_reporting(0);
+       $tanggal='';
        $tanggal=$_GET['tanggal'];
-       $kelas=$_GET['kelas']
+
+       if ($tanggal=='') {
+          $tanggal=date('Y-m-d');
+       }
+
+      // echo "<script type='text/javascript'>alert('$tanggal');</script>";
+       $kelas=$_GET['kelas'];
       ?>
       <form action="" method="GET" name="cari">
       
   <div class="col-md-3 ">
-    <input type="date" class="form-control" name="tanggal" value="<?php echo $tanggal; ?>">
+    <input type="date" value="<?php echo $tanggal; ?>" class="form-control" max="<?php echo date('Y-m-d');?>" name="tanggal" >
   </div>
       
   <div class="col-md-3 ">
@@ -219,7 +226,9 @@ if ($level != 'guru') {
 <br>
 <input type="submit" class="btn btn-primary" name="save" value="save">
 
-  <?php     
+  <?php
+  use PHPMailer\PHPMailer\PHPMailer;
+   use PHPMailer\PHPMailer\Exception;
     if (isset($_POST['save'])) {
       # code...
       //echo "<script type='text/javascript'>alert('1');</script>";
@@ -273,6 +282,65 @@ if ($level != 'guru') {
           // echo "<script type='text/javascript'>alert('$hadir');</script>";
               //$keterangan=$_POST['keterangan'];
               $query=mysql_query("INSERT INTO `absensi` ( `tanggal`, `kelas`, `nama`, `sakit`, `izin`, `alfa`, `hadir`,`keterangan`) VALUES ( '$tanggal', '$kelas', '$nama', '$sakit', '$izin', '$alfa', '$hadir','$keterangan')");
+            }
+                // $ambiluser = mysql_query("SELECT * from tbl_siswa ");
+                // $q1 = mysql_fetch_array($ambiluser);
+                // $id_user = $q1['id_user'];
+        $query = mysql_query("SELECT * FROM users");
+      while($data = mysql_fetch_array($query)){
+    $email = $data['email'];    
+
+  
+//Load Composer's autoloader
+
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
+    
+$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+try {
+    //Server settings
+    $mail->SMTPDebug = 1;                                 // Enable verbose debug output
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com;';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username = 'mrasyid.haikal@gmail.com';                 // SMTP username
+    $mail->Password = '511243wow';                           // SMTP password
+    // $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 587;                                    // TCP port to connect to
+
+    //Recipients
+    $mail->setFrom('mrasyid.haikal@gmail.com', '');
+    $mail->addAddress($email);     // Add a recipient
+    // $mail->addAddress('ellen@example.com');               // Name is optional
+    // $mail->addReplyTo('info@example.com', 'Information');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
+
+    // Attachments
+    //  $mail->addAttachment($path);         // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+    //Content
+    $id_userr =$_SESSION['id_user'];
+    $guru =mysql_fetch_array(mysql_query("SELECT * FROM users WHERE id_user = '$id_userr' "));
+    $namaguru = $guru['username'];
+    $judul2 ="Notifikasi Pengumuman Tentang Absensi";
+    $isi2 = "Haloo Saya ".$namaguru." (Admin Digital Parenting Control) Data Absensi Hari Ini Telah di Input , Silahkan di Cek di https://multistudi.sch.id/parent/absensi ";
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = $judul2;
+    $mail->Body    = $isi2;
+    $mail->AltBody = 'haiii';
+
+    $mail->send();
+   
+   
+    echo "<script>window.alert('Pesan Terkrim');
+    window.location='absensi.php'</script>";
+
+} catch (Exception $e) {
+    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+}
 
             }
           echo "<script type='text/javascript'>alert('sukses');window.location='absensi.php'</script>";
@@ -321,7 +389,7 @@ if ($level != 'guru') {
           //$keterangan=$_POST['keterangan'];
           $query=mysql_query("UPDATE `absensi` SET  `tanggal` = '$tanggal', `kelas` = '$kelas', `nama` = '$nama', `sakit` = '$sakit', `izin` = '$izin', `alfa` = '$alfa', `hadir` = '$hadir',`keterangan`='$keterangan' WHERE `absensi`.`id_absen` ='$id_absen'");
           }
-          echo "<script type='text/javascript'>alert('sukses');window.location='absensi.php'</script>";
+          // echo "<script type='text/javascript'>alert('sukses');window.location='absensi.php'</script>";
             
         }
 
@@ -330,7 +398,7 @@ if ($level != 'guru') {
       }
     }
     
-      echo "<script type='text/javascript'>window.location ='http://localhost/DigitalParentingControl/guru/absensi.php');</script>"; 
+      // echo "<script type='text/javascript'>window.location ='http://localhost/DigitalParentingControl/guru/absensi.php');</script>"; 
 ?>
 
 
