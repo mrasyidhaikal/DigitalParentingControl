@@ -98,8 +98,13 @@ if ($level != 'guru') {
        <form method="post" action="" enctype="multipart/form-data" role="form" class="col-md-10 go-right">
      <h2><i class="fas fa-file-invoice"></i> Nilai Murid (per Bulan)</h2>
 
-
+<div class="row">
+<div class="col-md-3">
+<div class="tampil2 " ><i class="fa fa-whatsapp" style="font-weight: bold;"></i> KIRIM PESAN</div>
+  </div>
+<div class="col-md-4">
   <div class="tampil" ><i class="fas fa-plus"></i> TAMBAH DATA</div>
+  </div></div>
   
   <div class="sembunyi">
     <div class="row">
@@ -114,6 +119,7 @@ if ($level != 'guru') {
            
             
                     <div class="form-group">        
+
                       <label class="form-label">ID Siswa</label>
                       
                       <select name="id_siswa" id="select" class="form-control" >
@@ -131,6 +137,26 @@ if ($level != 'guru') {
                         </select>
 
                       </div> 
+
+                        <div class="form-group">        
+                    
+                    <label class="form-label">Pilih Semester</label>
+                    
+                    <select name="id_siswa" id="select" class="form-control" >
+                        <option value="" disabled selected>Pilih ID Siswa</option>
+                          <?php 
+                          include '../koneksi.php';
+                          $data = mysql_query("SELECT id_siswa , nama_siswa from tbl_siswa");
+                           if ($data) {
+                             while ($row = mysql_fetch_array($data)){
+                                ?>
+
+                                <option value="<?php echo $row['id_siswa'];?>"><?php echo $row['id_siswa']; echo "  ---  "; echo $row['nama_siswa']; ?></option>
+                                              
+                        <?php } } ?>
+                      </select>
+
+                    </div> 
                       
                       <div class="form-group">        
                       <label class="form-label">Nilai Bahasa Indonesia</label>
@@ -188,9 +214,72 @@ if ($level != 'guru') {
                 </div>
     </div>
 
+<div class="sembunyi2">
+    <div class="row">
+      <div class="col-sm-10" style="margin-left: 10px;">
+        
+      
+    <table border="0" cellspacing="0" cellpadding="10" align="center" width="100%" style="padding: 5px;">
+           
+      
+ 
+      
+           
+            
+                    <div class="form-group">        
+                      <label class="form-label">ID Siswa</label>
+                      
+                      <select name="id_siswa" id="select" class="form-control" >
+                          <option value="" disabled selected>Pilih ID Siswa</option>
+                            <?php 
+                            include '../koneksi.php';
+                            $data = mysql_query("SELECT id_siswa , nama_siswa from tbl_siswa");
+                             if ($data) {
+                               while ($row = mysql_fetch_array($data)){
+                                  ?>
+
+                                  <option value="<?php echo $row['id_siswa'];?>"><?php echo $row['id_siswa']; echo "  ---  "; echo $row['nama_siswa']; ?></option>
+                                                
+                          <?php } } ?>
+                        </select>
+
+                      </div> 
+                      
+                      <div class="form-group">        
+                      <label class="form-label">Masukkan Isi Pesan</label>
+                      <textarea name="isipesan" class="form-control" id="" cols="30" rows="10" placeholder="Masukkan Isi Pesan" required></textarea>
+                      </div>
+
+                      
+                      
+
+                      <div class="form-group">
+                      <input type="submit" value="Kirim Pesan" name="fkirimpesan" class="btn btn-primary btn-lg"></a>
+                      </div> 
+                   
+                    
+                  </table>
+                  </div>
+                  
+                </div>
+                      <?php
+                      include "../koneksi.php";
+                      if (isset($_POST['fkirimpesan'])){
+                          $id = $_POST['id_siswa'];
+                      $noorangtua = mysql_query("SELECT * FROM tbl_siswa where id_siswa = '$id' "  );
+                     $no = mysql_fetch_array($noorangtua);
+                     $mor = $no['nohp'];
+                      
+
+
+                      }
+                      ?>
+    </div>
+
     </form>
     </div>
   </div>
+
   <?php
                 include '../koneksi.php';
                 if(isset($_POST['fsubmit'])){
